@@ -7,9 +7,9 @@ const DOW_THUMB =
 
 export function BridgeWhatIs() {
   return (
-    <section id="what-is" className="scroll-mt-[calc(var(--bridge-header-h)+48px)] bg-white pt-16 pb-28 lg:pt-24 lg:pb-36 relative">
-      <div className="mx-auto grid container gap-12 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
-        <div>
+    <section id="what-is" className="bg-white relative">
+      <div className="grid gap-12 px-6 lg:grid-cols-2 items-center lg:gap-16 lg:px-10">
+        <div className="py-10 container mx-auto max-w-lg ml-auto ">
           <h2 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#3d3d3d] lg:text-[2.75rem]">
           What is ZerofAI?
           </h2>
@@ -35,8 +35,8 @@ export function BridgeWhatIs() {
           </div>
         </div>
 
-        <div className="relative flex min-h-[300px] items-end lg:min-h-[380px]">
-          <video src="assets/zerofai_intro.mp4" controls loop className="w-full h-full"></video>
+        <div className="relative">
+          <video src="assets/zerofai_intro.mp4" controls loop className="w-full h-full  aspect-video  bg-black"></video>
         </div>
       </div>
 
@@ -62,7 +62,7 @@ export function BridgeWhatIs() {
         </div>
       </div> */}
 
-      <h3 className="text-7xl text-muted absolute -bottom-1 left-10">Stories that Inspire</h3>
+      {/* <h3 className="text-7xl text-muted absolute -bottom-1 left-10">Stories that Inspire</h3> */}
     </section>
   );
 }

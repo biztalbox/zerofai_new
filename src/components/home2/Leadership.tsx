@@ -6,7 +6,7 @@ import { MdArrowOutward } from "react-icons/md";
 
 const Leadership = () => {
   return (
-    <section id="connect" className="border-t border-[#e8e8e8] bg-white py-16 lg:py-24">
+    <section id="connect" className="border-t border-[#e8e8e8] bg-white py-16 lg:py-24 relative">
       <div className="mx-auto container grid gap-12 w-full px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10">
         <div className='flex flex-col gap-10'>
           <h2 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#006670] lg:text-[2.5rem]">
@@ -61,6 +61,10 @@ const Leadership = () => {
         </div>
 
       </div>
+
+            {/* <h3 className="text-[10rem] text-[#F4F4F1] absolute -bottom-1 right-10">ZerofAI</h3> */}
+            <Image src="/assets/logo.png" width="600" height="200" alt="zerofai" className="absolute -bottom-5 z-10 right-12 sw-[8rem]!" />
+
     </section>
   )
 }
