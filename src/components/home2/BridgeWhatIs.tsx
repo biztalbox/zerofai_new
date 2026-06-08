@@ -8,8 +8,8 @@ const DOW_THUMB =
 export function BridgeWhatIs() {
   return (
     <section id="what-is" className="bg-white relative">
-      <div className="grid gap-12 px-6 lg:grid-cols-2 items-center lg:gap-16 lg:px-10">
-        <div className="py-10 container mx-auto max-w-lg ml-auto ">
+      <div className="grid gap-12 lg:grid-cols-2 items-center lg:gap-16">
+        <div className="py-10 container mx-auto max-w-xl ml-auto">
           <h2 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#3d3d3d] lg:text-[2.75rem]">
           What is ZerofAI?
           </h2>
@@ -17,10 +17,7 @@ export function BridgeWhatIs() {
             <p>
               Modern enterprises struggle with growing operational complexity, fragmented
               tools, rising support workloads, and increasing demands for seamless digital
-              experiences.
-            </p>
-            <p>
-              At the core is ZerofAI, an AI-powered Autonomous IT Operations Platform that
+              experiences. At the core is ZerofAI, an AI-powered Autonomous IT Operations Platform that
               helps organizations observe, analyze, predict, and automate across their
               technology environment.
             </p>
@@ -36,7 +33,7 @@ export function BridgeWhatIs() {
         </div>
 
         <div className="relative">
-          <video src="assets/zerofai_intro.mp4" controls loop className="w-full h-full  aspect-video  bg-black"></video>
+          <video src="assets/zerofai_intro.mp4" controls loop className="w-full h-108 aspect-auto bg-black"></video>
         </div>
       </div>
 

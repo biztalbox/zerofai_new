@@ -39,7 +39,7 @@ resilience.`,
 
 export function BridgePillars() {
   return (
-    <section id="value" className="relative scroll-mt-[calc(var(--bridge-header-h)+48px)] overflow-hidden bg-[#f4f4f1] py-16 lg:py-24">
+    <section id="platform" className="relative scroll-mt-[calc(var(--bridge-header-h)+48px)] overflow-hidden bg-[#f4f4f1] py-16 lg:py-24">
       {/* Observe */}
 
       <div className="relative mx-auto container px-6 lg:px-10">

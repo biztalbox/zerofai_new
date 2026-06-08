@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -23,7 +24,7 @@ export function Header() {
     <header className={`fixed top-0 z-50 w-full bg-background transition-shadow duration-300 ${scrolled ? "shadow-[0_1px_0_rgba(0,0,0,0.08)]" : ""}`}>
       
       {/* Top utility bar — squeezes away on scroll */}
-      <div
+      {/* <div
         className="overflow-hidden transition-[max-height,opacity] duration-500 ease-[cubic-bezier(.2,.7,.2,1)]"
         style={{ maxHeight: scrolled ? 0 : 44, opacity: scrolled ? 0 : 1 }}
       >
@@ -32,7 +33,7 @@ export function Header() {
           <a href="#" className="inline-flex items-center gap-1 hover:text-coral">Investors <span aria-hidden>↗</span></a>
           <button className="inline-flex items-center gap-1 hover:text-coral">India - English <ChevronDown className="h-3.5 w-3.5" /></button>
         </div>
-      </div>
+      </div> */}
       {/* Main nav — squeezes vertical padding on scroll */}
       <div
         className={`flex items-center justify-between gap-6 border-t border-border/60 px-6 transition-all duration-500 ease-[cubic-bezier(.2,.7,.2,1)] lg:px-12 ${scrolled ? "py-3" : "py-4"}`}
@@ -40,16 +41,16 @@ export function Header() {
         <Link href="/" className="flex items-baseline gap-0.5">
           <img width="300" height="100" src="/assets/logo.png" className="w-32" />
         </Link>
-        <nav className="hidden items-center gap-8 lg:flex">
+        {/* <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
             <button key={n.label} className={`group inline-flex items-center gap-1 font-thin text-foreground transition-all duration-500 hover:text-coral ${scrolled ? "text-[14px]" : "text-[15px]"}`}>
               {n.label}
               {n.hasMenu && <ChevronDown className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" />}
             </button>
           ))}
-        </nav>
+        </nav> */}
         <div className="flex items-center gap-4">
-          <button aria-label="Search" className="hidden text-foreground hover:text-coral lg:block"><Search className="h-5 w-5" /></button>
+          {/* <button aria-label="Search" className="hidden text-foreground hover:text-coral lg:block"><Search className="h-5 w-5" /></button> */}
           <button aria-label="Menu" onClick={() => setOpen(!open)} className="lg:hidden">
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>

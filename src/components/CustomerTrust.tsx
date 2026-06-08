@@ -11,13 +11,13 @@ export function CustomerTrust() {
   const [active, setActive] = useState(1);
 
   return (
-    <section className="bg-secondary py-24" id="platform">
+    <section className="bg-secondary py-24">
       <div className="grid items-stretch lg:grid-cols-[1fr_2fr]">
         {/* Left label */}
         <div className="flex flex-col justify-between px-6 py-12 lg:px-16">
           <h2 className="text-5xl font-light leading-[1.1] text-foreground md:text-6xl">
-           Customer<br />trust.{" "}
-            <span className="text-primary">Real <br /> transformation.</span>
+           Customer trust.{" "}<br />
+            <span className="text-primary">Real transformation.</span>
           </h2>
           <div className="mt-12 flex gap-2">
             <button
