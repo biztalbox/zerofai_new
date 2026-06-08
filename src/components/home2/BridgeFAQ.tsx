@@ -5,18 +5,66 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    q: "What are digital business platforms?",
-    a: "Digital business platforms are comprehensive technology solutions that address the complexity of today's information technology environments. Digital business platforms integrate various tools, data, and services to support and enhance IT operations. These platforms often include capabilities for AI, data management, analytics, automation, and collaboration, enabling organizations to streamline processes and improve efficiency. IDC defines the digital business platform as a multilayered, enterprise-wide technology architecture that seamlessly integrates systems and applications from multiple vendors. This allows organizations to leverage the entire IT estate, identifying new insights and opportunities to enable use cases that ensure business competitiveness and innovation.",
+    id: "what-is-zerofai",
+    question: "What is ZerofAI?",
+    answer:
+      "ZerofAI is an AI-powered autonomous IT operations platform that helps enterprises move from reactive support to proactive and predictive digital operations. It automates issue resolution, improves workplace experience, and helps IT teams operate more efficiently at scale.",
   },
   {
-    q: "How do digital business platforms enhance operational efficiency?",
-    a: "Digital business platforms enhance operational efficiency by applying AI and automating routine tasks, providing real-time data insights, and facilitating seamless communication across different departments. This reduces manual effort, minimizes errors, and allows employees to focus on more strategic activities, ultimately leading to increased productivity.",
+    id: "vs-traditional-automation",
+    question: "How is ZerofAI different from traditional IT automation?",
+    answer:
+      "Traditional automation follows predefined workflows and rules. ZerofAI goes further by continuously analyzing operational signals, identifying issues proactively, orchestrating remediation, and helping IT operations become more intelligent and autonomous.",
   },
   {
-    q: "Why is data integration important in digital business platforms?",
-    a: "Data integration is crucial in digital business platforms because it ensures that information from various sources is consolidated and accessible in one place. This holistic observability of data enables better decision-making, as organizations can analyze comprehensive datasets to identify trends, optimize operations, and respond quickly to market changes.",
+    id: "platform-or-service",
+    question: "Is ZerofAI a platform, service, or both?",
+    answer:
+      "ZerofAI is both. Organizations can use it as a technology platform or combine it with ZerofAI-led operational services such as Autonomous Support Operations, Proactive Experience Operations, and Predictive Intelligence Operations.",
   },
-];
+  {
+    id: "proactive-self-healing",
+    question: "How does Proactive Self-Healing work?",
+    answer:
+      "ZerofAI continuously detects anomalies, identifies recurring endpoint issues, and triggers automated remediation workflows to resolve disruptions before they impact users or create support tickets.",
+  },
+  {
+    id: "endpoint-governance",
+    question: "What is Autonomous Endpoint Governance?",
+    answer:
+      "Autonomous Endpoint Governance helps organizations continuously manage endpoint compliance, security policies, provisioning, and operational health through intelligent automation and proactive control.",
+  },
+  {
+    id: "sentiment-trend",
+    question: "What does Sentiment Trend Analysis analyze?",
+    answer:
+      "ZerofAI analyzes workplace behavioral signals, support interactions, and digital experience patterns to identify employee frustration, dissatisfaction, and emerging experience issues early.",
+  },
+  {
+    id: "predictive-health",
+    question: "How does Predictive Health Analytics work?",
+    answer:
+      "ZerofAI analyzes historical operational patterns, real-time signals, and system behavior to identify early indicators of potential failures, helping teams act before disruptions occur.",
+  },
+  {
+    id: "enterprise-customization",
+    question: "Can ZerofAI be customized to fit enterprise business needs?",
+    answer:
+      "Yes. ZerofAI is designed to adapt to enterprise environments, workflows, and operational requirements. It can be aligned with existing ITSM platforms, endpoint ecosystems, security policies, support processes, and automation use cases to match specific business needs and operational maturity.",
+  },
+  {
+    id: "operational-services",
+    question: "What's included in ZerofAI's operational services?",
+    answer:
+      "ZerofAI's services combine AI-powered automation, operational intelligence, and managed execution to help enterprises improve support operations, workplace experience, and predictive decision-making across IT environments.",
+  },
+  {
+    id: "replace-it-teams",
+    question: "Does ZerofAI replace existing IT teams?",
+    answer:
+      "No. ZerofAI is designed to augment IT teams by reducing repetitive operational workload, improving response efficiency, and helping teams focus on strategic initiatives, governance, and higher-value operational decisions. AI operations models are increasingly positioned as augmentation layers rather than direct team replacements.",
+  },
+]
 
 export function BridgeFAQ() {
   const [open, setOpen] = useState<number | null>(null);
@@ -26,7 +74,7 @@ export function BridgeFAQ() {
       <div className="mx-auto container px-6 lg:px-10">
         <p className="text-[13px] uppercase tracking-[0.08em] text-white">Frequently asked questions</p>
         <h2 className="mt-3 text-[2rem] font-normal tracking-[-0.02em] text-white lg:text-[2.5rem]">
-        Everything You Need to Know About ZerofAI
+          Everything You Need to Know About ZerofAI
         </h2>
 
         <div className="mt-10 divide-y divide-[#d8d8d8] border-y border-[#d8d8d8]">
@@ -37,13 +85,13 @@ export function BridgeFAQ() {
                 onClick={() => setOpen(open === i ? null : i)}
                 className="flex w-full items-start justify-between gap-6 py-6 text-left"
               >
-                <span className="text-base font-medium text-white lg:text-lg">{faq.q}</span>
+                <span className="text-base font-medium text-white lg:text-lg">{faq.question}</span>
                 <span className="mt-0.5 shrink-0 text-white">
                   {open === i ? <Minus className="h-5 w-5" strokeWidth={1.5} /> : <Plus className="h-5 w-5" strokeWidth={1.5} />}
                 </span>
               </button>
               {open === i && (
-                <p className="pb-6 text-[15px] leading-[1.65] text-[#666]">{faq.a}</p>
+                <p className="pb-6 text-[15px] leading-[1.65] text-white">{faq.answer}</p>
               )}
             </div>
           ))}
