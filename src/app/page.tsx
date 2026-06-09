@@ -2,7 +2,6 @@
 
 import { BridgeHeader } from "@/components/home2/BridgeHeader";
 import { BridgeBreadcrumb } from "@/components/home2/BridgeBreadcrumb";
-import { NavigationBar } from "@/components/home2/BridgeSubNav";
 import { BridgeHero } from "@/components/home2/BridgeHero";
 import { BridgeWhatIs } from "@/components/home2/BridgeWhatIs";
 import { BridgeStats } from "@/components/home2/BridgeStats";
@@ -18,6 +17,7 @@ import { CustomerTrust } from "@/components/CustomerTrust";
 import CtaBot from "@/components/home2/CtaBot";
 import Leadership from "@/components/home2/Leadership";
 import { Footer } from "@/components/Footer";
+import { NavigationBar } from "@/components/Navigation";
 
 export default function Home2Page() {
   return (

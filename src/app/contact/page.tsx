@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { CiLocationOn } from "react-icons/ci";
-import { MdAlternateEmail, MdOutlineHeadphones } from "react-icons/md";
+import { MdAlternateEmail } from "react-icons/md";
 import { IoShieldCheckmark, IoFlash } from "react-icons/io5";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { TbShare3 } from "react-icons/tb";
+import { NavigationBar } from "@/components/Navigation";
 import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -12,30 +15,46 @@ export const metadata: Metadata = {
     "Connect with ZeroFAI to automate compliance, monitor endpoints, and strengthen enterprise security operations in real time.",
 };
 
-
 const iconBox = "h-5 w-5 shrink-0 text-primary";
 const cardIcon = "h-7 w-7 shrink-0 text-primary";
 
 export default function ContactPage() {
   return (
-    <main className=" bg-white text-neutral-900 dark:bg-black dark:text-white">
-      {/* Hero */}
-      <section className="py-10 sm:py-14 md:py-16">
-        <div className="container">
-        <div className="text-center text-3xl font-extrabold leading-tight tracking-tight text-neutral-950 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">
-          Let&apos;s <span className="text-primary! text-4xl! sm:text-7xl! md:text-7xl! lg:text-7xl!">Secure</span> Your<br />
-          <span className="text-primary! text-4xl! sm:text-5xl! md:text-6xl! lg:text-7xl!">Infrastructure</span>.
-        </div>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-neutral-600 sm:text-base dark:text-[#94A3B8]">
-            Connect with ZerofAI to automate compliance, monitor endpoints, and strengthen enterprise security
-            operations in real time.
-          </p>
+    <main>
+      <NavigationBar />
+
+     
+
+      <section className="relative  overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
+        <Image
+          src="https://plus.unsplash.com/premium_photo-1664474834472-6c7d1e3198e2?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29ya2luZyUyMGVtcGxveWVlc3xlbnwwfHwwfHx8MA%3D%3D"
+          alt="Team collaborating in a modern office"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-black to-transparent"
+          aria-hidden
+        />
+        <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
+          <div className="max-w-xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+              About us
+            </p>
+            <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
+              Contact ZeroFAI
+            </h1>
+            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white md:text-base">
+              Get answers to your questions about anything ZeroFAI
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Main card */}
       <section className="mx-auto w-full max-w-7xl py-10 sm:px-4 sm:py-14 md:py-16">
-        <div className="mx-auto w-full max-w-5xl overflow-hidden border-y border-neutral-200/90 bg-white/90 shadow-xl backdrop-blur-sm dark:border-white/8 dark:bg-[#111111]/95 dark:shadow-none sm:rounded-2xl sm:border md:rounded-3xl">
+        <div className="mx-auto w-full max-w-5xl overflow-hidden border-y border-neutral-200/90 bg-white/90 backdrop-blur-sm dark:border-white/8    sm:border ">
           <div className="grid lg:grid-cols-[1fr_0.85fr]">
             {/* Form column */}
             <div className="border-b border-neutral-200 bg-secondary/50 dark:bg-secondary/10 p-5 sm:p-7 md:p-8 lg:border-b-0 lg:border-r lg:border-neutral-200  dark:border-white/8 dark:lg:border-white/8">
@@ -44,10 +63,7 @@ export default function ContactPage() {
 
             {/* Contact column */}
             <div className="bg-secondary dark:bg-secondary/40 p-5 sm:p-7 md:p-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
-                <IoFlash className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                Response within 1 hours
-              </div>
+              
 
               <ul className="mt-8 space-y-6">
                 <li className="flex gap-4">
@@ -109,7 +125,7 @@ export default function ContactPage() {
       {/* Feature cards */}
       <section className="container pb-10 sm:pb-14 md:pb-20">
         <div className="mx-auto grid max-w-5xl gap-4 sm:gap-5 sm:grid-cols-2 md:grid-cols-3">
-          <article className="rounded-2xl border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8">
+          <article className=" border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8">
             <div className="mx-auto mb-4 grid h-12 w-12 place-items-center">
               <IoShieldCheckmark className={cardIcon} aria-hidden />
             </div>
@@ -118,7 +134,7 @@ export default function ContactPage() {
               Built for enterprise compliance standards from the ground up.
             </p>
           </article>
-          <article className="rounded-2xl border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8">
+          <article className=" border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8">
             <div className="mx-auto mb-4 grid h-12 w-12 place-items-center">
               <TbShare3 className={cardIcon} aria-hidden />
             </div>
@@ -127,7 +143,7 @@ export default function ContactPage() {
               Seamlessly connects with AWS, GCP, Azure, and Kubernetes.
             </p>
           </article>
-          <article className="rounded-2xl border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8 sm:col-span-2 md:col-span-1">
+          <article className="border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8 sm:col-span-2 md:col-span-1">
             <div className="mx-auto mb-4 grid h-12 w-12 place-items-center">
               <BsGraphUpArrow className={cardIcon} aria-hidden />
             </div>

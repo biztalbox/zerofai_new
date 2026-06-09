@@ -69,9 +69,20 @@ function validateWorkEmail(value: string): string | null {
   return null;
 }
 
+const ROLE_LABELS: Record<string, string> = {
+  "cto-ciso": "CTO / CISO",
+  "vp-engineering": "VP Engineering",
+  "it-director": "IT Director",
+  "security-manager": "Security Manager",
+  other: "Other",
+};
+
 export function ContactForm() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const emailInvalid = Boolean(emailError);
   const emailFieldClass =
@@ -91,16 +102,73 @@ export function ContactForm() {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitError(null);
+    setSubmitSuccess(false);
+
     const err = validateWorkEmail(email);
     setEmailError(err);
-    if (err) {
-      e.preventDefault();
+    if (err) return;
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("fullName") ?? "").trim();
+    const workEmail = String(formData.get("email") ?? "").trim();
+    const companyName = String(formData.get("company") ?? "").trim();
+    const phoneNumber = String(formData.get("phone") ?? "").trim();
+    let message = String(formData.get("message") ?? "").trim();
+    const role = String(formData.get("role") ?? "").trim();
+
+    if (!name || !workEmail || !companyName || !phoneNumber) {
+      setSubmitError("Please fill in all required fields.");
+      return;
+    }
+
+    if (role) {
+      const roleLabel = ROLE_LABELS[role] ?? role;
+      message = message
+        ? `${message}\n\nDesignation: ${roleLabel}`
+        : `Designation: ${roleLabel}`;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email: workEmail,
+          phone_number: phoneNumber,
+          message,
+          company_name: companyName,
+        }),
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        setSubmitError(
+          typeof result.error === "string"
+            ? result.error
+            : "Something went wrong. Please try again."
+        );
+        return;
+      }
+
+      setSubmitSuccess(true);
+      form.reset();
+      setEmail("");
+      setEmailError(null);
+    } catch {
+      setSubmitError("Unable to submit the form. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form className="space-y-5" action="#" method="post" onSubmit={handleSubmit} noValidate>
+    <form className="space-y-5" onSubmit={handleSubmit} noValidate>
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="contact-full-name" className={labelClass}>
@@ -112,6 +180,7 @@ export function ContactForm() {
             type="text"
             placeholder="John Doe"
             autoComplete="name"
+            required
             className={fieldClass}
           />
         </div>
@@ -128,6 +197,7 @@ export function ContactForm() {
             value={email}
             onChange={(e) => handleEmailChange(e.target.value)}
             onBlur={handleEmailBlur}
+            required
             aria-invalid={emailInvalid}
             aria-describedby={emailInvalid ? "contact-email-error" : undefined}
             className={emailFieldClass}
@@ -152,6 +222,7 @@ export function ContactForm() {
             type="text"
             placeholder="Acme Corp"
             autoComplete="organization"
+            required
             className={fieldClass}
           />
         </div>
@@ -165,6 +236,7 @@ export function ContactForm() {
             type="tel"
             placeholder="+1 (555) 000-0000"
             autoComplete="tel"
+            required
             className={fieldClass}
           />
         </div>
@@ -201,11 +273,22 @@ export function ContactForm() {
           className={`${fieldClass} min-h-[110px] resize-y`}
         />
       </div>
+      {submitError ? (
+        <p className="text-sm! leading-relaxed! text-red-600! dark:text-red-400!" role="alert">
+          {submitError}
+        </p>
+      ) : null}
+      {submitSuccess ? (
+        <p className="text-sm! leading-relaxed! text-green-700! dark:text-green-400!" role="status">
+          Thank you! Your message has been submitted. Our team will get back to you soon.
+        </p>
+      ) : null}
       <button
         type="submit"
-        className="w-full rounded-xl bg-primary py-3.5 text-sm font-bold text-black transition hover:bg-primary-hover active:brightness-95"
+        disabled={isSubmitting}
+        className="w-full bg-primary py-3.5 text-sm font-bold text-white transition hover:bg-primary-hover active:brightness-95 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        Request Demo
+        {isSubmitting ? "Submitting..." : "Request Demo"}
       </button>
     </form>
   );

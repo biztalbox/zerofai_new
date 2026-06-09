@@ -1,25 +1,33 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const links = [
+const homeSectionLinks = [
   { label: "What is ZerofAI?", id: "what-is" },
   { label: "Platform", id: "platform" },
   { label: "Insights", id: "insights" },
+];
+
+const routeLinks = [
   { label: "Leadership", id: "/leadership" },
-  { label: "Knowledge", id: "knowledge" },
+  { label: "Knowledge", id: "/knowledge" },
   { label: "Contact us", id: "/contact" },
 ];
 
 const isRouteLink = (id: string) => id.startsWith("/");
-const sectionLinks = links.filter((link) => !isRouteLink(link.id));
 
 export function NavigationBar() {
-  const [active, setActive] = useState(sectionLinks[0].id);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const links = isHomePage ? [...homeSectionLinks, ...routeLinks] : routeLinks;
+  const [active, setActive] = useState(homeSectionLinks[0].id);
 
   useEffect(() => {
-    const sections = sectionLinks
+    if (!isHomePage) return;
+
+    const sections = homeSectionLinks
       .map((link) => document.getElementById(link.id))
       .filter(Boolean) as HTMLElement[];
     const observer = new IntersectionObserver(
@@ -32,11 +40,14 @@ export function NavigationBar() {
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [isHomePage]);
+
+  const isLinkActive = (id: string) =>
+    isRouteLink(id) ? pathname === id : active === id;
 
   const linkClassName = (id: string) =>
     `shrink-0 border-b-[2px] px-4 py-3.5 text-[13px] transition-colors lg:px-5 ${
-      active === id
+      isLinkActive(id)
         ? "border-primary font-medium text-[#3d3d3d]"
         : "border-transparent text-[#666] hover:text-[#3d3d3d]"
     }`;

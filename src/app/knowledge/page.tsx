@@ -8,6 +8,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { NavigationBar } from "@/components/Navigation";
+import Image from "next/image";
 
 const FAQ_ITEMS = [
   {
@@ -87,39 +89,39 @@ const KnowledgeCenterPage = () => {
 
   return (
     <main>
-      <section className="relative overflow-hidden bg-white dark:bg-black">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,211,255,0.2)_0%,rgba(0,164,190,0.12)_48%,rgba(245,250,252,0.96)_90%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,211,255,0.46)_0%,rgba(0,164,190,0.28)_46%,rgba(0,0,0,0.88)_88%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0)_38%,rgba(255,255,255,0.42)_100%)] dark:bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0)_38%,rgba(0,0,0,0.72)_100%)]" />
+      <NavigationBar />
 
+     
+
+<section className="relative  overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
+  <Image
+    src="https://plus.unsplash.com/premium_photo-1664474834472-6c7d1e3198e2?w=1600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29ya2luZyUyMGVtcGxveWVlc3xlbnwwfHwwfHx8MA%3D%3D"
+    alt="Team collaborating in a modern office"
+    fill
+    priority
+    className="object-cover object-center"
+  />
+  <div
+    className="absolute inset-0 bg-gradient-to-t from-black to-transparent"
+    aria-hidden
+  />
+  <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
+    <div className="max-w-xl">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+        Knowledge Center
+      </p>
+      <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
+        Knowledge Center
+      </h1>
+      <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white md:text-base">
+        Everything you need to know about ZerofAI - platform capabilities, services, and how autonomous IT operations work in practice.
+      </p>
+    </div>
+  </div>
+</section>
+      <section className="">
         <div className="container relative px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
-          {/* Header */}
-          <header className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide text-primary">
-              Knowledge Center
-            </div>
 
-            <h1 className="mt-6 text-foreground">
-              Frequently Asked{" "}
-              <span className="text-primary!">Questions</span>
-            </h1>
-
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 sm:text-base dark:text-[#94A3B8]">
-              Everything you need to know about ZerofAI — platform capabilities,
-              services, and how autonomous IT operations work in practice.
-            </p>
-          </header>
-
-          {/* Search */}
-          <div className="mx-auto mt-8 max-w-3xl sm:mt-10">
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search for answers, features, or integrations..."
-              className="h-12 w-full rounded-full border border-neutral-200/80 dark:bg-secondary/40 px-5 text-sm text-neutral-900 shadow-sm outline-none transition-shadow placeholder:text-neutral-400 focus:border-primary/50 focus:ring-2 focus:ring-primary/20 dark:border-white/10  dark:text-neutral-900 dark:placeholder:text-neutral-500 dark:focus:ring-primary/30 sm:h-14 sm:px-6 sm:text-base"
-              aria-label="Search FAQs"
-            />
-          </div>
 
           {/* FAQ list */}
           <div className="mx-auto mt-8 max-w-3xl sm:mt-10">
