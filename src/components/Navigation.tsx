@@ -11,7 +11,8 @@ const homeSectionLinks = [
 ];
 
 const routeLinks = [
-  { label: "Leadership", id: "/leadership" },
+  { label: "Our Team", id: "/our-team" },
+  { label: "Blog", id: "/blog" },
   { label: "Knowledge", id: "/knowledge" },
   { label: "Contact us", id: "/contact" },
 ];
