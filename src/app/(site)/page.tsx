@@ -9,7 +9,7 @@ import { CustomerTrust } from "@/components/CustomerTrust";
 import { NavigationBar } from "@/components/Navigation";
 import { getHomepageContent } from "@/lib/homepage";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   const content = await getHomepageContent();
@@ -19,12 +19,12 @@ export default async function HomePage() {
       <BridgeHero content={content.hero} />
       <NavigationBar />
       <BridgeWhatIs content={content.whatIs} />
-      <CustomerTrust content={content.customerTrust} />
+      <CustomerTrust />
       <BridgeStats content={content.stats} />
       <BridgePillars content={content.pillars} />
       <CtaBot content={content.cta} />
       <BridgeCatalog content={content.catalog} />
-      <BridgeFAQ content={content.faq} />
+      <BridgeFAQ />
     </main>
   );
 }
