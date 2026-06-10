@@ -1,7 +1,7 @@
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { Homepage } from "./src/globals/homepage.ts";
-import { articleEditor } from "./src/lib/lexical-editor.ts";
+import { Homepage } from "./src/globals/homepage";
+import { articleEditor } from "./src/lib/lexical-editor";
 import { s3Storage } from "@payloadcms/storage-s3";
 import { config as loadEnv } from "dotenv";
 import path from "path";
@@ -10,7 +10,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
-import { migrations } from "./src/migrations/index.ts";
+import { migrations } from "./src/migrations";
 import { buildSupabasePublicUrl, resolveMediaPublicUrl } from "./src/lib/supabase-storage";
 
 loadEnv({ path: path.resolve(process.cwd(), ".env.local") });
@@ -25,6 +25,7 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 const s3Enabled = Boolean(process.env.S3_ACCESS_KEY_ID && process.env.S3_SECRET_ACCESS_KEY);
+const isNextBuild = process.env.npm_lifecycle_event === "build";
 
 function slugify(value: string): string {
   return value
@@ -226,7 +227,8 @@ export default buildConfig({
     pool: {
       connectionString,
     },
-    prodMigrations: migrations,
+    prodMigrations: isNextBuild ? undefined : migrations,
+    push: process.env.NODE_ENV !== "production",
   }),
   plugins: [
     ...(s3Enabled

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "Insights, updates, and perspectives on autonomous IT operations from ZerofAI.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
   let blogs: Post[] = [];
@@ -26,7 +26,7 @@ export default async function BlogPage() {
       sort: "-publishedAt",
       depth: 1,
     });
-    blogs = result.docs;
+    blogs = result.docs as Post[];
   } catch {
     dbError = true;
   }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
+
+import { ContactChatBot } from "@/app/(site)/contact/ContactChatBot";
 import { ConditionalFooter } from "@/components/ConditionalFooter";
 
 const geistSans = Geist({
@@ -30,6 +31,7 @@ export default function SiteLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <ContactChatBot />
         <ConditionalFooter />
       </body>
     </html>
