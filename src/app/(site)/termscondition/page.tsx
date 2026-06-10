@@ -1,40 +1,40 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { NavigationBar } from "@/components/Navigation";
+
+export const metadata: Metadata = {
+  title: "Terms of Use | ZeroFAI",
+  description:
+    "Detailed guidelines defining user rights, obligations, and service usage policies.",
+};
 
 export default function TermsConditionPage() {
   return (
-    <main>
-      {/* Hero (match screenshot) */}
-      <section className="relative overflow-hidden bg-white p-20 dark:bg-black">
-        {/* ZeroFAI ambient glow inspired by the reference hero */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,211,255,0.2)_0%,rgba(0,164,190,0.12)_48%,rgba(245,250,252,0.96)_90%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,211,255,0.46)_0%,rgba(0,164,190,0.28)_46%,rgba(0,0,0,0.88)_88%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0)_38%,rgba(255,255,255,0.42)_100%)] dark:bg-[linear-gradient(180deg,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0)_38%,rgba(0,0,0,0.72)_100%)]" />
-        
-        <div className="container relative flex flex-col items-center justify-center text-center py-30">
-          <h1 className="text-primary!">
-            Terms & Conditions.
-            <br />
-           
+    <main className="bridge-page min-h-screen bg-white text-[#3d3d3d]">
+      <NavigationBar />
+
+      <section className="bg-[#1a2e24] px-6 py-16 lg:px-10 lg:py-20">
+        <div className="mx-auto container">
+          <h1 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
+            Terms of use
           </h1>
-
-          <p className="mt-7 max-w-[760px] text-xs leading-6 text-foreground/65 dark:text-white/65 sm:mt-8 sm:text-sm sm:leading-7">
-          Detailed guidelines defining user rights, obligations, and service usage policies.
-          </p>
-
           
         </div>
       </section>
 
       {/* Content */}
-      <section id="terms-and-conditions" className="container p-20 dark:bg-black">
-        <div className="p-5 dark:bg-black">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/70 dark:text-white/70">
-            Terms & Conditions
-          </p>
-          <h2 className="mt-3 text-foreground dark:text-white">
-            Team Computers Private Limited (TCPL)
-          </h2>
+      <section id="terms-and-conditions" className="container px-6 py-16 lg:px-10 lg:py-20">
+        <h2 className="text-[1.75rem] font-normal tracking-[-0.02em] text-[#3d3d3d] lg:text-[2rem]">
+          Overview
+        </h2>
+        <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#767676]">
+          Terms & Conditions
+        </p>
+        <h3 className="mt-3 text-[1.25rem] font-normal tracking-[-0.02em] text-[#3d3d3d] lg:text-[1.5rem]">
+          Team Computers Private Limited (TCPL)
+        </h3>
 
-          <div className="mt-8 space-y-10">
+        <div className="mt-8 space-y-10">
             <div className="space-y-4">
               <p className="text-foreground/75 dark:text-white/70">
                 These Terms of Service apply to the ordering, purchase and
@@ -388,7 +388,6 @@ export default function TermsConditionPage() {
               </p>
             </div>
           </div>
-        </div>
       </section>
     </main>
   );

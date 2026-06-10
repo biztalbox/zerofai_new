@@ -149,7 +149,7 @@ export default function ContactPage() {
             </div>
             <h2 className="!text-base !font-bold !text-neutral-950 md:!text-lg dark:!text-white">Real-Time DRI</h2>
             <p className="text-sm! leading-5!">
-              Immediate detection and remediation of compliance drift.
+              Immediate detection and remediation of compliance drift. 
             </p>
           </article>
         </div>

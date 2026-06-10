@@ -77,8 +77,16 @@ export async function POST(request: Request) {
     }
 
     if (!response.ok) {
+      const apiMessage =
+        responseData &&
+        typeof responseData === "object" &&
+        "message" in responseData &&
+        typeof (responseData as { message: unknown }).message === "string"
+          ? (responseData as { message: string }).message
+          : "Failed to submit contact form.";
+
       return NextResponse.json(
-        { error: "Failed to submit contact form.", details: responseData },
+        { error: apiMessage, details: responseData },
         { status: response.status }
       );
     }
