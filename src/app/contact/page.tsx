@@ -7,7 +7,6 @@ import { IoShieldCheckmark, IoFlash } from "react-icons/io5";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { TbShare3 } from "react-icons/tb";
 import { NavigationBar } from "@/components/Navigation";
-import { ContactChatBot } from "./ContactChatBot";
 import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -155,8 +154,6 @@ export default function ContactPage() {
           </article>
         </div>
       </section>
-
-      <ContactChatBot />
     </main>
   );
 }

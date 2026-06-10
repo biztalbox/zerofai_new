@@ -43,7 +43,7 @@ export function BridgeHero() {
           Autonomous IT Operations Platform
           </h1>
           <a
-            href="#"
+            href="/contact"
             className="mt-5 inline-flex items-center gap-1.5 rounded bg-primary p-2.5 text-[14px] font-medium text-white transition hover:bg-[#005a63]"
           >
            Request a Demo<span aria-hidden>›</span>
