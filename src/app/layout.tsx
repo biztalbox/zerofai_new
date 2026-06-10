@@ -1,7 +1,8 @@
 import "./globals.css";
-import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ContactChatBot } from "./contact/ContactChatBot";
+import { ContactChatBot } from "@/app/(site)/contact/ContactChatBot";
+import { Geist, Geist_Mono } from "next/font/google";
+import { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
