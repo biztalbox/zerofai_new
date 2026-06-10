@@ -17,9 +17,7 @@ export default function PrivacyPage() {
           <h1 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
             ZeroFAI Privacy Statement
           </h1>
-          <p className="mt-4 text-[15px] leading-relaxed text-white/85 md:text-base">
-            This Privacy Statement is effective as of 23 May 2025
-          </p>
+          
         </div>
       </section>
 

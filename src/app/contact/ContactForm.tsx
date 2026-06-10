@@ -1,6 +1,15 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import {
+  normalizePhone,
+  toApiBody,
+  validateCompany,
+  validateEmail,
+  validateMessage,
+  validateName,
+  validatePhone,
+} from "./contactValidation";
 
 const fieldClass =
   "w-full rounded-xl border border-neutral-300 bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-500 outline-none transition-colors " +
@@ -17,57 +26,6 @@ const selectFieldClass =
   "dark:[color-scheme:dark] " +
   "[&_option]:bg-white [&_option]:text-neutral-900 " +
   "dark:[&_option]:bg-[#161616] dark:[&_option]:text-neutral-100";
-
-/** Lowercase domains commonly used for personal / free mail   business submissions should use corporate domains. */
-const PERSONAL_EMAIL_DOMAINS = new Set([
-  "gmail.com",
-  "googlemail.com",
-  "yahoo.com",
-  "yahoo.co.uk",
-  "yahoo.co.in",
-  "ymail.com",
-  "outlook.com",
-  "hotmail.com",
-  "live.com",
-  "msn.com",
-  "icloud.com",
-  "me.com",
-  "mac.com",
-  "protonmail.com",
-  "proton.me",
-  "aol.com",
-  "gmx.com",
-  "gmx.net",
-  "mail.com",
-  "yandex.com",
-  "yandex.ru",
-  "tutanota.com",
-  "tutanota.de",
-  "fastmail.com",
-  "hey.com",
-]);
-
-function emailDomain(email: string): string | null {
-  const t = email.trim().toLowerCase();
-  const i = t.lastIndexOf("@");
-  if (i < 0 || i === t.length - 1) return null;
-  return t.slice(i + 1);
-}
-
-function isPersonalEmail(email: string): boolean {
-  const domain = emailDomain(email);
-  if (!domain) return false;
-  return PERSONAL_EMAIL_DOMAINS.has(domain);
-}
-
-function validateWorkEmail(value: string): string | null {
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-  if (isPersonalEmail(trimmed)) {
-    return "Please use your work email. Personal providers (Gmail, Yahoo, Outlook, etc.) are not accepted.";
-  }
-  return null;
-}
 
 const ROLE_LABELS: Record<string, string> = {
   "cto-ciso": "CTO / CISO",
@@ -92,13 +50,15 @@ export function ContactForm() {
       : "");
 
   const handleEmailBlur = () => {
-    setEmailError(validateWorkEmail(email));
+    const trimmed = email.trim();
+    setEmailError(trimmed ? validateEmail(trimmed) : null);
   };
 
   const handleEmailChange = (value: string) => {
     setEmail(value);
     if (emailError) {
-      setEmailError(validateWorkEmail(value));
+      const trimmed = value.trim();
+      setEmailError(trimmed ? validateEmail(trimmed) : null);
     }
   };
 
@@ -107,29 +67,44 @@ export function ContactForm() {
     setSubmitError(null);
     setSubmitSuccess(false);
 
-    const err = validateWorkEmail(email);
-    setEmailError(err);
-    if (err) return;
-
     const form = e.currentTarget;
     const formData = new FormData(form);
     const name = String(formData.get("fullName") ?? "").trim();
     const workEmail = String(formData.get("email") ?? "").trim();
     const companyName = String(formData.get("company") ?? "").trim();
     const phoneNumber = String(formData.get("phone") ?? "").trim();
-    let message = String(formData.get("message") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
     const role = String(formData.get("role") ?? "").trim();
+    const roleLabel = role ? (ROLE_LABELS[role] ?? role) : "";
 
-    if (!name || !workEmail || !companyName || !phoneNumber) {
-      setSubmitError("Please fill in all required fields.");
+    const nameErr = validateName(name);
+    if (nameErr) {
+      setSubmitError(nameErr);
       return;
     }
 
-    if (role) {
-      const roleLabel = ROLE_LABELS[role] ?? role;
-      message = message
-        ? `${message}\n\nDesignation: ${roleLabel}`
-        : `Designation: ${roleLabel}`;
+    const emailErr = validateEmail(workEmail);
+    setEmailError(emailErr);
+    if (emailErr) return;
+
+    const companyErr = validateCompany(companyName);
+    if (companyErr) {
+      setSubmitError(companyErr);
+      return;
+    }
+
+    const phoneErr = validatePhone(phoneNumber);
+    if (phoneErr) {
+      setSubmitError(phoneErr);
+      return;
+    }
+
+    if (message) {
+      const messageErr = validateMessage(message);
+      if (messageErr) {
+        setSubmitError(messageErr);
+        return;
+      }
     }
 
     setIsSubmitting(true);
@@ -137,13 +112,16 @@ export function ContactForm() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email: workEmail,
-          phone_number: phoneNumber,
-          message,
-          company_name: companyName,
-        }),
+        body: JSON.stringify(
+          toApiBody({
+            name,
+            email: workEmail,
+            company: companyName,
+            phone: normalizePhone(phoneNumber),
+            designation: roleLabel,
+            message,
+          })
+        ),
       });
 
       const result = await response.json().catch(() => ({}));
@@ -234,7 +212,7 @@ export function ContactForm() {
             id="contact-phone"
             name="phone"
             type="tel"
-            placeholder="+1 (555) 000-0000"
+            placeholder="10-digit mobile number"
             autoComplete="tel"
             required
             className={fieldClass}

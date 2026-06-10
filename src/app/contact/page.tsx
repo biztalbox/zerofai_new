@@ -7,6 +7,7 @@ import { IoShieldCheckmark, IoFlash } from "react-icons/io5";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { TbShare3 } from "react-icons/tb";
 import { NavigationBar } from "@/components/Navigation";
+import { ContactChatBot } from "./ContactChatBot";
 import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -149,11 +150,13 @@ export default function ContactPage() {
             </div>
             <h2 className="!text-base !font-bold !text-neutral-950 md:!text-lg dark:!text-white">Real-Time DRI</h2>
             <p className="text-sm! leading-5!">
-              Immediate detection and remediation of compliance drift.
+              Immediate detection and remediation of compliance drift. 
             </p>
           </article>
         </div>
       </section>
+
+      <ContactChatBot />
     </main>
   );
 }

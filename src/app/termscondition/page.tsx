@@ -18,9 +18,7 @@ export default function TermsConditionPage() {
           <h1 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
             Terms of use
           </h1>
-          <p className="mt-4 text-[15px] leading-relaxed text-white/85 md:text-base">
-            Date: November 10, 2021
-          </p>
+          
         </div>
       </section>
 
