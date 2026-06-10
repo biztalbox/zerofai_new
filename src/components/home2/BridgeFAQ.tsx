@@ -66,8 +66,11 @@ const faqs = [
   },
 ]
 
+const HOME_FAQ_LIMIT = 5;
+
 export function BridgeFAQ() {
   const [open, setOpen] = useState<number | null>(null);
+  const visibleFaqs = faqs.slice(0, HOME_FAQ_LIMIT);
 
   return (
     <section id="knowledge" className="bg-[#0A6EC1] py-16 lg:py-24 relative z-20">
@@ -78,7 +81,7 @@ export function BridgeFAQ() {
         </h2>
 
         <div className="mt-10 divide-y divide-[#d8d8d8] border-y border-[#d8d8d8]">
-          {faqs.map((faq, i) => (
+          {visibleFaqs.map((faq, i) => (
             <div key={i}>
               <button
                 type="button"
