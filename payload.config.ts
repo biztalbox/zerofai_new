@@ -251,40 +251,6 @@ const Homepage: GlobalConfig = {
             },
           ],
         },
-        {
-          label: "FAQ",
-          fields: [
-            {
-              name: "faq",
-              type: "group",
-              fields: [
-                { name: "eyebrow", type: "text", label: "Eyebrow label" },
-                { name: "title", type: "text", required: true },
-                {
-                  name: "visibleCount",
-                  type: "number",
-                  label: "FAQs shown on homepage",
-                  defaultValue: 5,
-                  min: 1,
-                  max: 20,
-                },
-                {
-                  name: "items",
-                  type: "array",
-                  fields: [
-                    {
-                      name: "id",
-                      type: "text",
-                      admin: { description: "Unique anchor id (e.g. what-is-zerofai)" },
-                    },
-                    { name: "question", type: "text", required: true },
-                    { name: "answer", type: "textarea", required: true },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
       ],
     },
   ],

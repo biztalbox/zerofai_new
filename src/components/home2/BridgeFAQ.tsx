@@ -3,22 +3,26 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
-import type { HomepageFaq } from "@/types/homepage";
+import type { FaqItem } from "@/types/site-content";
+
+const HOME_FAQ_EYEBROW = "FAQs";
+const HOME_FAQ_TITLE = "Frequently Asked Questions";
+const HOME_FAQ_LIMIT = 5;
 
 type BridgeFAQProps = {
-  content: HomepageFaq;
+  faqs: FaqItem[];
 };
 
-export function BridgeFAQ({ content }: BridgeFAQProps) {
+export function BridgeFAQ({ faqs }: BridgeFAQProps) {
   const [open, setOpen] = useState<number | null>(null);
-  const visibleFaqs = content.items.slice(0, content.visibleCount);
+  const visibleFaqs = faqs.slice(0, HOME_FAQ_LIMIT);
 
   return (
     <section id="knowledge" className="bg-[#0A6EC1] py-16 lg:py-24 relative z-20">
       <div className="mx-auto container px-6 lg:px-10">
-        <p className="text-[13px] uppercase tracking-[0.08em] text-white">{content.eyebrow}</p>
+        <p className="text-[13px] uppercase tracking-[0.08em] text-white">{HOME_FAQ_EYEBROW}</p>
         <h2 className="mt-3 text-[2rem] font-normal tracking-[-0.02em] text-white lg:text-[2.5rem]">
-          {content.title}
+          {HOME_FAQ_TITLE}
         </h2>
 
         <div className="mt-10 divide-y divide-[#d8d8d8] border-y border-[#d8d8d8]">

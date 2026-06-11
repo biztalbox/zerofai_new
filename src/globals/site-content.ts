@@ -210,6 +210,10 @@ export const KnowledgePage: GlobalConfig = {
             {
               name: "faqs",
               type: "array",
+              admin: {
+                description:
+                  "All FAQs appear on the Knowledge page. The first 5 are also shown on the homepage.",
+              },
               fields: [
                 {
                   name: "id",

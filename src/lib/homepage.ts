@@ -20,8 +20,6 @@ function mapHomepageFromCms(data: Record<string, unknown>): HomepageContent {
   const pillars = (data.pillars ?? {}) as Record<string, unknown>;
   const cta = (data.cta ?? {}) as Record<string, unknown>;
   const catalog = (data.catalog ?? {}) as Record<string, unknown>;
-  const faq = (data.faq ?? {}) as Record<string, unknown>;
-
   return {
     hero: {
       videoUrl: resolveUploadUrl(
@@ -120,26 +118,6 @@ function mapHomepageFromCms(data: Record<string, unknown>): HomepageContent {
           : homepageDefaults.catalog.paragraphs,
       ctaLabel: (catalog.ctaLabel as string) || homepageDefaults.catalog.ctaLabel,
       ctaLink: (catalog.ctaLink as string) || homepageDefaults.catalog.ctaLink,
-    },
-    faq: {
-      eyebrow: (faq.eyebrow as string) || homepageDefaults.faq.eyebrow,
-      title: (faq.title as string) || homepageDefaults.faq.title,
-      visibleCount:
-        typeof faq.visibleCount === "number" && faq.visibleCount > 0
-          ? faq.visibleCount
-          : homepageDefaults.faq.visibleCount,
-      items:
-        Array.isArray(faq.items) && faq.items.length > 0
-          ? faq.items.map((item, index) => {
-              const faqItem = item as { id?: string; question?: string; answer?: string };
-              const fallback = homepageDefaults.faq.items[index];
-              return {
-                id: faqItem.id || fallback?.id || `faq-${index}`,
-                question: faqItem.question || fallback?.question || "",
-                answer: faqItem.answer || fallback?.answer || "",
-              };
-            })
-          : homepageDefaults.faq.items,
     },
   };
 }
