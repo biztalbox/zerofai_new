@@ -11,6 +11,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { pageMetaGroupFields } from "./src/globals/seo-fields";
 import { SiteGlobals } from "./src/globals/site-content";
 import { migrations } from "./src/migrations";
 
@@ -250,6 +251,10 @@ const Homepage: GlobalConfig = {
               ],
             },
           ],
+        },
+        {
+          label: "SEO / Metadata",
+          fields: pageMetaGroupFields,
         },
       ],
     },

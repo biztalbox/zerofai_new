@@ -1,6 +1,11 @@
 import type { HomepageContent } from "@/types/homepage";
 
 export const homepageDefaults: HomepageContent = {
+  meta: {
+    title: "Autonomous IT Operations Platform | ZerofAI",
+    description:
+      "ZerofAI is an AI-powered autonomous IT operations platform that helps enterprises automate support, improve workplace experience, and operate more efficiently at scale.",
+  },
   hero: {
     videoUrl: "/assets/Zerofai_mashup.mp4",
     title: "Autonomous IT Operations Platform",

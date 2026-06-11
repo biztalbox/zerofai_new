@@ -12,6 +12,7 @@ import type {
 } from "@/types/site-content";
 
 import { getMediaUrl } from "@/lib/blog";
+import { mapPageSeo } from "@/lib/page-seo";
 import {
   contactPageDefaults,
   footerDefaults,
@@ -28,15 +29,38 @@ function resolveUploadUrl(
   return getMediaUrl(media) ?? fallback;
 }
 
-function mapNavLink(
+function mapAnchorLink(
   item: Record<string, unknown>,
   fallback?: NavLink,
 ): NavLink {
+  const href = ((item.href as string) || fallback?.href || "").replace(/^#/, "");
   return {
     label: (item.label as string) || fallback?.label || "",
-    href: (item.href as string) || fallback?.href || "",
-    type: (item.type as NavLink["type"]) || fallback?.type || "route",
+    href,
+    type: "anchor",
   };
+}
+
+function mapRouteLink(
+  item: Record<string, unknown>,
+  fallback?: NavLink,
+): NavLink {
+  const href = (item.href as string) || fallback?.href || "";
+  return {
+    label: (item.label as string) || fallback?.label || "",
+    href: href.startsWith("/") ? href : `/${href}`,
+    type: "route",
+  };
+}
+
+function dedupeNavLinks(links: NavLink[]): NavLink[] {
+  const seen = new Set<string>();
+  return links.filter((link) => {
+    const key = `${link.type}:${link.href}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function mapHero(
@@ -61,18 +85,25 @@ function mapNavigationFromCms(data: Record<string, unknown>): NavigationContent 
       data.logo as number | Media | null | undefined,
       (data.logoUrl as string) || navigationDefaults.logoUrl,
     ),
-    homeSectionLinks:
+    homeSectionLinks: dedupeNavLinks(
       Array.isArray(data.homeSectionLinks) && data.homeSectionLinks.length > 0
-        ? data.homeSectionLinks.map((item, index) =>
-            mapNavLink(item as Record<string, unknown>, navigationDefaults.homeSectionLinks[index]),
-          )
+        ? data.homeSectionLinks
+            .map((item, index) =>
+              mapAnchorLink(
+                item as Record<string, unknown>,
+                navigationDefaults.homeSectionLinks[index],
+              ),
+            )
+            .filter((link) => link.href && !link.href.startsWith("/"))
         : navigationDefaults.homeSectionLinks,
-    routeLinks:
+    ),
+    routeLinks: dedupeNavLinks(
       Array.isArray(data.routeLinks) && data.routeLinks.length > 0
         ? data.routeLinks.map((item, index) =>
-            mapNavLink(item as Record<string, unknown>, navigationDefaults.routeLinks[index]),
+            mapRouteLink(item as Record<string, unknown>, navigationDefaults.routeLinks[index]),
           )
         : navigationDefaults.routeLinks,
+    ),
   };
 }
 
@@ -111,7 +142,9 @@ function mapFooterFromCms(data: Record<string, unknown>): FooterContent {
 
 function mapContactPageFromCms(data: Record<string, unknown>): ContactPageContent {
   const hero = (data.hero ?? {}) as Record<string, unknown>;
+  const meta = (data.meta ?? {}) as Record<string, unknown>;
   return {
+    meta: mapPageSeo(meta, contactPageDefaults.meta),
     hero: mapHero(hero, contactPageDefaults.hero),
     address: (data.address as string) || contactPageDefaults.address,
     email: (data.email as string) || contactPageDefaults.email,
@@ -139,7 +172,9 @@ function mapTeamMember(
 
 function mapLeadershipPageFromCms(data: Record<string, unknown>): LeadershipPageContent {
   const hero = (data.hero ?? {}) as Record<string, unknown>;
+  const meta = (data.meta ?? {}) as Record<string, unknown>;
   return {
+    meta: mapPageSeo(meta, leadershipPageDefaults.meta),
     hero: mapHero(hero, leadershipPageDefaults.hero),
     members:
       Array.isArray(data.members) && data.members.length > 0
@@ -163,7 +198,9 @@ function mapFaqItem(item: Record<string, unknown>, fallback?: FaqItem): FaqItem 
 
 function mapKnowledgePageFromCms(data: Record<string, unknown>): KnowledgePageContent {
   const hero = (data.hero ?? {}) as Record<string, unknown>;
+  const meta = (data.meta ?? {}) as Record<string, unknown>;
   return {
+    meta: mapPageSeo(meta, knowledgePageDefaults.meta),
     hero: mapHero(hero, knowledgePageDefaults.hero),
     faqs:
       Array.isArray(data.faqs) && data.faqs.length > 0

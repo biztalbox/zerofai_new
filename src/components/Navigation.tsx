@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useSiteContent } from "@/components/SiteContentProvider";
 import type { NavLink } from "@/types/site-content";
@@ -11,22 +11,43 @@ type NavigationBarProps = {
   overlay?: boolean;
 };
 
+function dedupeNavLinks(links: NavLink[]): NavLink[] {
+  const seen = new Set<string>();
+  return links.filter((link) => {
+    const key = `${link.type}:${link.href}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export function NavigationBar({ overlay = false }: NavigationBarProps) {
   const { navigation } = useSiteContent();
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const { homeSectionLinks, routeLinks } = navigation;
-  const links: NavLink[] = isHomePage
-    ? [...homeSectionLinks, ...routeLinks]
-    : routeLinks;
+
+  const links = useMemo(() => {
+    const anchors = homeSectionLinks.filter(
+      (link) => link.type === "anchor" && link.href && !link.href.startsWith("/"),
+    );
+    const routes = routeLinks.filter(
+      (link) => link.type === "route" && link.href.startsWith("/"),
+    );
+
+    return dedupeNavLinks(isHomePage ? [...anchors, ...routes] : routes);
+  }, [homeSectionLinks, routeLinks, isHomePage]);
+
   const [active, setActive] = useState(homeSectionLinks[0]?.href ?? "");
 
   useEffect(() => {
     if (!isHomePage) return;
 
     const sections = homeSectionLinks
+      .filter((link) => link.type === "anchor" && !link.href.startsWith("/"))
       .map((link) => document.getElementById(link.href))
       .filter(Boolean) as HTMLElement[];
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -67,12 +88,12 @@ export function NavigationBar({ overlay = false }: NavigationBarProps) {
         </Link>
         {links.map((link) =>
           link.type === "route" ? (
-            <Link key={link.href} href={link.href} className={linkClassName(link)}>
+            <Link key={`route-${link.href}`} href={link.href} className={linkClassName(link)}>
               {link.label}
             </Link>
           ) : (
             <a
-              key={link.href}
+              key={`anchor-${link.href}`}
               href={`/#${link.href}`}
               onClick={() => setActive(link.href)}
               className={linkClassName(link)}

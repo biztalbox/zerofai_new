@@ -1,3 +1,5 @@
+import type { PageSeo } from "@/types/page-seo";
+
 export type NavLink = {
   label: string;
   href: string;
@@ -36,6 +38,7 @@ export type PageHero = {
 };
 
 export type ContactPageContent = {
+  meta: PageSeo;
   hero: PageHero;
   address: string;
   email: string;
@@ -51,6 +54,7 @@ export type TeamMember = {
 };
 
 export type LeadershipPageContent = {
+  meta: PageSeo;
   hero: PageHero;
   members: TeamMember[];
 };
@@ -62,6 +66,7 @@ export type FaqItem = {
 };
 
 export type KnowledgePageContent = {
+  meta: PageSeo;
   hero: PageHero;
   faqs: FaqItem[];
   ctaTitle: string;

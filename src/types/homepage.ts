@@ -1,3 +1,5 @@
+import type { PageSeo } from "@/types/page-seo";
+
 export type HomepageHero = {
   videoUrl: string;
   title: string;
@@ -60,6 +62,7 @@ export type HomepageCatalog = {
 };
 
 export type HomepageContent = {
+  meta: PageSeo;
   hero: HomepageHero;
   whatIs: HomepageWhatIs;
   customerTrust: HomepageCustomerTrust;

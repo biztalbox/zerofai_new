@@ -51,6 +51,11 @@ export const footerDefaults: FooterContent = {
 };
 
 export const contactPageDefaults: ContactPageContent = {
+  meta: {
+    title: "Contact | Request Demo | ZerofAI",
+    description:
+      "Connect with ZerofAI to automate compliance, monitor endpoints, and strengthen enterprise security operations in real time.",
+  },
   hero: {
     eyebrow: "Get in Touch",
     title: "Contact US",
@@ -65,6 +70,10 @@ export const contactPageDefaults: ContactPageContent = {
 };
 
 export const leadershipPageDefaults: LeadershipPageContent = {
+  meta: {
+    title: "Our Team | ZerofAI",
+    description: "Meet the ZerofAI leadership team driving autonomous IT operations innovation.",
+  },
   hero: {
     title: "Our Team",
     subtitle: "Meet our Leadership Team",
@@ -110,6 +119,11 @@ export const leadershipPageDefaults: LeadershipPageContent = {
 };
 
 export const knowledgePageDefaults: KnowledgePageContent = {
+  meta: {
+    title: "Knowledge Center | ZerofAI",
+    description:
+      "Find answers to frequently asked questions about ZerofAI's autonomous IT operations platform and services.",
+  },
   hero: {
     eyebrow: "FAQs",
     title: "Knowledge Center",

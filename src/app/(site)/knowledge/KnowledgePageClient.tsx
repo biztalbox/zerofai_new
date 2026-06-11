@@ -61,8 +61,8 @@ export function KnowledgePageClient({ content }: KnowledgePageClientProps) {
       </section>
 
       <section>
-        <div className="container relative px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
-          <div className="mx-auto mt-8 sm:mt-10">
+        <div className="container max-w-7xl mx-auto relative px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
+          <div className="mt-8 sm:mt-10">
             {filteredFaqs.length === 0 ? (
               <p className="rounded-xl border border-neutral-200/60 bg-white/60 px-5 py-8 text-center text-sm text-neutral-600 dark:border-white/10 dark:bg-white/5 dark:text-[#94A3B8]">
                 No matching questions found. Try a different search term.

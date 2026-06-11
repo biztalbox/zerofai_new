@@ -1,5 +1,7 @@
 import type { GlobalConfig } from "payload";
 
+import { pageMetaGroupFields } from "./seo-fields";
+
 const pageHeroFields = [
   { name: "eyebrow", type: "text" as const, label: "Eyebrow label" },
   { name: "title", type: "text" as const, required: true },
@@ -17,23 +19,23 @@ const pageHeroFields = [
   },
 ];
 
-const navLinkFields = [
+const anchorLinkFields = [
   { name: "label", type: "text" as const, required: true },
   {
     name: "href",
     type: "text" as const,
     required: true,
-    admin: { description: "Route path (e.g. /contact) or section id (e.g. what-is)" },
+    admin: { description: "Homepage section id only (e.g. what-is, platform)" },
   },
+];
+
+const routeLinkFields = [
+  { name: "label", type: "text" as const, required: true },
   {
-    name: "type",
-    type: "select" as const,
+    name: "href",
+    type: "text" as const,
     required: true,
-    defaultValue: "route",
-    options: [
-      { label: "Page route", value: "route" },
-      { label: "Homepage anchor", value: "anchor" },
-    ],
+    admin: { description: "Page path only (e.g. /contact, /our-team)" },
   },
 ];
 
@@ -57,14 +59,20 @@ export const SiteNavigation: GlobalConfig = {
     {
       name: "homeSectionLinks",
       type: "array",
-      label: "Homepage section links",
-      fields: navLinkFields,
+      label: "Homepage section links (anchors)",
+      admin: {
+        description: "Shown on homepage only — links scroll to sections like #what-is",
+      },
+      fields: anchorLinkFields,
     },
     {
       name: "routeLinks",
       type: "array",
-      label: "Page links",
-      fields: navLinkFields,
+      label: "Page links (routes)",
+      admin: {
+        description: "Site pages like /contact — shown on all pages",
+      },
+      fields: routeLinkFields,
     },
   ],
 };
@@ -150,6 +158,10 @@ export const ContactPage: GlobalConfig = {
             },
           ],
         },
+        {
+          label: "SEO / Metadata",
+          fields: pageMetaGroupFields,
+        },
       ],
     },
   ],
@@ -186,6 +198,10 @@ export const LeadershipPage: GlobalConfig = {
               ],
             },
           ],
+        },
+        {
+          label: "SEO / Metadata",
+          fields: pageMetaGroupFields,
         },
       ],
     },
@@ -238,6 +254,10 @@ export const KnowledgePage: GlobalConfig = {
             { name: "ctaButtonLabel", type: "text", defaultValue: "Contact Support" },
             { name: "ctaButtonLink", type: "text", defaultValue: "/contact" },
           ],
+        },
+        {
+          label: "SEO / Metadata",
+          fields: pageMetaGroupFields,
         },
       ],
     },

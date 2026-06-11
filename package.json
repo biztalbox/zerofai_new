@@ -11,6 +11,7 @@
     "migrate:site-content": "node scripts/apply-site-content-migration.mjs",
     "migrate:homepage": "node scripts/apply-homepage-cms-migration.mjs",
     "fix:homepage-schema": "node scripts/fix-homepage-schema.mjs",
+    "migrate:page-seo": "node scripts/apply-page-seo-migration.mjs",
     "build:prod": "node scripts/migrate-production.mjs && next build",
     "migrate:status": "payload migrate:status",
     "start:app": "next start",

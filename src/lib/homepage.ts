@@ -3,6 +3,7 @@ import type { HomepageContent } from "@/types/homepage";
 
 import { getMediaUrl } from "@/lib/blog";
 import { homepageDefaults } from "@/lib/homepage-defaults";
+import { mapPageSeo } from "@/lib/page-seo";
 import { getPayloadClient } from "@/lib/payload";
 
 function resolveUploadUrl(
@@ -20,7 +21,10 @@ function mapHomepageFromCms(data: Record<string, unknown>): HomepageContent {
   const pillars = (data.pillars ?? {}) as Record<string, unknown>;
   const cta = (data.cta ?? {}) as Record<string, unknown>;
   const catalog = (data.catalog ?? {}) as Record<string, unknown>;
+  const meta = (data.meta ?? {}) as Record<string, unknown>;
+
   return {
+    meta: mapPageSeo(meta, homepageDefaults.meta),
     hero: {
       videoUrl: resolveUploadUrl(
         hero.video as number | Media | null | undefined,

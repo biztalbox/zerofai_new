@@ -1,5 +1,7 @@
 import type { GlobalConfig } from "payload";
 
+import { pageMetaGroupFields } from "./seo-fields";
+
 export const Homepage: GlobalConfig = {
   slug: "homepage",
   label: "Homepage",
@@ -160,6 +162,10 @@ export const Homepage: GlobalConfig = {
               ],
             },
           ],
+        },
+        {
+          label: "SEO / Metadata",
+          fields: pageMetaGroupFields,
         },
       ],
     },
