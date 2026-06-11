@@ -230,7 +230,6 @@ export function validateContactPayload(data: ContactPayload): string | null {
     validateEmail(data.email) ??
     validateCompany(data.company) ??
     validatePhone(data.phone) ??
-    validateDesignation(data.designation) ??
     validateMessage(data.message)
   );
 }
@@ -241,6 +240,7 @@ export function toApiBody(data: ContactPayload) {
     email: data.email.trim().toLowerCase(),
     phone_number: normalizePhone(data.phone),
     company_name: data.company.trim(),
-    message: buildApiMessage(data.message, data.designation),
+    designation: "",
+    message: data.message.trim(),
   };
 }

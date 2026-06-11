@@ -108,14 +108,11 @@ const KnowledgeCenterPage = () => {
   <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
     <div className="max-w-xl">
       <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
-        Knowledge Center
+       FAQs
       </p>
       <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
         Knowledge Center
       </h1>
-      <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white md:text-base">
-        Everything you need to know about ZerofAI - platform capabilities, services, and how autonomous IT operations work in practice.
-      </p>
     </div>
   </div>
 </section>

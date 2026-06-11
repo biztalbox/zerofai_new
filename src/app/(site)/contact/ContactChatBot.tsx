@@ -11,7 +11,6 @@ import {
   toApiBody,
   validateCompany,
   validateContactPayload,
-  validateDesignation,
   validateEmail,
   validateMessage,
   validateName,
@@ -26,22 +25,7 @@ type ChatMessage = {
   text: string;
 };
 
-type Step =
-  | "name"
-  | "email"
-  | "company"
-  | "phone"
-  | "designation"
-  | "message"
-  | "complete";
-
-const DESIGNATION_OPTIONS = [
-  "CTO / CISO",
-  "VP Engineering",
-  "IT Director",
-  "Security Manager",
-  "Other",
-] as const;
+type Step = "name" | "email" | "company" | "phone" | "message" | "complete";
 
 const EMPTY_FORM: ContactPayload = {
   name: "",
@@ -256,8 +240,8 @@ export function ContactChatBot() {
     setInput("");
     await addBotMessages(
       [
-        "👋 Welcome to ZeroFAI!",
-        "I'm your assistant here to help you connect with our security team. Let's get started — what is your name?",
+        "👋 Welcome to ZerofAI!",
+        "I'm here to help you. Let's get started — what is your name?",
       ],
       800
     );
@@ -275,22 +259,10 @@ export function ContactChatBot() {
   }, [messages, isTyping, scrollToBottom]);
 
   useEffect(() => {
-    if (isOpen && !isMinimized && step !== "complete" && step !== "designation") {
+    if (isOpen && !isMinimized && step !== "complete") {
       inputRef.current?.focus();
     }
   }, [isOpen, isMinimized, step, isTyping]);
-
-  const handleDesignationSelect = async (designation: string) => {
-    if (step !== "designation" || isTyping) return;
-    addUserMessage(designation);
-    updateFormData({ designation });
-    setStep("message");
-    const firstName = formDataRef.current.name.split(" ")[0] || "there";
-    await addBotMessages([
-      `Got it, ${firstName}!`,
-      "How can we help you strengthen your security posture?",
-    ]);
-  };
 
   const handleSend = async () => {
     const value = input.trim();
@@ -352,32 +324,15 @@ export function ContactChatBot() {
       setInput("");
 
       if (formDataRef.current.message.trim()) {
-        await finishSubmission(formDataRef.current);
+        await finishSubmission({ ...formDataRef.current, designation: "" });
         return;
       }
 
-      setStep("designation");
-      await addBotMessages([
-        "Almost done! What is your current designation?",
-        "You can pick one below or type your own.",
-      ]);
-      return;
-    }
-
-    if (step === "designation") {
-      const err = validateDesignation(value);
-      if (err) {
-        await showValidationError(value, err, CONTINUE.designation);
-        return;
-      }
-      addUserMessage(value);
-      updateFormData({ designation: value.trim() });
-      setInput("");
       setStep("message");
       const firstName = formDataRef.current.name.split(" ")[0] || "there";
       await addBotMessages([
         `Got it, ${firstName}!`,
-        "How can we help you strengthen your security posture?",
+        "How can we help you?",
       ]);
       return;
     }
@@ -389,8 +344,12 @@ export function ContactChatBot() {
         return;
       }
       addUserMessage(value);
-      const finalData = { ...formDataRef.current, message: value.trim() };
-      updateFormData({ message: value.trim() });
+      const finalData = {
+        ...formDataRef.current,
+        message: value.trim(),
+        designation: "",
+      };
+      updateFormData({ message: value.trim(), designation: "" });
       setInput("");
       await finishSubmission(finalData);
     }
@@ -421,16 +380,13 @@ export function ContactChatBot() {
       : step === "email"
         ? "you@company.com"
         : step === "company"
-          ? "Acme Corp"
+          ? "Your company name..."
           : step === "phone"
             ? "10-digit mobile number"
-            : step === "designation"
-              ? "Or type your designation..."
-              : step === "message"
-                ? "Tell us how we can help..."
-                : "Conversation ended";
+            : step === "message"
+              ? "Tell us how we can help..."
+              : "Conversation ended";
 
-  const showDesignationPills = step === "designation" && !isTyping;
   const inputDisabled = step === "complete" || isTyping || isSubmitting;
 
   return (
@@ -462,7 +418,7 @@ export function ContactChatBot() {
               <BotAvatar />
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-neutral-900 dark:text-white">
-                  ZeroFAI Assistant
+                  ZerofAI
                 </p>
                 <p className="truncate text-[11px] text-neutral-500 dark:text-neutral-400">
                   {isTyping ? "Typing..." : "Get instant guidance for your security needs"}
@@ -499,23 +455,6 @@ export function ContactChatBot() {
                   {isTyping && <TypingIndicator />}
                   <div ref={messagesEndRef} />
                 </div>
-
-                {showDesignationPills && (
-                  <div className="shrink-0 border-t border-neutral-200/60 bg-white/80 px-3 py-2.5 backdrop-blur-sm dark:border-white/8 dark:bg-[#111]/90">
-                    <div className="flex flex-wrap gap-2">
-                      {DESIGNATION_OPTIONS.map((opt) => (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() => void handleDesignationSelect(opt)}
-                          className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-[11px] font-medium text-neutral-700 transition hover:border-primary hover:bg-primary/5 hover:text-primary dark:border-white/15 dark:bg-[#1a1a1a] dark:text-neutral-200 dark:hover:border-primary dark:hover:text-primary"
-                        >
-                          {opt}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
 
                 <div className="shrink-0 border-t border-neutral-200/80 bg-white px-3 py-3 dark:border-white/10 dark:bg-[#111]">
                   {step === "complete" ? (

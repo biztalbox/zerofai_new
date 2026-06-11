@@ -74,8 +74,6 @@ export function ContactForm() {
     const companyName = String(formData.get("company") ?? "").trim();
     const phoneNumber = String(formData.get("phone") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
-    const role = String(formData.get("role") ?? "").trim();
-    const roleLabel = role ? (ROLE_LABELS[role] ?? role) : "";
 
     const nameErr = validateName(name);
     if (nameErr) {
@@ -118,7 +116,7 @@ export function ContactForm() {
             email: workEmail,
             company: companyName,
             phone: normalizePhone(phoneNumber),
-            designation: roleLabel,
+            designation: "",
             message,
           })
         ),
@@ -156,7 +154,6 @@ export function ContactForm() {
             id="contact-full-name"
             name="fullName"
             type="text"
-            placeholder="John Doe"
             autoComplete="name"
             required
             className={fieldClass}
@@ -170,7 +167,6 @@ export function ContactForm() {
             id="contact-email"
             name="email"
             type="email"
-            placeholder="john@company.com"
             autoComplete="email"
             value={email}
             onChange={(e) => handleEmailChange(e.target.value)}
@@ -198,7 +194,7 @@ export function ContactForm() {
             id="contact-company"
             name="company"
             type="text"
-            placeholder="Acme Corp"
+           
             autoComplete="organization"
             required
             className={fieldClass}
@@ -212,32 +208,11 @@ export function ContactForm() {
             id="contact-phone"
             name="phone"
             type="tel"
-            placeholder="10-digit mobile number"
             autoComplete="tel"
             required
             className={fieldClass}
           />
         </div>
-      </div>
-      <div>
-        <label htmlFor="contact-role" className={labelClass}>
-          Designation{" "}
-          <span className="text-xs! text-neutral-500! dark:text-neutral-500!">(optional)</span>
-        </label>
-        <select
-          id="contact-role"
-          name="role"
-          className={selectFieldClass}
-          defaultValue=""
-          aria-required={false}
-        >
-          <option value="">Select designation…</option>
-          <option value="cto-ciso">CTO / CISO</option>
-          <option value="vp-engineering">VP Engineering</option>
-          <option value="it-director">IT Director</option>
-          <option value="security-manager">Security Manager</option>
-          <option value="other">Other</option>
-        </select>
       </div>
       <div>
         <label htmlFor="contact-message" className={labelClass}>
@@ -247,7 +222,6 @@ export function ContactForm() {
           id="contact-message"
           name="message"
           rows={4}
-          placeholder="How can we help strengthen your security posture?"
           className={`${fieldClass} min-h-[110px] resize-y`}
         />
       </div>

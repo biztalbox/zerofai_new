@@ -52,10 +52,6 @@ export default async function BlogPage() {
             <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
               Blog
             </h1>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white md:text-base">
-              Expert perspectives on AI-driven IT operations, workplace experience, and digital
-              transformation.
-            </p>
           </div>
         </div>
       </section>
@@ -65,21 +61,14 @@ export default async function BlogPage() {
           <div className="mx-auto max-w-2xl rounded-xl border border-amber-200/80 bg-amber-50 px-6 py-12 text-center shadow-sm">
             <h2 className="text-xl font-medium text-neutral-900">Blog is being set up</h2>
             <p className="mt-2 text-sm text-neutral-600">
-              Could not connect to the database. Verify your Supabase{" "}
-              <code className="text-xs">DATABASE_URI</code> in{" "}
-              <code className="text-xs">.env.local</code>, then restart the dev server.
+              Could not connect to the database.
+              
             </p>
           </div>
         ) : blogs.length === 0 ? (
           <div className="mx-auto max-w-2xl rounded-xl border border-neutral-200/70 bg-white px-6 py-12 text-center shadow-sm">
-            <h2 className="text-xl font-medium text-neutral-900">No posts yet</h2>
-            <p className="mt-2 text-sm text-neutral-600">
-              Publish your first blog post from the{" "}
-              <Link href="/admin" className="text-primary underline-offset-2 hover:underline">
-                admin panel
-              </Link>
-              .
-            </p>
+            <h2 className="text-xl font-medium text-neutral-900">No posts found</h2>
+            
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -89,7 +78,7 @@ export default async function BlogPage() {
               return (
                 <article
                   key={blog.id}
-                  className="overflow-hidden rounded-xl border border-neutral-200/70 bg-white shadow-sm transition-shadow hover:shadow-md"
+                  className="overflow-hidden rounded border border-neutral-200/70 bg-white"
                 >
                   <Link href={`/blog/${blog.slug}`} className="block">
                     <div className="relative aspect-[16/10] bg-neutral-100">
