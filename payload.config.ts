@@ -11,7 +11,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
-import { SiteGlobals } from "./src/globals/site-content.ts";
+import { SiteGlobals } from "./src/globals/site-content";
 import { migrations } from "./src/migrations";
 
 loadEnv({ path: path.resolve(process.cwd(), ".env.local") });
