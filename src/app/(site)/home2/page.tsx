@@ -1,7 +1,6 @@
 "use client"
 import { ArrowRight, Cloud, Shield, Database, Network, Cpu, Layers } from "lucide-react";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { WhoWeAre } from "@/components/WhoWeAre";
 import { IndustryRecognition } from "@/components/IndustryRecognition";
@@ -236,7 +235,6 @@ export default function Page() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

@@ -14,6 +14,7 @@ export type HomepageWhatIs = {
 export type HomepageTrustCard = {
   number: string;
   imageUrl: string;
+  videoId?: string;
 };
 
 export type HomepageCustomerTrust = {
@@ -58,18 +59,6 @@ export type HomepageCatalog = {
   ctaLink: string;
 };
 
-export type HomepageFaqItem = {
-  id: string;
-  question: string;
-  answer: string;
-};
-
-export type HomepageFaq = {
-  eyebrow: string;
-  title: string;
-  items: HomepageFaqItem[];
-};
-
 export type HomepageContent = {
   hero: HomepageHero;
   whatIs: HomepageWhatIs;
@@ -78,5 +67,4 @@ export type HomepageContent = {
   pillars: HomepagePillars;
   cta: HomepageCta;
   catalog: HomepageCatalog;
-  faq: HomepageFaq;
 };
