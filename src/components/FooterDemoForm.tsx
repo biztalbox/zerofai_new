@@ -165,7 +165,9 @@ export function FooterDemoForm() {
             className={fieldClass}
           />
         </div>
+        <div className="flex justify-between gap-4">
 
+        
         {submitError ? (
           <p className="text-xs leading-relaxed text-red-300" role="alert">
             {submitError}
@@ -181,10 +183,11 @@ export function FooterDemoForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-fit block ml-auto! px-3 rounded bg-primary py-1.5 text-sm font-semibold text-white transition hover:bg-[#005a63] disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-fit block ml-auto! whitespace-nowrap px-3 rounded bg-primary py-1.5 text-sm font-semibold text-white transition hover:bg-[#005a63] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isSubmitting ? "Submitting..." : "Request Demo"}
+          {isSubmitting ? "Submitting..." : "Submit"}
         </button>
+        </div>
       </form>
     </div>
   );
