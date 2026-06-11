@@ -11,6 +11,7 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { SiteGlobals } from "./src/globals/site-content.ts";
 import { migrations } from "./src/migrations";
 
 loadEnv({ path: path.resolve(process.cwd(), ".env.local") });
@@ -450,7 +451,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Posts],
-  globals: [Homepage],
+  globals: [Homepage, ...SiteGlobals],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

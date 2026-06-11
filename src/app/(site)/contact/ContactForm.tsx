@@ -20,7 +20,15 @@ const fieldClass =
 const labelClass =
   "mb-1.5 block text-xs font-medium tracking-wide text-neutral-600 dark:text-[#94A3B8]";
 
-export function ContactForm() {
+type ContactFormProps = {
+  submitLabel?: string;
+  successMessage?: string;
+};
+
+export function ContactForm({
+  submitLabel = "Request Demo",
+  successMessage = "Thank you! Your message has been submitted. Our team will get back to you soon.",
+}: ContactFormProps) {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -237,7 +245,7 @@ export function ContactForm() {
       ) : null}
       {submitSuccess ? (
         <p className="text-sm! leading-relaxed! text-green-700! dark:text-green-400!" role="status">
-          Thank you! Your message has been submitted. Our team will get back to you soon.
+          {successMessage}
         </p>
       ) : null}
       <button
@@ -245,7 +253,7 @@ export function ContactForm() {
         disabled={isSubmitting}
         className="w-full bg-primary py-3.5 text-sm font-bold text-white transition hover:bg-primary-hover active:brightness-95 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {isSubmitting ? "Submitting..." : "Request Demo"}
+        {isSubmitting ? "Submitting..." : submitLabel}
       </button>
     </form>
   );

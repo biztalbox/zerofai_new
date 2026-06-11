@@ -63,6 +63,25 @@ try {
     console.log("Recorded homepage migration for existing dev-provisioned schema.");
   }
 
+  const siteNavExists = await pool.query(`
+    SELECT EXISTS (
+      SELECT 1 FROM information_schema.tables
+      WHERE table_schema = 'public' AND table_name = 'site_navigation'
+    ) AS exists
+  `);
+
+  const siteMigrationPending = await pool.query(`
+    SELECT 1 FROM "payload_migrations"
+    WHERE name = '20260611_site_content_globals'
+    LIMIT 1
+  `);
+
+  if (!siteNavExists.rows[0]?.exists && siteMigrationPending.rowCount === 0) {
+    console.log(
+      "Site content CMS tables are missing. Run: yarn migrate:site-content",
+    );
+  }
+
   console.log("\nPayload is ready for production mode.");
   console.log("Migrations run automatically when the app starts with NODE_ENV=production.");
 } catch (error) {

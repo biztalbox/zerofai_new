@@ -1,0 +1,71 @@
+export type NavLink = {
+  label: string;
+  href: string;
+  type: "route" | "anchor";
+};
+
+export type NavigationContent = {
+  logoUrl: string;
+  homeSectionLinks: NavLink[];
+  routeLinks: NavLink[];
+};
+
+export type FooterLink = {
+  label: string;
+  href: string;
+};
+
+export type FooterColumn = {
+  title: string;
+  links: FooterLink[];
+};
+
+export type FooterContent = {
+  logoUrl: string;
+  description: string;
+  columns: FooterColumn[];
+  demoTitle: string;
+  copyright: string;
+};
+
+export type PageHero = {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  imageUrl: string;
+};
+
+export type ContactPageContent = {
+  hero: PageHero;
+  address: string;
+  email: string;
+  mapAddress: string;
+  formSubmitLabel: string;
+  formSuccessMessage: string;
+};
+
+export type TeamMember = {
+  name: string;
+  designation: string;
+  imageUrl: string;
+};
+
+export type LeadershipPageContent = {
+  hero: PageHero;
+  members: TeamMember[];
+};
+
+export type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+export type KnowledgePageContent = {
+  hero: PageHero;
+  faqs: FaqItem[];
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaButtonLabel: string;
+  ctaButtonLink: string;
+};

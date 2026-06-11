@@ -1,7 +1,9 @@
 "use client"
 import Link from "next/link";
-import { Search, ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+
+import { useSiteContent } from "@/components/SiteContentProvider";
 
 const nav = [
   { label: "Services", hasMenu: true },
@@ -13,6 +15,7 @@ const nav = [
 ];
 
 export function Header() {
+  const { navigation } = useSiteContent();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -39,7 +42,7 @@ export function Header() {
         className={`flex items-center justify-between gap-6 border-t border-border/60 px-6 transition-all duration-500 ease-[cubic-bezier(.2,.7,.2,1)] lg:px-12 ${scrolled ? "py-3" : "py-4"}`}
       >
         <Link href="/" className="flex items-baseline gap-0.5">
-          <img width="300" height="100" src="/assets/logo.png" className="w-32" />
+          <img width="300" height="100" src={navigation.logoUrl} alt="ZerofAI" className="w-32" />
         </Link>
         {/* <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
