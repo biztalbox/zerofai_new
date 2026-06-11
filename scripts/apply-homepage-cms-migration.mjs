@@ -57,6 +57,9 @@ try {
     console.log("Seeded initial homepage row.");
   }
 
+  const { execSync } = await import("node:child_process");
+  execSync("node scripts/fix-homepage-schema.mjs", { stdio: "inherit" });
+
   console.log("Homepage CMS schema is ready.");
 } catch (error) {
   console.error("Migration failed:", error instanceof Error ? error.message : error);
