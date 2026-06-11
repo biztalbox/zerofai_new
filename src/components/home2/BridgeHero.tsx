@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import type { HomepageHero } from "@/types/homepage";
@@ -42,8 +41,7 @@ export function BridgeHero({ content }: Props) {
 
       <div className="relative mx-auto flex h-full min-h-[460px] self-center container items-center px-6 py-12 lg:min-h-[540px] lg:px-10 lg:py-16">
         <div className="w-full max-w-[400px] rounded-xl bg-[#2828288a] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-[2px] lg:max-w-[420px] lg:p-10">
-          <Image width={300} height={100} src="/assets/logo.png" alt="Zerofai" className="w-32" />
-          <h1 className="mt-5 text-[1.625rem] font-normal leading-[1.25] tracking-[-0.02em] text-white lg:text-[1.75rem]">
+          <h1 className="text-[1.625rem] font-normal leading-[1.25] tracking-[-0.02em] text-white lg:text-[1.75rem]">
             {content.title}
           </h1>
           <Link

@@ -19,7 +19,11 @@ const routeLinks = [
 
 const isRouteLink = (id: string) => id.startsWith("/");
 
-export function NavigationBar() {
+type NavigationBarProps = {
+  overlay?: boolean;
+};
+
+export function NavigationBar({ overlay = false }: NavigationBarProps) {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const links = isHomePage ? [...homeSectionLinks, ...routeLinks] : routeLinks;
@@ -53,8 +57,12 @@ export function NavigationBar() {
         : "border-transparent text-[#666] hover:text-[#3d3d3d]"
     }`;
 
+  const navClassName = overlay
+    ? "fixed top-0 left-0 right-0 z-50 border-b border-[#e8e8e8] bg-white"
+    : "sticky top-0 z-40 border-b border-[#e8e8e8] bg-[#f4f4f4]";
+
   return (
-    <nav className="sticky top-0 z-40 border-b border-[#e8e8e8] bg-[#f4f4f4]">
+    <nav className={navClassName}>
       <div className="mx-auto flex container overflow-x-auto px-6 lg:px-10">
 
       <Link href="/">

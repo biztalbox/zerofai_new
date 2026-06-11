@@ -1,3 +1,4 @@
+import { CountUpStat } from "@/components/home2/CountUpStat";
 import type { HomepageStats } from "@/types/homepage";
 
 type Props = {
@@ -15,9 +16,10 @@ export function BridgeStats({ content }: Props) {
               key={`${stat.value}-${stat.label}`}
               className={`${index > 0 ? "md:border-l md:border-[#e8e8e8] md:pl-8 lg:pl-10" : ""}`}
             >
-              <div className="text-[3.5rem] font-light leading-none tracking-[-0.03em] text-[#006670]">
-                {stat.value}
-              </div>
+              <CountUpStat
+                value={stat.value}
+                className="block text-[3.5rem] font-light leading-none tracking-[-0.03em] text-[#006670]"
+              />
               <h3 className="mt-4 text-base font-medium leading-snug text-[#3d3d3d]">
                 {stat.label}
               </h3>

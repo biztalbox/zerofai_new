@@ -106,7 +106,7 @@ const KnowledgeCenterPage = () => {
     aria-hidden
   />
   <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
-    <div className="max-w-xl">
+    <div className="">
       <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
        FAQs
       </p>
@@ -121,7 +121,7 @@ const KnowledgeCenterPage = () => {
 
 
           {/* FAQ list */}
-          <div className="mx-auto mt-8 max-w-3xl sm:mt-10">
+          <div className="mx-auto mt-8 sm:mt-10">
             {filteredFaqs.length === 0 ? (
               <p className="rounded-xl border border-neutral-200/60 bg-white/60 px-5 py-8 text-center text-sm text-neutral-600 dark:border-white/10 dark:bg-white/5 dark:text-[#94A3B8]">
                 No matching questions found. Try a different search term.
