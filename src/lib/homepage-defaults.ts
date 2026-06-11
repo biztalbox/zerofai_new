@@ -38,22 +38,19 @@ export const homepageDefaults: HomepageContent = {
         title: "Observe",
         description:
           "Gain real-time visibility across endpoints, users, applications, services, and operational workflows. ZerofAI continuously analyzes enterprise signals to uncover issues, experience gaps, and operational bottlenecks before they escalate.",
-        imageUrl:
-          "https://s7d1.scene7.com/is/image/kyndryl/integrate-16x9-01?qlt=85",
+        imageUrl: "/assets/observe.png",
       },
       {
         title: "Predict",
         description:
           "Move beyond monitoring. ZerofAI uses operational intelligence and behavioral analytics to identify emerging risks, recurring issues, and experience degradation patterns before they impact users or business operations.",
-        imageUrl:
-          "https://s7d1.scene7.com/is/image/kyndryl/Observe-2.2-16x9-01?qlt=85",
+        imageUrl: "/assets/predict.png",
       },
       {
         title: "Automate",
         description:
           "Transform insights into action. ZerofAI orchestrates remediation workflows, resolves repetitive operational issues, and enables autonomous execution to reduce manual effort and improve operational resilience.",
-        imageUrl:
-          "https://s7d1.scene7.com/is/image/kyndryl/Orchestrate-16x9-01?qlt=85",
+        imageUrl: "/assets/automate.png",
       },
     ],
   },
@@ -65,8 +62,7 @@ export const homepageDefaults: HomepageContent = {
     buttonLink: "/contact",
   },
   catalog: {
-    imageUrl:
-      "https://s7d1.scene7.com/is/image/kyndryl/team_womaninmeetingwithcolleagues_16x9:4x3_Large?qlt=85",
+    imageUrl: "/assets/insights.jpg",
     paragraphs: [
       "Stay informed with expert perspectives, industry trends, and practical insights on autonomous IT operations, workplace experience, predictive intelligence, and the future of enterprise technology.",
       "Explore how organizations are transforming IT operations through automation, operational intelligence, and AI-driven decision-making.",

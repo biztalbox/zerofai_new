@@ -4,6 +4,12 @@ type Props = {
   content: HomepagePillars;
 };
 
+const pillarImages: Record<string, string> = {
+  Observe: "/assets/observe.png",
+  Predict: "/assets/predict.png",
+  Automate: "/assets/automate.png",
+};
+
 export function BridgePillars({ content }: Props) {
   return (
     <section
@@ -20,9 +26,9 @@ export function BridgePillars({ content }: Props) {
             <article key={pillar.title}>
               <div className="overflow-hidden rounded-md bg-white shadow-[0_1px_4px_rgba(0,0,0,0.08)]">
                 <img
-                  src={pillar.imageUrl}
+                  src={pillarImages[pillar.title] ?? pillar.imageUrl}
                   alt={pillar.title}
-                  className="aspect-[4/3] w-full object-cover object-top"
+                  className="aspect-[4/3] w-full object-cover object-center"
                 />
               </div>
               <h4 className="mt-6 text-lg font-medium text-[#3d3d3d]">{pillar.title}</h4>

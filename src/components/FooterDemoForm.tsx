@@ -12,7 +12,7 @@ import {
 } from "@/app/(site)/contact/contactValidation";
 
 const fieldClass =
-  "w-full rounded-lg border border-white/15 bg-white/5 px-3.5 py-3 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/40";
+  "w-full rounded-lg border border-white/15 bg-white/5 px-3 text-sm py-1.5 text-sm text-white placeholder:text-white/40 outline-none transition-colors focus:border-primary focus:ring-1 focus:ring-primary/40";
 
 export function FooterDemoForm() {
   const [email, setEmail] = useState("");
@@ -94,10 +94,9 @@ export function FooterDemoForm() {
   };
 
   return (
-    <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
-      <h4 className="font-bold text-xl tracking-tight text-white">Book a demo</h4>
+    <div className="">
 
-      <form className="mt-4 space-y-3.5" onSubmit={handleSubmit} noValidate>
+      <form className="space-y-3.5" onSubmit={handleSubmit} noValidate>
         <div className="grid grid-cols-2 gap-3">
           <input
             id="footer-demo-name"
@@ -182,7 +181,7 @@ export function FooterDemoForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full rounded-lg bg-primary py-3 text-sm font-semibold text-white transition hover:bg-[#005a63] disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-fit block ml-auto! px-3 rounded bg-primary py-1.5 text-sm font-semibold text-white transition hover:bg-[#005a63] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? "Submitting..." : "Request Demo"}
         </button>

@@ -1,14 +1,14 @@
 import { FooterDemoForm } from "@/components/FooterDemoForm";
 
 const cols = [
-  { title: "Company", items: ["Leadership", "Blogs", "Knowledge Center", "Customer Stories"] },
+  { title: "Company", items: ["Our Team", "Blogs", "Knowledge Center", "Customer Stories"] },
   { title: "Quicklinks", items: ["Contact", "Privacy Policy", "Terms of Service"] }
 ];
 
 export function Footer() {
   return (
     <footer className="bg-navy-deep text-white z-10">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div className="mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-12 py-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <img width="300" height="100" src="/assets/logo.png" className="w-32" alt="ZerofAI" />
@@ -18,7 +18,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 lg:col-span-3">
+          <div className="grid grid-cols-2 gap-8 lg:col-span-4">
             {cols.map((c) => (
               <div key={c.title}>
                 <div className="mb-4 text-sm font-semibold tracking-wide text-white">{c.title}</div>
@@ -35,7 +35,8 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-4">
+          <div className="mb-4 text-sm font-semibold tracking-wide text-white">Book a demo</div>
             <FooterDemoForm />
           </div>
         </div>

@@ -12,7 +12,7 @@ export function BridgeCatalog({ content }: Props) {
       <div className="grid lg:grid-cols-2">
         <div className="aspect-[4/3] lg:aspect-auto lg:min-h-[480px]">
           <img
-            src={content.imageUrl}
+            src={content.imageUrl || "/assets/insights.jpg"}
             alt="Insights"
             className="h-full w-full object-cover"
           />
