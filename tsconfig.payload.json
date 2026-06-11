@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": false,
+    "outDir": ".payload-tmp"
+  },
+  "include": ["payload.config.ts", "src/**/*.ts"]
+}
