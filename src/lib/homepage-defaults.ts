@@ -68,7 +68,7 @@ export const homepageDefaults: HomepageContent = {
       "Explore how organizations are transforming IT operations through automation, operational intelligence, and AI-driven decision-making.",
     ],
     ctaLabel: "Visit the Resource Center",
-    ctaLink: "/knowledge",
+    ctaLink: "/blog",
   },
   faq: {
     eyebrow: "Frequently asked questions",
