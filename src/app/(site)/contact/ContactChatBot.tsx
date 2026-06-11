@@ -25,13 +25,7 @@ type ChatMessage = {
   text: string;
 };
 
-type Step =
-  | "name"
-  | "email"
-  | "company"
-  | "phone"
-  | "message"
-  | "complete";
+type Step = "name" | "email" | "company" | "phone" | "message" | "complete";
 
 const EMPTY_FORM: ContactPayload = {
   name: "",
@@ -246,8 +240,8 @@ export function ContactChatBot() {
     setInput("");
     await addBotMessages(
       [
-        "👋 Welcome to ZeroFAI!",
-        "I'm your assistant here to help you connect with our security team. Let's get started — what is your name?",
+        "👋 Welcome to ZerofAI!",
+        "I'm here to help you. Let's get started — what is your name?",
       ],
       800
     );
@@ -330,14 +324,14 @@ export function ContactChatBot() {
       setInput("");
 
       if (formDataRef.current.message.trim()) {
-        await finishSubmission(formDataRef.current);
+        await finishSubmission({ ...formDataRef.current, designation: "" });
         return;
       }
 
       setStep("message");
       const firstName = formDataRef.current.name.split(" ")[0] || "there";
       await addBotMessages([
-        `Thanks, ${firstName}!`,
+        `Got it, ${firstName}!`,
         "How can we help you strengthen your security posture?",
       ]);
       return;
@@ -350,8 +344,12 @@ export function ContactChatBot() {
         return;
       }
       addUserMessage(value);
-      const finalData = { ...formDataRef.current, message: value.trim() };
-      updateFormData({ message: value.trim() });
+      const finalData = {
+        ...formDataRef.current,
+        message: value.trim(),
+        designation: "",
+      };
+      updateFormData({ message: value.trim(), designation: "" });
       setInput("");
       await finishSubmission(finalData);
     }
@@ -382,7 +380,7 @@ export function ContactChatBot() {
       : step === "email"
         ? "you@company.com"
         : step === "company"
-          ? "Acme Corp"
+          ? "Your company name..."
           : step === "phone"
             ? "10-digit mobile number"
             : step === "message"
@@ -420,7 +418,7 @@ export function ContactChatBot() {
               <BotAvatar />
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-neutral-900 dark:text-white">
-                  ZeroFAI Assistant
+                  ZerofAI
                 </p>
                 <p className="truncate text-[11px] text-neutral-500 dark:text-neutral-400">
                   {isTyping ? "Typing..." : "Get instant guidance for your security needs"}

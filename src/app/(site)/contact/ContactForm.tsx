@@ -138,7 +138,6 @@ export function ContactForm() {
             id="contact-full-name"
             name="fullName"
             type="text"
-            placeholder="John Doe"
             autoComplete="name"
             required
             className={fieldClass}
@@ -152,7 +151,6 @@ export function ContactForm() {
             id="contact-email"
             name="email"
             type="email"
-            placeholder="john@company.com"
             autoComplete="email"
             value={email}
             onChange={(e) => handleEmailChange(e.target.value)}
@@ -180,7 +178,7 @@ export function ContactForm() {
             id="contact-company"
             name="company"
             type="text"
-            placeholder="Acme Corp"
+           
             autoComplete="organization"
             required
             className={fieldClass}
@@ -194,7 +192,6 @@ export function ContactForm() {
             id="contact-phone"
             name="phone"
             type="tel"
-            placeholder="10-digit mobile number"
             autoComplete="tel"
             required
             className={fieldClass}
@@ -209,7 +206,6 @@ export function ContactForm() {
           id="contact-message"
           name="message"
           rows={4}
-          placeholder="How can we help strengthen your security posture?"
           className={`${fieldClass} min-h-[110px] resize-y`}
         />
       </div>

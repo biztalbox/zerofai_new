@@ -10,6 +10,7 @@ type ContactPayload = {
   phone_number: string;
   message: string;
   company_name: string;
+  designation: string;
 };
 
 function isValidPayload(body: unknown): body is ContactPayload {
@@ -20,7 +21,8 @@ function isValidPayload(body: unknown): body is ContactPayload {
     typeof data.email === "string" &&
     typeof data.phone_number === "string" &&
     typeof data.message === "string" &&
-    typeof data.company_name === "string"
+    typeof data.company_name === "string" &&
+    typeof data.designation === "string"
   );
 }
 
@@ -50,6 +52,7 @@ export async function POST(request: Request) {
     phone_number: body.phone_number.trim(),
     message: body.message.trim(),
     company_name: body.company_name.trim(),
+    designation: body.designation.trim(),
   };
 
   if (!payload.name || !payload.email || !payload.phone_number || !payload.company_name) {

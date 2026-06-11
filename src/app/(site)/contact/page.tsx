@@ -40,14 +40,11 @@ export default function ContactPage() {
         <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
           <div className="max-w-xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
-              About us
+              Get in Touch
             </p>
             <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
-              Contact ZeroFAI
+              Contact US
             </h1>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white md:text-base">
-              Get answers to your questions about anything ZeroFAI
-            </p>
           </div>
         </div>
       </section>
@@ -75,7 +72,7 @@ export default function ContactPage() {
                       Address
                     </p>
                     <p className="!mt-1 !text-xs !leading-relaxed !text-neutral-600 dark:!text-[#94A3B8]">
-                    B, 15, Block B, Noida Sector 3, Noida, Uttar Pradesh 201301
+                      B, 15, Block B, Noida Sector 3, Noida, Uttar Pradesh 201301
                      
                     </p>
                   </div>
@@ -90,7 +87,7 @@ export default function ContactPage() {
                       href="mailto:security@zerofai.tech"
                       className="!mt-1 !block !text-xs !font-medium !text-neutral-700 hover:!text-primary dark:!text-[#94A3B8] dark:hover:!text-primary"
                     >
-                      security@zerofai.tech
+                      cs@zerofai.ai
                     </a>
                   </div>
                 </li>
@@ -123,8 +120,8 @@ export default function ContactPage() {
       </section>
 
       {/* Feature cards */}
-      <section className="container pb-10 sm:pb-14 md:pb-20">
-        <div className="mx-auto grid max-w-5xl gap-4 sm:gap-5 sm:grid-cols-2 md:grid-cols-3">
+      <section className="container mx-auto max-w-5xl pb-10 sm:pb-14 md:pb-20">
+        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 md:grid-cols-3">
           <article className=" border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8">
             <div className="mx-auto mb-4 grid h-12 w-12 place-items-center">
               <IoShieldCheckmark className={cardIcon} aria-hidden />

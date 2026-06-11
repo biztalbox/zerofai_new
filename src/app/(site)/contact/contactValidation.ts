@@ -240,6 +240,7 @@ export function toApiBody(data: ContactPayload) {
     email: data.email.trim().toLowerCase(),
     phone_number: normalizePhone(data.phone),
     company_name: data.company.trim(),
-    message: buildApiMessage(data.message, data.designation),
+    designation: "",
+    message: data.message.trim(),
   };
 }
