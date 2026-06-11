@@ -19,22 +19,6 @@ const fieldClass =
 const labelClass =
   "mb-1.5 block text-xs font-medium tracking-wide text-neutral-600 dark:text-[#94A3B8]";
 
-/** Native select: dark dropdown list + options (OS support varies; color-scheme helps). */
-const selectFieldClass =
-  fieldClass +
-  " appearance-auto cursor-pointer pr-9 " +
-  "dark:[color-scheme:dark] " +
-  "[&_option]:bg-white [&_option]:text-neutral-900 " +
-  "dark:[&_option]:bg-[#161616] dark:[&_option]:text-neutral-100";
-
-const ROLE_LABELS: Record<string, string> = {
-  "cto-ciso": "CTO / CISO",
-  "vp-engineering": "VP Engineering",
-  "it-director": "IT Director",
-  "security-manager": "Security Manager",
-  other: "Other",
-};
-
 export function ContactForm() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState<string | null>(null);
@@ -74,8 +58,6 @@ export function ContactForm() {
     const companyName = String(formData.get("company") ?? "").trim();
     const phoneNumber = String(formData.get("phone") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
-    const role = String(formData.get("role") ?? "").trim();
-    const roleLabel = role ? (ROLE_LABELS[role] ?? role) : "";
 
     const nameErr = validateName(name);
     if (nameErr) {
@@ -118,7 +100,7 @@ export function ContactForm() {
             email: workEmail,
             company: companyName,
             phone: normalizePhone(phoneNumber),
-            designation: roleLabel,
+            designation: "",
             message,
           })
         ),
@@ -218,26 +200,6 @@ export function ContactForm() {
             className={fieldClass}
           />
         </div>
-      </div>
-      <div>
-        <label htmlFor="contact-role" className={labelClass}>
-          Designation{" "}
-          <span className="text-xs! text-neutral-500! dark:text-neutral-500!">(optional)</span>
-        </label>
-        <select
-          id="contact-role"
-          name="role"
-          className={selectFieldClass}
-          defaultValue=""
-          aria-required={false}
-        >
-          <option value="">Select designation…</option>
-          <option value="cto-ciso">CTO / CISO</option>
-          <option value="vp-engineering">VP Engineering</option>
-          <option value="it-director">IT Director</option>
-          <option value="security-manager">Security Manager</option>
-          <option value="other">Other</option>
-        </select>
       </div>
       <div>
         <label htmlFor="contact-message" className={labelClass}>

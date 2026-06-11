@@ -16,8 +16,8 @@ export default async function HomePage() {
 
   return (
     <main className="bridge-page min-h-screen bg-white text-[#3d3d3d]">
+      <NavigationBar overlay />
       <BridgeHero content={content.hero} />
-      <NavigationBar />
       <BridgeWhatIs content={content.whatIs} />
       <CustomerTrust />
       <BridgeStats content={content.stats} />

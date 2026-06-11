@@ -72,7 +72,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="!text-sm !font-semibold !leading-snug !text-neutral-900 dark:!text-white">
-                      Global Headquarters
+                      Address
                     </p>
                     <p className="!mt-1 !text-xs !leading-relaxed !text-neutral-600 dark:!text-[#94A3B8]">
                     B, 15, Block B, Noida Sector 3, Noida, Uttar Pradesh 201301
@@ -85,7 +85,7 @@ export default function ContactPage() {
                     <MdAlternateEmail className={iconBox} aria-hidden />
                   </div>
                   <div>
-                    <p className="!text-sm !font-semibold !leading-snug !text-neutral-900 dark:!text-white">Email Us</p>
+                    <p className="!text-sm !font-semibold !leading-snug !text-neutral-900 dark:!text-white">Email</p>
                     <a
                       href="mailto:security@zerofai.tech"
                       className="!mt-1 !block !text-xs !font-medium !text-neutral-700 hover:!text-primary dark:!text-[#94A3B8] dark:hover:!text-primary"

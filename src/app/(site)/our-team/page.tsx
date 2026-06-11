@@ -4,11 +4,15 @@ import { FaLinkedin } from "react-icons/fa";
 import { MdArrowOutward } from "react-icons/md";
 import { NavigationBar } from "@/components/Navigation";
 
+type TeamMember = {
+    name: string;
+    designation: string;
+    image: string;
+};
+
 const Leadership = () => {
 
-
-
-    const teamMembers = [
+    const teamMembers: TeamMember[] = [
         {
             name: "Ajay Sharma",
             designation: "Head - Managed Services Business",
@@ -89,13 +93,15 @@ const Leadership = () => {
                                     key={index}
                                     className={`flex flex-col gap-4`}
                                 >
-                                    <Image
-                                        src={member.image}
-                                        width={400}
-                                        height={600}
-                                        alt={member.name}
-                                        className="w-full"
-                                    />
+                                    <div className="aspect-[3/4] w-full overflow-hidden bg-white">
+                                        <Image
+                                            src={member.image}
+                                            width={400}
+                                            height={600}
+                                            alt={member.name}
+                                            className="h-full w-full object-cover object-top"
+                                        />
+                                    </div>
 
                                     <div className="flex flex-col gap-1">
                                         <h3>{member.name}</h3>

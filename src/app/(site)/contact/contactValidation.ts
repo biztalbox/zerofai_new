@@ -230,7 +230,6 @@ export function validateContactPayload(data: ContactPayload): string | null {
     validateEmail(data.email) ??
     validateCompany(data.company) ??
     validatePhone(data.phone) ??
-    validateDesignation(data.designation) ??
     validateMessage(data.message)
   );
 }
