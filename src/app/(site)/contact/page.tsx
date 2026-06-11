@@ -17,6 +17,9 @@ export const metadata: Metadata = {
 
 const iconBox = "h-5 w-5 shrink-0 text-primary";
 const cardIcon = "h-7 w-7 shrink-0 text-primary";
+const OFFICE_ADDRESS =
+  "B, 15, Block B, Noida Sector 3, Noida, Uttar Pradesh 201301";
+const MAP_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(OFFICE_ADDRESS)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 export default function ContactPage() {
   return (
@@ -72,8 +75,7 @@ export default function ContactPage() {
                       Address
                     </p>
                     <p className="!mt-1 !text-xs !leading-relaxed !text-neutral-600 dark:!text-[#94A3B8]">
-                      B, 15, Block B, Noida Sector 3, Noida, Uttar Pradesh 201301
-                     
+                      {OFFICE_ADDRESS}
                     </p>
                   </div>
                 </li>
@@ -91,28 +93,19 @@ export default function ContactPage() {
                     </a>
                   </div>
                 </li>
-                <li className="flex gap-4">
-                  
-                  
-                </li>
               </ul>
 
               <hr className="my-8 border-neutral-200 dark:border-white/10" />
 
-              <div>
-                <p className="!mb-3 !text-[11px] !font-semibold !uppercase !tracking-wider !text-neutral-500 dark:!text-white">
-                  Business hours
-                </p>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between gap-4">
-                    <span className="font-medium text-sm! text-neutral-700! dark:text-white/40!">Mon - Fri</span>
-                    <span className="text-neutral-600 text-sm! dark:text-white/40!">09:00 - 18:00 PST</span>
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <span className="font-medium text-sm! text-neutral-700! dark:text-white/40!">Sat - Sun</span>
-                    <span className="text-neutral-600 text-sm! dark:text-white/40!">Critical Support Only</span>
-                  </div>
-                </div>
+              <div className="mt-8 overflow-hidden rounded-xl border border-neutral-200 dark:border-white/10">
+                <iframe
+                  title="ZeroFAI office location"
+                  src={MAP_EMBED_URL}
+                  className="h-52 w-full sm:h-56"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
             </div>
           </div>
@@ -120,37 +113,7 @@ export default function ContactPage() {
       </section>
 
       {/* Feature cards */}
-      <section className="container mx-auto max-w-5xl pb-10 sm:pb-14 md:pb-20">
-        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 md:grid-cols-3">
-          <article className=" border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8">
-            <div className="mx-auto mb-4 grid h-12 w-12 place-items-center">
-              <IoShieldCheckmark className={cardIcon} aria-hidden />
-            </div>
-            <h2 className="!text-base !font-bold  !text-neutral-950 md:!text-lg dark:!text-white">ISO 27001 Ready</h2>
-            <p className="text-sm! leading-5!">
-              Built for enterprise compliance standards from the ground up.
-            </p>
-          </article>
-          <article className=" border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8">
-            <div className="mx-auto mb-4 grid h-12 w-12 place-items-center">
-              <TbShare3 className={cardIcon} aria-hidden />
-            </div>
-            <h2 className="!text-base !font-bold !text-neutral-950 md:!text-lg dark:!text-white">Native Integrations</h2>
-            <p className="text-sm! leading-5!">
-              Seamlessly connects with AWS, GCP, Azure, and Kubernetes.
-            </p>
-          </article>
-          <article className="border border-neutral-200/90 bg-white/90 p-5 text-center shadow-sm dark:border-white/8 dark:bg-[#111111]/90 dark:shadow-none sm:p-6 md:p-8 sm:col-span-2 md:col-span-1">
-            <div className="mx-auto mb-4 grid h-12 w-12 place-items-center">
-              <BsGraphUpArrow className={cardIcon} aria-hidden />
-            </div>
-            <h2 className="!text-base !font-bold !text-neutral-950 md:!text-lg dark:!text-white">Real-Time DRI</h2>
-            <p className="text-sm! leading-5!">
-              Immediate detection and remediation of compliance drift. 
-            </p>
-          </article>
-        </div>
-      </section>
+      
     </main>
   );
 }

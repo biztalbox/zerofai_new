@@ -5,6 +5,7 @@ import {
   normalizePhone,
   toApiBody,
   validateCompany,
+  validateDesignation,
   validateEmail,
   validateMessage,
   validateName,
@@ -57,6 +58,7 @@ export function ContactForm() {
     const workEmail = String(formData.get("email") ?? "").trim();
     const companyName = String(formData.get("company") ?? "").trim();
     const phoneNumber = String(formData.get("phone") ?? "").trim();
+    const designation = String(formData.get("designation") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
 
     const nameErr = validateName(name);
@@ -81,6 +83,12 @@ export function ContactForm() {
       return;
     }
 
+    const designationErr = validateDesignation(designation);
+    if (designationErr) {
+      setSubmitError(designationErr);
+      return;
+    }
+
     if (message) {
       const messageErr = validateMessage(message);
       if (messageErr) {
@@ -100,7 +108,7 @@ export function ContactForm() {
             email: workEmail,
             company: companyName,
             phone: normalizePhone(phoneNumber),
-            designation: "",
+            designation,
             message,
           })
         ),
@@ -193,6 +201,19 @@ export function ContactForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
+            required
+            className={fieldClass}
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="contact-designation" className={labelClass}>
+            Designation
+          </label>
+          <input
+            id="contact-designation"
+            name="designation"
+            type="text"
+            autoComplete="organization-title"
             required
             className={fieldClass}
           />
