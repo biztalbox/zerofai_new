@@ -77,8 +77,7 @@ const Leadership = () => {
       <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
         Our Team
       </h1>
-      <p className="mt-3 max-w-md text-[15px] leading-relaxed text-white md:text-base">
-      Meet our Leadership Team      </p>
+      
     </div>
   </div>
 </section>
