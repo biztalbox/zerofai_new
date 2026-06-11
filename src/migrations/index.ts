@@ -2,6 +2,7 @@ import * as migration_20260522_183457_initial from "./20260522_183457_initial";
 import * as migration_20260527_add_media_prefix from "./20260527_add_media_prefix";
 import * as migration_20260610_homepage_global from "./20260610_homepage_global";
 import * as migration_20260611_site_content_globals from "./20260611_site_content_globals";
+import * as migration_20260612_homepage_cms_fields from "./20260612_homepage_cms_fields";
 
 export const migrations = [
   {
@@ -23,5 +24,10 @@ export const migrations = [
     up: migration_20260611_site_content_globals.up,
     down: migration_20260611_site_content_globals.down,
     name: "20260611_site_content_globals",
+  },
+  {
+    up: migration_20260612_homepage_cms_fields.up,
+    down: migration_20260612_homepage_cms_fields.down,
+    name: "20260612_homepage_cms_fields",
   },
 ];

@@ -19,8 +19,8 @@ export const homepageDefaults: HomepageContent = {
     heading: "Customer trust.",
     headingHighlight: "Real transformation.",
     cards: [
-      { number: "01", imageUrl: "/assets/ravi.png" },
-      { number: "02", imageUrl: "/assets/rajeev.png" },
+      { number: "01", imageUrl: "/assets/ravi.png", videoId: "kLja5C1i_kk" },
+      { number: "02", imageUrl: "/assets/rajeev.png", videoId: "Qo6BTfEd8UE" },
     ],
   },
   stats: {
@@ -71,8 +71,9 @@ export const homepageDefaults: HomepageContent = {
     ctaLink: "/blog",
   },
   faq: {
-    eyebrow: "Frequently asked questions",
-    title: "Everything You Need to Know About ZerofAI",
+    eyebrow: "FAQs",
+    title: "Frequently Asked Questions",
+    visibleCount: 5,
     items: [
       {
         id: "what-is-zerofai",

@@ -19,12 +19,12 @@ export default async function HomePage() {
       <NavigationBar overlay />
       <BridgeHero content={content.hero} />
       <BridgeWhatIs content={content.whatIs} />
-      <CustomerTrust />
+      <CustomerTrust content={content.customerTrust} />
       <BridgeStats content={content.stats} />
       <BridgePillars content={content.pillars} />
       <CtaBot content={content.cta} />
       <BridgeCatalog content={content.catalog} />
-      <BridgeFAQ />
+      <BridgeFAQ content={content.faq} />
     </main>
   );
 }

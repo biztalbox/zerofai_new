@@ -14,6 +14,7 @@ export type HomepageWhatIs = {
 export type HomepageTrustCard = {
   number: string;
   imageUrl: string;
+  videoId?: string;
 };
 
 export type HomepageCustomerTrust = {
@@ -67,6 +68,7 @@ export type HomepageFaqItem = {
 export type HomepageFaq = {
   eyebrow: string;
   title: string;
+  visibleCount: number;
   items: HomepageFaqItem[];
 };
 
