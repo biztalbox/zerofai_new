@@ -5,6 +5,7 @@ import * as migration_20260611_site_content_globals from "./20260611_site_conten
 import * as migration_20260612_homepage_cms_fields from "./20260612_homepage_cms_fields";
 import * as migration_20260613_homepage_schema_fix from "./20260613_homepage_schema_fix";
 import * as migration_20260614_page_seo_meta from "./20260614_page_seo_meta";
+import * as migration_20260615_site_footer_schema_fix from "./20260615_site_footer_schema_fix";
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20260614_page_seo_meta.up,
     down: migration_20260614_page_seo_meta.down,
     name: "20260614_page_seo_meta",
+  },
+  {
+    up: migration_20260615_site_footer_schema_fix.up,
+    down: migration_20260615_site_footer_schema_fix.down,
+    name: "20260615_site_footer_schema_fix",
   },
 ];

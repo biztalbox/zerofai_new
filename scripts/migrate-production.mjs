@@ -82,6 +82,19 @@ try {
     );
   }
 
+  const footerFkExists = await pool.query(`
+    SELECT EXISTS (
+      SELECT 1 FROM information_schema.table_constraints
+      WHERE constraint_name = 'site_footer_columns_links_parent_id_fk'
+    ) AS exists
+  `);
+
+  if (!footerFkExists.rows[0]?.exists) {
+    console.log(
+      "Site footer CMS schema is missing nested-array FKs. Run: yarn fix:site-footer-schema",
+    );
+  }
+
   console.log("\nPayload is ready for production mode.");
   console.log("Migrations run automatically when the app starts with NODE_ENV=production.");
 } catch (error) {
