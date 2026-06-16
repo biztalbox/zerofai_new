@@ -29,13 +29,13 @@ export default async function ContactPage() {
       <main>
         <NavigationBar />
 
-        <section className="relative  overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
+        <section className="relative  overflow-hidden">
           <Image
             src={content.hero.imageUrl}
             alt={content.hero.title}
             fill
             priority
-            className="object-cover object-center"
+            className="object-contain"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-black to-transparent"
