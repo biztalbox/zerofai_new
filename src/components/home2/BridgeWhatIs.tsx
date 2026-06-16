@@ -32,7 +32,7 @@ export function BridgeWhatIs({ content }: Props) {
     <section id="what-is" className="bg-background">
       <div className="grid lg:grid-cols-2">
         <div className="flex items-center px-6 py-20 lg:px-20 lg:py-28">
-          <div className="max-w-xl">
+          <div>
             <h2 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#3d3d3d] lg:text-[2.75rem]">
               {content.title}
             </h2>
@@ -69,7 +69,7 @@ export function BridgeWhatIs({ content }: Props) {
             className="absolute bottom-8 left-8 z-10 inline-flex items-center gap-3 border border-white px-7 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-coral"
           >
             <Play className="h-3.5 w-3.5 fill-current" />
-            Watch
+            Watch Now
           </button>
         </div>
       </div>
@@ -82,7 +82,13 @@ export function BridgeWhatIs({ content }: Props) {
         }}
       >
         <DialogContent className="w-auto max-w-none overflow-visible border-0 bg-transparent p-0 shadow-none [&>button]:hidden">
-          <div className="flex items-start gap-3">
+          <div className="flex items-start gap-1 flex-col lg:flex-row-reverse">
+            <DialogClose
+              className="mt-1 text-white cursor-pointer ml-auto"
+              aria-label="Close video"
+            >
+              <X className="h-7 w-7 stroke-[2.5]" />
+            </DialogClose>
             <div className="relative aspect-video w-[min(900px,90vw)] overflow-hidden rounded-lg bg-black">
               {videoOpen && (
                 <video
@@ -96,12 +102,6 @@ export function BridgeWhatIs({ content }: Props) {
                 />
               )}
             </div>
-            <DialogClose
-              className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white transition hover:scale-105 focus:ring-2 focus:ring-white"
-              aria-label="Close video"
-            >
-              <X className="h-7 w-7 stroke-[2.5]" />
-            </DialogClose>
           </div>
         </DialogContent>
       </Dialog>

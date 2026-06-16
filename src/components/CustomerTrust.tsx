@@ -14,12 +14,12 @@ type CustomerTrustProps = {
 };
 
 export function CustomerTrust({ content }: CustomerTrustProps) {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const cards = content.cards;
 
   return (
-    <section className="bg-secondary py-24">
+    <section className="bg-secondary py-24 overflow-hidden">
       <div className="grid items-stretch lg:grid-cols-[1fr_2fr]">
         <div className="flex flex-col justify-between px-6 py-12 lg:px-16">
           <h2 className="text-5xl font-light leading-[1.1] text-foreground md:text-6xl">
@@ -44,7 +44,7 @@ export function CustomerTrust({ content }: CustomerTrustProps) {
           </div>
         </div>
 
-        <div className="flex overflow-hidden">
+        <div className="flex w-full">
           {cards.map((card, index) => {
             const isActive = index === active;
             const shade = SHADES[index % SHADES.length];
@@ -87,9 +87,15 @@ export function CustomerTrust({ content }: CustomerTrustProps) {
 
       <Dialog open={!!activeVideoId} onOpenChange={(open) => !open && setActiveVideoId(null)}>
         <DialogContent className="w-auto max-w-none overflow-visible border-0 bg-transparent p-0 shadow-none [&>button]:hidden">
-          <div className="flex items-start gap-3">
+          <div className="flex gap-1 flex-col justify-center items-start lg:flex-row-reverse lg:max-h-[90vh] ">
+          <DialogClose
+              className="mt-1 text-white cursor-pointer ml-auto"
+              aria-label="Close video"
+            >
+              <X className="h-7 w-7 stroke-[2.5]" />
+            </DialogClose>
             {activeVideoId && (
-              <div className="relative aspect-[9/16] w-[min(400px,85vw)] overflow-hidden rounded-lg bg-black">
+              <div className="relative aspect-[9/16] lg:aspect-[4/7] w-[min(400px,85vw)] overflow-hidden rounded-lg bg-black">
                 <iframe
                   src={`https://www.youtube.com/embed/${activeVideoId}?autoplay=1`}
                   title="Customer testimonial video"
@@ -99,12 +105,7 @@ export function CustomerTrust({ content }: CustomerTrustProps) {
                 />
               </div>
             )}
-            <DialogClose
-              className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full  text-white  transition hover:scale-105 hover:border focus:ring-2 focus:ring-white"
-              aria-label="Close video"
-            >
-              <X className="h-7 w-7 stroke-[2.5]" />
-            </DialogClose>
+            
           </div>
         </DialogContent>
       </Dialog>
