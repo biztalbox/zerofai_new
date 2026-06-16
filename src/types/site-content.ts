@@ -6,6 +6,7 @@ export type NavLink = {
   label: string;
   href: string;
   type: "route" | "anchor";
+  showOnHomepage?: boolean;
 };
 
 export type NavigationContent = {

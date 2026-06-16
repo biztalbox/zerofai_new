@@ -59,7 +59,7 @@ export function BridgeWhatIs({ content }: Props) {
               className="text-center text-5xl font-light text-white transition-transform duration-700 md:text-6xl lg:text-7xl"
               style={{ transform: hover ? "translateY(-12px)" : "translateY(0)" }}
             >
-              We are ZerofAI
+              ZerofAI
             </h3>
           </div>
 

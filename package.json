@@ -15,6 +15,7 @@
     "migrate:page-seo": "node scripts/apply-page-seo-migration.mjs",
     "migrate:knowledge-intro": "node scripts/apply-knowledge-intro-migration.mjs",
     "migrate:blog-page": "node scripts/apply-blog-page-migration.mjs",
+    "migrate:nav-show-on-homepage": "node scripts/apply-nav-show-on-homepage-migration.mjs",
     "build:prod": "node scripts/migrate-production.mjs && next build",
     "migrate:status": "payload migrate:status",
     "start:app": "next start",

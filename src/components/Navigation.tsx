@@ -34,7 +34,10 @@ export function NavigationBar({ overlay = false }: NavigationBarProps) {
       (link) => link.type === "anchor" && link.href && !link.href.startsWith("/"),
     );
     const routes = routeLinks.filter(
-      (link) => link.type === "route" && link.href.startsWith("/"),
+      (link) =>
+        link.type === "route" &&
+        link.href.startsWith("/") &&
+        (!isHomePage || link.showOnHomepage !== false),
     );
 
     return dedupeNavLinks(isHomePage ? [...anchors, ...routes] : routes);

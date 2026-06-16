@@ -52,6 +52,10 @@ function mapRouteLink(
     label: (item.label as string) || fallback?.label || "",
     href: href.startsWith("/") ? href : `/${href}`,
     type: "route",
+    showOnHomepage:
+      typeof item.showOnHomepage === "boolean"
+        ? item.showOnHomepage
+        : fallback?.showOnHomepage ?? true,
   };
 }
 

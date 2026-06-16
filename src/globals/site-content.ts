@@ -39,6 +39,15 @@ const routeLinkFields = [
     required: true,
     admin: { description: "Page path only (e.g. /contact, /our-team)" },
   },
+  {
+    name: "showOnHomepage",
+    type: "checkbox" as const,
+    label: "Show on homepage",
+    defaultValue: true,
+    admin: {
+      description: "When off, this link appears on inner pages only (not the homepage nav).",
+    },
+  },
 ];
 
 export const SiteNavigation: GlobalConfig = {
@@ -72,7 +81,7 @@ export const SiteNavigation: GlobalConfig = {
       type: "array",
       label: "Page links (routes)",
       admin: {
-        description: "Site pages like /contact — shown on all pages",
+        description: "Site pages like /contact — visibility on homepage can be toggled per link.",
       },
       fields: routeLinkFields,
     },

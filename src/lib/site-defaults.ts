@@ -18,9 +18,9 @@ export const navigationDefaults: NavigationContent = {
     { label: "Insights", href: "insights", type: "anchor" },
   ],
   routeLinks: [
-    { label: "Our Team", href: "/our-team", type: "route" },
-    { label: "Knowledge", href: "/knowledge", type: "route" },
-    { label: "Contact us", href: "/contact", type: "route" },
+    { label: "Our Team", href: "/our-team", type: "route", showOnHomepage: true },
+    { label: "Knowledge", href: "/knowledge", type: "route", showOnHomepage: true },
+    { label: "Contact us", href: "/contact", type: "route", showOnHomepage: true },
   ],
 };
 

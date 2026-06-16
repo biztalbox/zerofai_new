@@ -1,14 +1,17 @@
 import { FooterDemoForm } from "@/components/FooterDemoForm";
 import type { FooterContent } from "@/types/site-content";
+import Image from "next/image";
 
 type FooterProps = {
   content: FooterContent;
 };
-
+// bg-[url('/assets/mobile.webp')] md:bg-[url('/assets/tab.webp')] lg:bg-[url('/assets/desktop.webp')] bg-contain bg-no-repeat bg-center
 export function Footer({ content }: FooterProps) {
   return (
-    <footer className="bg-navy-deep text-white z-10">
-      <div className="mx-auto px-6 lg:px-12">
+    <footer className="bg-[#060f1c] text-white z-10 relative flex flex-col p-5">
+      <img src="/assets/text.png" alt="Footer Background" className="object-contain self-center" />
+
+      <div className="container mx-auto z-10 relative -mt-5 lg:-mt-16">
         <div className="grid grid-cols-1 gap-12 py-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <img
@@ -47,7 +50,8 @@ export function Footer({ content }: FooterProps) {
             <FooterDemoForm />
           </div>
         </div>
-        <div className="flex text-center justify-center items-center border-t border-white/10 py-5 text-xs text-white/50">
+        <img src="/assets/pattern.png" alt="Footer Background" className="" />
+        <div className="flex text-center justify-center items-center py-5 text-xs text-white/50">
           <div>
             © {new Date().getFullYear()} {content.copyright}
           </div>
