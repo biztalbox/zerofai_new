@@ -29,19 +29,18 @@ export default async function ContactPage() {
       <main>
         <NavigationBar />
 
-        <section className="relative  overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
+        <section className="relative overflow-hidden">
           <Image
             src={content.hero.imageUrl}
             alt={content.hero.title}
             fill
-            priority
-            className="object-cover object-center"
+            className=""
           />
           <div
-            className="absolute inset-0 bg-gradient-to-t from-black to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
             aria-hidden
           />
-          <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
+          <div className="relative mx-auto flex h-full container items-center px-6 py-12 lg:py-20">
             <div className="max-w-xl">
               {content.hero.eyebrow ? (
                 <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
