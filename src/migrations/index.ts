@@ -8,6 +8,7 @@ import * as migration_20260614_page_seo_meta from "./20260614_page_seo_meta";
 import * as migration_20260615_site_footer_schema_fix from "./20260615_site_footer_schema_fix";
 import * as migration_20260616_knowledge_page_intro_content from "./20260616_knowledge_page_intro_content";
 import * as migration_20260617_blog_page_global from "./20260617_blog_page_global";
+import * as migration_20260618_nav_route_show_on_homepage from "./20260618_nav_route_show_on_homepage";
 
 export const migrations = [
   {
@@ -59,5 +60,10 @@ export const migrations = [
     up: migration_20260617_blog_page_global.up,
     down: migration_20260617_blog_page_global.down,
     name: "20260617_blog_page_global",
+  },
+  {
+    up: migration_20260618_nav_route_show_on_homepage.up,
+    down: migration_20260618_nav_route_show_on_homepage.down,
+    name: "20260618_nav_route_show_on_homepage",
   },
 ];

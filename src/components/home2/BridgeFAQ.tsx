@@ -20,7 +20,7 @@ export function BridgeFAQ({ faqs }: BridgeFAQProps) {
   return (
     <section id="knowledge" className="bg-[#0A6EC1] py-16 lg:py-24 relative z-20">
       <div className="mx-auto container px-6 lg:px-10">
-        <p className="text-[13px] uppercase tracking-[0.08em] text-white">{HOME_FAQ_EYEBROW}</p>
+        <p className="text-[13px] tracking-[0.08em] text-white">{HOME_FAQ_EYEBROW}</p>
         <h2 className="mt-3 text-[2rem] font-normal tracking-[-0.02em] text-white lg:text-[2.5rem]">
           {HOME_FAQ_TITLE}
         </h2>
