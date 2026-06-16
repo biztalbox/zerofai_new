@@ -8,7 +8,7 @@ export function BridgePillars({ content }: Props) {
   return (
     <section
       id="platform"
-      className="relative scroll-mt-[calc(var(--bridge-header-h)+48px)] overflow-hidden bg-[#f4f4f1] py-16 lg:py-24"
+      className="relative overflow-hidden bg-[#f4f4f1] py-16 lg:py-24"
     >
       <div className="relative mx-auto container px-6 lg:px-10">
         <h2 className="max-w-3xl text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#006670] lg:text-[2.75rem]">

@@ -8,7 +8,7 @@ type Props = {
 
 export function BridgeCatalog({ content }: Props) {
   return (
-    <section id="insights" className="scroll-mt-[calc(var(--bridge-header-h)+48px)] border-[#e8e8e8]">
+    <section id="insights" className="border-[#e8e8e8]">
       <div className="grid lg:grid-cols-2">
         <div className="aspect-[4/3] lg:aspect-auto lg:min-h-[480px]">
           <img

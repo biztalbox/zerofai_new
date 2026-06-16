@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { NavigationBar } from "@/components/Navigation";
+import { RichText } from "@/components/blog/RichText";
 import {
   Accordion,
   AccordionContent,
@@ -16,6 +17,11 @@ import type { KnowledgePageContent } from "@/types/site-content";
 type KnowledgePageClientProps = {
   content: KnowledgePageContent;
 };
+
+function hasRichTextContent(content: KnowledgePageContent["introContent"]): boolean {
+  const children = content?.root?.children;
+  return Array.isArray(children) && children.length > 0;
+}
 
 export function KnowledgePageClient({ content }: KnowledgePageClientProps) {
   const [search, setSearch] = useState("");
@@ -34,19 +40,18 @@ export function KnowledgePageClient({ content }: KnowledgePageClientProps) {
     <main>
       <NavigationBar />
 
-      <section className="relative  overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
+      <section className="relative overflow-hidden">
         <Image
           src={content.hero.imageUrl}
           alt={content.hero.title}
           fill
-          priority
-          className="object-cover object-center"
+          className=""
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-black to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
           aria-hidden
         />
-        <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
+        <div className="relative mx-auto flex h-full container items-center px-6 py-12 lg:py-20">
           <div>
             {content.hero.eyebrow ? (
               <p className="text-[11px] font-semibold tracking-[0.12em] text-primary">
@@ -62,6 +67,12 @@ export function KnowledgePageClient({ content }: KnowledgePageClientProps) {
 
       <section>
         <div className="container max-w-7xl mx-auto relative px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
+          {hasRichTextContent(content.introContent) ? (
+            <div className="">
+              <RichText data={content.introContent!} />
+            </div>
+          ) : null}
+
           <div className="mt-8 sm:mt-10">
             {filteredFaqs.length === 0 ? (
               <p className="rounded-xl border border-neutral-200/60 bg-white/60 px-5 py-8 text-center text-sm text-neutral-600 dark:border-white/10 dark:bg-white/5 dark:text-[#94A3B8]">

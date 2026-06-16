@@ -1,4 +1,5 @@
 import type {
+  BlogPageContent,
   ContactPageContent,
   FooterContent,
   KnowledgePageContent,
@@ -195,4 +196,17 @@ export const knowledgePageDefaults: KnowledgePageContent = {
   ctaDescription: "Our engineering team is ready to walk you through a custom demo.",
   ctaButtonLabel: "Contact Support",
   ctaButtonLink: "/contact",
+};
+
+export const blogPageDefaults: BlogPageContent = {
+  meta: {
+    title: "Blog | ZerofAI",
+    description:
+      "Insights, updates, and perspectives on autonomous IT operations from ZerofAI.",
+  },
+  hero: {
+    eyebrow: "Insights",
+    title: "Blog",
+    imageUrl: "/assets/blog.webp",
+  },
 };

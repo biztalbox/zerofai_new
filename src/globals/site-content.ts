@@ -1,5 +1,7 @@
 import type { GlobalConfig } from "payload";
 
+import { articleEditor } from "@/lib/lexical-editor";
+
 import { pageMetaGroupFields } from "./seo-fields";
 
 const pageHeroFields = [
@@ -221,6 +223,21 @@ export const KnowledgePage: GlobalConfig = {
           fields: [{ name: "hero", type: "group", fields: pageHeroFields }],
         },
         {
+          label: "Content",
+          fields: [
+            {
+              name: "introContent",
+              type: "richText",
+              editor: articleEditor,
+              label: "Intro content",
+              admin: {
+                description:
+                  "Rich text displayed above the FAQ section on the Knowledge page.",
+              },
+            },
+          ],
+        },
+        {
           label: "FAQs",
           fields: [
             {
@@ -264,10 +281,32 @@ export const KnowledgePage: GlobalConfig = {
   ],
 };
 
+export const BlogPage: GlobalConfig = {
+  slug: "blog-page",
+  label: "Blog Page",
+  access: { read: () => true },
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        {
+          label: "Hero",
+          fields: [{ name: "hero", type: "group", fields: pageHeroFields }],
+        },
+        {
+          label: "SEO / Metadata",
+          fields: pageMetaGroupFields,
+        },
+      ],
+    },
+  ],
+};
+
 export const SiteGlobals = [
   SiteNavigation,
   SiteFooter,
   ContactPage,
   LeadershipPage,
   KnowledgePage,
+  BlogPage,
 ];

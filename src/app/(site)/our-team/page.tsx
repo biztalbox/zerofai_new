@@ -22,19 +22,18 @@ export default async function LeadershipPage() {
       <main>
         <NavigationBar />
 
-        <section className="relative  overflow-hidden md:min-h-[320px] lg:min-h-[360px]">
+        <section className="relative overflow-hidden">
           <Image
             src={content.hero.imageUrl}
             alt={content.hero.title}
             fill
-            priority
-            className="object-cover object-center"
+            className=""
           />
           <div
-            className="absolute inset-0 bg-gradient-to-t from-black to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
             aria-hidden
           />
-          <div className="relative mx-auto flex h-full min-h-[280px] container items-center px-6 py-12 md:min-h-[320px] lg:min-h-[360px] lg:px-10 lg:py-16">
+          <div className="relative mx-auto flex h-full container items-center px-6 py-12 lg:py-20">
             <div className="max-w-xl">
               <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
                 {content.hero.title}
