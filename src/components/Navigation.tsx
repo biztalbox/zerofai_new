@@ -40,25 +40,25 @@ export function NavigationBar({ overlay = false }: NavigationBarProps) {
 
   const [active, setActive] = useState(homeSectionLinks[0]?.href ?? "");
 
-  useEffect(() => {
-    if (!isHomePage) return;
+  // useEffect(() => {
+  //   if (!isHomePage) return;
 
-    const sections = homeSectionLinks
-      .filter((link) => link.type === "anchor" && !link.href.startsWith("/"))
-      .map((link) => document.getElementById(link.href))
-      .filter(Boolean) as HTMLElement[];
+  //   const sections = homeSectionLinks
+  //     .filter((link) => link.type === "anchor" && !link.href.startsWith("/"))
+  //     .map((link) => document.getElementById(link.href))
+  //     .filter(Boolean) as HTMLElement[];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: "-35% 0px -55% 0px", threshold: 0 },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, [isHomePage, homeSectionLinks]);
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) setActive(entry.target.id);
+  //       });
+  //     },
+  //     { rootMargin: "0px 0px 0px 0px", threshold: 0 },
+  //   );
+  //   sections.forEach((section) => observer.observe(section));
+  //   return () => observer.disconnect();
+  // }, [isHomePage, homeSectionLinks]);
 
   const isLinkActive = (link: NavLink) =>
     link.type === "route" ? pathname === link.href : active === link.href;
