@@ -421,7 +421,7 @@ export function ContactChatBot() {
                   ZerofAI
                 </p>
                 <p className="truncate text-[11px] text-neutral-500 dark:text-neutral-400">
-                  {isTyping ? "Typing..." : "Get instant guidance for your security needs"}
+                  {isTyping ? "Typing..." : ""}
                 </p>
               </div>
             </div>
