@@ -54,7 +54,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <main>
       <NavigationBar />
 
-      <article className="container px-6 py-10 lg:px-10 lg:py-14">
+      <article className="container mx-auto px-6 py-10 lg:px-10 lg:py-14">
         <Link
           href="/blog"
           className="inline-flex text-sm font-medium text-primary hover:underline"
@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           ← Back to blog
         </Link>
 
-        <header className="mx-auto mt-6 max-w-3xl">
+        <header className="mx-auto mt-6">
           {blog.publishedAt && (
             <time className="text-xs uppercase tracking-[0.08em] text-neutral-500">
               {formatBlogDate(blog.publishedAt)}
@@ -77,7 +77,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </header>
 
         {imageUrl && (
-          <div className="relative mx-auto mt-8 aspect-[16/9] max-w-4xl overflow-hidden rounded-xl">
+          <div className="relative mx-auto mt-8 aspect-[16/9] overflow-hidden rounded-xl">
             <Image
               src={imageUrl}
               alt={blog.title}
@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         )}
 
-        <div className="mx-auto mt-10 max-w-3xl">
+        <div className="mx-auto mt-10">
           {blog.content && <RichText data={blog.content} />}
         </div>
       </article>

@@ -6,6 +6,8 @@ import * as migration_20260612_homepage_cms_fields from "./20260612_homepage_cms
 import * as migration_20260613_homepage_schema_fix from "./20260613_homepage_schema_fix";
 import * as migration_20260614_page_seo_meta from "./20260614_page_seo_meta";
 import * as migration_20260615_site_footer_schema_fix from "./20260615_site_footer_schema_fix";
+import * as migration_20260616_knowledge_page_intro_content from "./20260616_knowledge_page_intro_content";
+import * as migration_20260617_blog_page_global from "./20260617_blog_page_global";
 
 export const migrations = [
   {
@@ -47,5 +49,15 @@ export const migrations = [
     up: migration_20260615_site_footer_schema_fix.up,
     down: migration_20260615_site_footer_schema_fix.down,
     name: "20260615_site_footer_schema_fix",
+  },
+  {
+    up: migration_20260616_knowledge_page_intro_content.up,
+    down: migration_20260616_knowledge_page_intro_content.down,
+    name: "20260616_knowledge_page_intro_content",
+  },
+  {
+    up: migration_20260617_blog_page_global.up,
+    down: migration_20260617_blog_page_global.down,
+    name: "20260617_blog_page_global",
   },
 ];

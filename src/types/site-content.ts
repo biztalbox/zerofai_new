@@ -1,3 +1,5 @@
+import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+
 import type { PageSeo } from "@/types/page-seo";
 
 export type NavLink = {
@@ -68,9 +70,15 @@ export type FaqItem = {
 export type KnowledgePageContent = {
   meta: PageSeo;
   hero: PageHero;
+  introContent?: SerializedEditorState | null;
   faqs: FaqItem[];
   ctaTitle: string;
   ctaDescription: string;
   ctaButtonLabel: string;
   ctaButtonLink: string;
+};
+
+export type BlogPageContent = {
+  meta: PageSeo;
+  hero: PageHero;
 };

@@ -13,6 +13,8 @@
     "fix:homepage-schema": "node scripts/fix-homepage-schema.mjs",
     "fix:site-footer-schema": "node scripts/fix-site-footer-schema.mjs",
     "migrate:page-seo": "node scripts/apply-page-seo-migration.mjs",
+    "migrate:knowledge-intro": "node scripts/apply-knowledge-intro-migration.mjs",
+    "migrate:blog-page": "node scripts/apply-blog-page-migration.mjs",
     "build:prod": "node scripts/migrate-production.mjs && next build",
     "migrate:status": "payload migrate:status",
     "start:app": "next start",

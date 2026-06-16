@@ -1,5 +1,6 @@
 import type { Media } from "@/payload-types";
 import type {
+  BlogPageContent,
   ContactPageContent,
   FaqItem,
   FooterContent,
@@ -14,6 +15,7 @@ import type {
 import { getMediaUrl } from "@/lib/blog";
 import { mapPageSeo } from "@/lib/page-seo";
 import {
+  blogPageDefaults,
   contactPageDefaults,
   footerDefaults,
   knowledgePageDefaults,
@@ -215,6 +217,16 @@ function mapKnowledgePageFromCms(data: Record<string, unknown>): KnowledgePageCo
       (data.ctaButtonLabel as string) || knowledgePageDefaults.ctaButtonLabel,
     ctaButtonLink:
       (data.ctaButtonLink as string) || knowledgePageDefaults.ctaButtonLink,
+    introContent: (data.introContent as KnowledgePageContent["introContent"]) ?? null,
+  };
+}
+
+function mapBlogPageFromCms(data: Record<string, unknown>): BlogPageContent {
+  const hero = (data.hero ?? {}) as Record<string, unknown>;
+  const meta = (data.meta ?? {}) as Record<string, unknown>;
+  return {
+    meta: mapPageSeo(meta, blogPageDefaults.meta),
+    hero: mapHero(hero, blogPageDefaults.hero),
   };
 }
 
@@ -265,6 +277,16 @@ export async function getKnowledgePageContent(): Promise<KnowledgePageContent> {
     return mapKnowledgePageFromCms(data as Record<string, unknown>);
   } catch {
     return knowledgePageDefaults;
+  }
+}
+
+export async function getBlogPageContent(): Promise<BlogPageContent> {
+  try {
+    const payload = await getPayloadClient();
+    const data = await payload.findGlobal({ slug: "blog-page", depth: 2 });
+    return mapBlogPageFromCms(data as Record<string, unknown>);
+  } catch {
+    return blogPageDefaults;
   }
 }
 
