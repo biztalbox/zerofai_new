@@ -111,7 +111,7 @@ export function KnowledgePageClient({ content }: KnowledgePageClientProps) {
             <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
               <Link
                 href={content.ctaButtonLink}
-                className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-black"
               >
                 {content.ctaButtonLabel}
               </Link>

@@ -63,6 +63,7 @@ export function BridgeWhatIs({ content }: Props) {
             </h3>
           </div>
 
+
           <button
             type="button"
             onClick={() => setVideoOpen(true)}
@@ -71,9 +72,13 @@ export function BridgeWhatIs({ content }: Props) {
             <Play className="h-3.5 w-3.5 fill-current" />
             Watch Now
           </button>
-        </div>
-      </div>
 
+        </div>
+
+      </div>
+      <div className="text-center capitalize md:-mb-[30px] lg:-mb-[35px] xl:text-[9.8rem] md:text-[80px] pt-20 lg:text-[6.7rem] whitespace-nowrap text-[#EFF2F5] text-[40px] font-bold">client testimonials</div>
+
+       
       <Dialog
         open={videoOpen}
         onOpenChange={(open) => {
@@ -102,9 +107,13 @@ export function BridgeWhatIs({ content }: Props) {
                 />
               )}
             </div>
+
           </div>
+
         </DialogContent>
+
       </Dialog>
+
     </section>
   );
 }
