@@ -1,10 +1,12 @@
 "use client";
 
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 import { useSiteContent } from "@/components/SiteContentProvider";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import type { NavLink } from "@/types/site-content";
 
 type NavigationBarProps = {
@@ -39,6 +41,11 @@ export function NavigationBar({ overlay = false }: NavigationBarProps) {
   }, [homeSectionLinks, routeLinks, isHomePage]);
 
   const [active, setActive] = useState(homeSectionLinks[0]?.href ?? "");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   // useEffect(() => {
   //   if (!isHomePage) return;
@@ -70,39 +77,83 @@ export function NavigationBar({ overlay = false }: NavigationBarProps) {
         : "border-transparent text-[#666] hover:text-[#3d3d3d]"
     }`;
 
+  const mobileLinkClassName = (link: NavLink) =>
+    `block border-b border-[#e8e8e8] px-6 py-4 text-[14px] transition-colors last:border-b-0 ${
+      isLinkActive(link)
+        ? "border-l-2 border-l-primary font-medium text-[#3d3d3d] bg-[#f9f9f9]"
+        : "text-[#666] hover:bg-[#f4f4f4] hover:text-[#3d3d3d]"
+    }`;
+
+  const renderNavLink = (link: NavLink, className: string, onNavigate?: () => void) =>
+    link.type === "route" ? (
+      <Link
+        key={`route-${link.href}`}
+        href={link.href}
+        className={className}
+        onClick={onNavigate}
+      >
+        {link.label}
+      </Link>
+    ) : (
+      <a
+        key={`anchor-${link.href}`}
+        href={`/#${link.href}`}
+        onClick={() => {
+          setActive(link.href);
+          onNavigate?.();
+        }}
+        className={className}
+      >
+        {link.label}
+      </a>
+    );
+
   const navClassName = overlay
     ? "fixed top-0 left-0 right-0 z-50 border-b border-[#e8e8e8] bg-white"
     : "sticky top-0 z-40 border-b border-[#e8e8e8] bg-[#f4f4f4]";
 
   return (
     <nav className={navClassName}>
-      <div className="mx-auto flex container overflow-x-auto px-6 lg:px-10">
-        <Link href="/">
-          <img
-            width="150"
-            height="50"
-            src={navigation.logoUrl}
-            alt="ZerofAI"
-            className="w-28 px-2 py-3"
-          />
-        </Link>
-        {links.map((link) =>
-          link.type === "route" ? (
-            <Link key={`route-${link.href}`} href={link.href} className={linkClassName(link)}>
-              {link.label}
-            </Link>
-          ) : (
-            <a
-              key={`anchor-${link.href}`}
-              href={`/#${link.href}`}
-              onClick={() => setActive(link.href)}
-              className={linkClassName(link)}
-            >
-              {link.label}
-            </a>
-          ),
-        )}
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between">
+          <Link href="/">
+            <img
+              width="150"
+              height="50"
+              src={navigation.logoUrl}
+              alt="ZerofAI"
+              className="w-28 px-2 py-3"
+            />
+          </Link>
+
+          <div className="hidden overflow-x-auto md:flex">
+            {links.map((link) => renderNavLink(link, linkClassName(link)))}
+          </div>
+
+          <button
+            type="button"
+            className="p-2 text-[#3d3d3d] md:hidden"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
       </div>
+
+      <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <SheetContent
+          side="right"
+          className="w-[min(85vw,20rem)] border-[#e8e8e8] bg-white p-0 md:hidden"
+        >
+          <SheetTitle className="sr-only">Navigation menu</SheetTitle>
+          <nav className="pt-12">
+            {links.map((link) =>
+              renderNavLink(link, mobileLinkClassName(link), () => setMobileMenuOpen(false)),
+            )}
+          </nav>
+        </SheetContent>
+      </Sheet>
     </nav>
   );
 }
