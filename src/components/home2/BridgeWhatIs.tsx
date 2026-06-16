@@ -29,7 +29,7 @@ export function BridgeWhatIs({ content }: Props) {
   }, [videoOpen]);
 
   return (
-    <section className="bg-background">
+    <section id="what-is" className="bg-background">
       <div className="grid lg:grid-cols-2">
         <div className="flex items-center px-6 py-20 lg:px-20 lg:py-28">
           <div className="max-w-xl">

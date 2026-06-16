@@ -1,9 +1,15 @@
 import { CountUpStat } from "@/components/home2/CountUpStat";
+import { isNumericStatValue } from "@/lib/stat-value";
+import { FadeInTextStat } from "@/components/home2/FadeInTextStat";
 import type { HomepageStats } from "@/types/homepage";
 
 type Props = {
   content: HomepageStats;
 };
+
+const valueClassName =
+  "block text-[3.5rem] font-light leading-none tracking-[-0.03em] text-[#006670]";
+const labelClassName = "mt-4 text-base font-medium leading-snug text-[#3d3d3d]";
 
 export function BridgeStats({ content }: Props) {
   return (
@@ -16,13 +22,19 @@ export function BridgeStats({ content }: Props) {
               key={`${stat.value}-${stat.label}`}
               className={`${index > 0 ? "md:border-l md:border-[#e8e8e8] md:pl-8 lg:pl-10" : ""}`}
             >
-              <CountUpStat
-                value={stat.value}
-                className="block text-[3.5rem] font-light leading-none tracking-[-0.03em] text-[#006670]"
-              />
-              <h3 className="mt-4 text-base font-medium leading-snug text-[#3d3d3d]">
-                {stat.label}
-              </h3>
+              {isNumericStatValue(stat.value) ? (
+                <>
+                  <CountUpStat value={stat.value} className={valueClassName} />
+                  <h3 className={labelClassName}>{stat.label}</h3>
+                </>
+              ) : (
+                <FadeInTextStat
+                  value={stat.value}
+                  label={stat.label}
+                  valueClassName={valueClassName}
+                  labelClassName={labelClassName}
+                />
+              )}
             </div>
           ))}
         </div>

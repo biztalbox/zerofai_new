@@ -2,15 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-function parseStatValue(value: string) {
-  const match = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
-  if (!match) return null;
-
-  return {
-    target: Number(match[1]),
-    suffix: match[2],
-  };
-}
+import { parseStatValue } from "@/lib/stat-value";
 
 type Props = {
   value: string;
