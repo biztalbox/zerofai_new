@@ -76,7 +76,7 @@ export function BridgeWhatIs({ content }: Props) {
         </div>
 
       </div>
-      <div className="text-center capitalize md:-mb-[30px] lg:-mb-[35px] xl:-mb-[55px]  xl:text-[9.8rem] md:text-[80px] pt-20 lg:text-[6.7rem] whitespace-nowrap text-[#EFF2F5] text-[40px] font-bold">Transformation Stories</div>
+      <div className="text-center capitalize -mb-[14px] md:-mb-[30px] lg:-mb-[35px] xl:-mb-[55px]  xl:text-[8.2rem] md:text-[65px] pt-20 lg:text-[5.5rem] whitespace-nowrap text-[#EFF2F5] text-[35px] font-bold">Transformation Stories</div>
 
        
       <Dialog
