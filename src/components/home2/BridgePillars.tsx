@@ -6,10 +6,12 @@ type Props = {
 
 export function BridgePillars({ content }: Props) {
   return (
+    
     <section
       id="platform"
       className="relative overflow-hidden bg-[#f4f4f1] py-16 lg:py-24"
     >
+      
       <div className="relative mx-auto container px-6 lg:px-10">
         <h2 className="max-w-3xl text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#006670] lg:text-[2.75rem]">
           {content.title}
@@ -22,7 +24,7 @@ export function BridgePillars({ content }: Props) {
                 <img
                   src={pillar.imageUrl}
                   alt={pillar.title}
-                  className="aspect-[4/3] w-full object-cover object-center"
+                  className="aspect-video w-full object-cover object-center"
                 />
               </div>
               <h4 className="mt-6 text-lg font-medium text-[#3d3d3d]">{pillar.title}</h4>

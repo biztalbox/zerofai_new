@@ -13,7 +13,8 @@ const labelClassName = "mt-4 text-base font-medium leading-snug text-[#3d3d3d]";
 
 export function BridgeStats({ content }: Props) {
   return (
-    <section className="border-y border-[#e8e8e8] bg-white py-16 lg:py-24">
+    <section className="bg-white py-16 lg:py-24">
+      
       <div className="mx-auto container px-6 lg:px-10">
         <p className="text-[15px] font-medium text-[#3d3d3d]">{content.sectionLabel}</p>
         <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8 lg:mt-14 lg:gap-12">
@@ -38,7 +39,10 @@ export function BridgeStats({ content }: Props) {
             </div>
           ))}
         </div>
+
       </div>
+      <div className="text-center leading-0 -mb-[50px] md:-mb-[38px] lg:-mb-[35px] md:text-[75px] pt-28 xl:text-[9.4rem] lg:text-[6.3rem] whitespace-nowrap text-[#F4F4F1] text-[36px] font-bold">ZerofAI Intelligence</div>
+
     </section>
   );
 }

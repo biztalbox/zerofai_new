@@ -34,7 +34,8 @@ export default async function ContactPage() {
             src={content.hero.imageUrl}
             alt={content.hero.title}
             fill
-            className=""
+            priority
+            className="object-contain"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"

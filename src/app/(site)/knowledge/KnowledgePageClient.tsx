@@ -54,8 +54,8 @@ export function KnowledgePageClient({ content }: KnowledgePageClientProps) {
         <div className="relative mx-auto flex h-full container items-center px-6 py-12 lg:py-20">
           <div>
             {content.hero.eyebrow ? (
-              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
-                {content.hero.eyebrow}
+              <p className="text-[11px] font-semibold tracking-[0.12em] text-primary">
+                <span className="uppercase">FAQ</span>s
               </p>
             ) : null}
             <h1 className="mt-3 text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
@@ -111,7 +111,7 @@ export function KnowledgePageClient({ content }: KnowledgePageClientProps) {
             <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
               <Link
                 href={content.ctaButtonLink}
-                className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-hover"
+                className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition-colors hover:bg-black"
               >
                 {content.ctaButtonLabel}
               </Link>
