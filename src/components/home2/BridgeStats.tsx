@@ -41,7 +41,7 @@ export function BridgeStats({ content }: Props) {
         </div>
 
       </div>
-      <div className="text-center leading-0 -mb-[50px] md:-mb-[38px] lg:-mb-[35px] md:text-[75px] pt-28 xl:text-[9.4rem] lg:text-[6.3rem] whitespace-nowrap text-[#F4F4F1] text-[40px] font-bold">ZerofAI Intelligence</div>
+      <div className="text-center leading-0 -mb-[50px] md:-mb-[38px] lg:-mb-[35px] xl:-mb-[43px] md:text-[75px] pt-28 xl:text-[8.4rem] 2xl:text-[9.4rem] lg:text-[6.3rem] whitespace-nowrap text-[#F4F4F1] text-[36px] font-bold">ZerofAI Intelligence</div>
 
     </section>
   );
