@@ -11,8 +11,8 @@ export function Footer({ content }: FooterProps) {
     <footer className="bg-[#060f1c] text-white z-10 relative flex flex-col p-5">
       <img src="/assets/text.png" alt="Footer Background" className="object-contain self-center" />
 
-      <div className="container mx-auto z-10 relative -mt-5 lg:-mt-16">
-        <div className="grid grid-cols-1 gap-12 py-12 lg:grid-cols-12 lg:gap-10">
+      <div className="container mx-auto -mt-5 lg:-mt-16">
+        <div className="grid grid-cols-1 z-10 relative gap-12 py-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <img
               width="300"
@@ -50,7 +50,7 @@ export function Footer({ content }: FooterProps) {
             <FooterDemoForm />
           </div>
         </div>
-        <img src="/assets/pattern.png" alt="Footer Background" className="" />
+        <img src="/assets/pattern.png" alt="Footer Background" className="-mt-24" />
         <div className="flex text-center justify-center items-center py-5 text-xs text-white/50">
           <div>
             © {new Date().getFullYear()} {content.copyright}

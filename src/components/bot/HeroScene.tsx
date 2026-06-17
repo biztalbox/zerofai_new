@@ -92,10 +92,17 @@ const HeroScene = () => {
 
   }, { dependencies: [actions] })
 
+  const openChatbot = () => {
+    const chatbotIcon = document.getElementById("chatbotIcon");
+    if (chatbotIcon) {
+      chatbotIcon.click();
+    }
+  }
+
   return (
     <group ref={botRef} >
       {/* <Float floatIntensity={2} rotationIntensity={0.2} speed={4}> */}
-      <mesh>
+      <mesh onClick={openChatbot}>
         <primitive object={model.scene} scale={4.8} rotation={[0, 0, 0]} position={[0, -2, 0]}  />
       </mesh>
       {/* </Float> */}
