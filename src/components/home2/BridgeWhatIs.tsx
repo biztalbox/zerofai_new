@@ -47,7 +47,7 @@ export function BridgeWhatIs({ content }: Props) {
         <div
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          className="group relative h-full overflow-hidden bg-coral"
+          className="group relative min-h-80 md:min-h-96 h-full overflow-hidden bg-coral"
         >
           <div
             className="absolute inset-0 bg-black/35 transition-opacity duration-700"
@@ -67,7 +67,7 @@ export function BridgeWhatIs({ content }: Props) {
           <button
             type="button"
             onClick={() => setVideoOpen(true)}
-            className="absolute bottom-8 left-8 z-10 inline-flex items-center gap-3 border border-white px-7 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-coral"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-8 z-10 inline-flex items-center gap-3 border border-white px-7 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-coral"
           >
             <Play className="h-3.5 w-3.5 fill-current" />
             Watch Now
@@ -76,7 +76,7 @@ export function BridgeWhatIs({ content }: Props) {
         </div>
 
       </div>
-      <div className="text-center capitalize -mb-[14px] md:-mb-[30px] lg:-mb-[35px] 2xl:-mb-[55px] xl:text-[7.2rem] xl:-mb-[44px] 2xl:text-[8.2rem] md:text-[65px] pt-10 lg:text-[5.5rem] whitespace-nowrap text-[#EFF2F5] text-[35px] font-bold">Transformation Stories</div>
+      <div className="text-center capitalize -mb-[14px] md:-mb-[30px] lg:-mb-[35px] 2xl:-mb-[55px] xl:text-[7.2rem] xl:-mb-[44px] 2xl:text-[8.2rem] md:text-[65px] pt-10 lg:text-[5.5rem] whitespace-nowrap text-[#EFF2F5] text-[32px] font-bold">Transformation Stories</div>
 
        
       <Dialog
