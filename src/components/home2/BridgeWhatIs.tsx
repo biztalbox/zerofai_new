@@ -31,7 +31,7 @@ export function BridgeWhatIs({ content }: Props) {
   return (
     <section id="what-is" className="bg-background">
       <div className="grid lg:grid-cols-2">
-        <div className="flex items-center px-6 py-20 lg:px-20 lg:py-28">
+        <div className="flex items-center px-6 py-12 lg:px-16 lg:py-20">
           <div>
             <h2 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#3d3d3d] lg:text-[2.75rem]">
               {content.title}
@@ -47,14 +47,14 @@ export function BridgeWhatIs({ content }: Props) {
         <div
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          className="group relative min-h-[460px] overflow-hidden bg-coral lg:min-h-[640px]"
+          className="group relative h-full overflow-hidden bg-coral"
         >
           <div
             className="absolute inset-0 bg-black/35 transition-opacity duration-700"
             style={{ opacity: hover ? 1 : 0 }}
           />
 
-          <div className="relative flex h-full min-h-[460px] items-center justify-center px-6 lg:min-h-[640px]">
+          <div className="relative flex h-full items-center justify-center px-6">
             <h3
               className="text-center text-5xl font-light text-white transition-transform duration-700 md:text-6xl lg:text-7xl"
               style={{ transform: hover ? "translateY(-12px)" : "translateY(0)" }}

@@ -25,7 +25,7 @@ export function BridgeHero({ content }: Props) {
   }, [content.videoUrl]);
 
   return (
-    <section className="relative min-h-[93vh] overflow-hidden flex">
+    <section className="relative min-h-screen overflow-hidden flex">
       {!usePoster && (
         <video
           ref={videoRef}
