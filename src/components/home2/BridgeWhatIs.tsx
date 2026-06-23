@@ -30,8 +30,8 @@ export function BridgeWhatIs({ content }: Props) {
 
   return (
     <section id="what-is" className="bg-background">
-      <div className="grid lg:grid-cols-2">
-        <div className="flex items-center px-6 py-12 lg:px-16 lg:py-20">
+      <div className="container mx-auto px-6 lg:px-10 gap-8 grid lg:grid-cols-2 py-12 lg:py-16">
+        <div className="flex items-center">
           <div>
             <h2 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#3d3d3d] lg:text-[2.75rem]">
               {content.title}
@@ -47,7 +47,7 @@ export function BridgeWhatIs({ content }: Props) {
         <div
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          className="group relative min-h-80 md:min-h-96 h-full overflow-hidden bg-coral"
+          className="group relative min-h-72 md:min-h-96 h-full overflow-hidden bg-coral"
         >
           <div
             className="absolute inset-0 bg-black/35 transition-opacity duration-700"
@@ -76,7 +76,7 @@ export function BridgeWhatIs({ content }: Props) {
         </div>
 
       </div>
-      <div className="text-center capitalize -mb-[14px] md:-mb-[30px] lg:-mb-[35px] 2xl:-mb-[55px] xl:text-[7.2rem] xl:-mb-[44px] 2xl:text-[8.2rem] md:text-[65px] pt-10 lg:text-[5.5rem] whitespace-nowrap text-[#EFF2F5] text-[32px] font-bold">Transformation Stories</div>
+      <div className="text-center capitalize -mb-[14px] md:-mb-[30px] lg:-mb-[35px] 2xl:-mb-[55px] xl:text-[7.2rem] xl:-mb-[44px] 2xl:text-[8.2rem] md:text-[65px] lg:text-[5.5rem] whitespace-nowrap text-[#EFF2F5] text-[32px] font-bold">Transformation Stories</div>
 
        
       <Dialog
