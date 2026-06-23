@@ -11,6 +11,7 @@ import type { NavLink } from "@/types/site-content";
 
 type NavigationBarProps = {
   overlay?: boolean;
+  hardNavigation?: boolean;
 };
 
 function dedupeNavLinks(links: NavLink[]): NavLink[] {
@@ -23,7 +24,7 @@ function dedupeNavLinks(links: NavLink[]): NavLink[] {
   });
 }
 
-export function NavigationBar({ overlay = false }: NavigationBarProps) {
+export function NavigationBar({ overlay = false, hardNavigation = false }: NavigationBarProps) {
   const { navigation } = useSiteContent();
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -89,14 +90,25 @@ export function NavigationBar({ overlay = false }: NavigationBarProps) {
 
   const renderNavLink = (link: NavLink, className: string, onNavigate?: () => void) =>
     link.type === "route" ? (
-      <Link
-        key={`route-${link.href}`}
-        href={link.href}
-        className={className}
-        onClick={onNavigate}
-      >
-        {link.label}
-      </Link>
+      hardNavigation ? (
+        <a
+          key={`route-${link.href}`}
+          href={link.href}
+          className={className}
+          onClick={onNavigate}
+        >
+          {link.label}
+        </a>
+      ) : (
+        <Link
+          key={`route-${link.href}`}
+          href={link.href}
+          className={className}
+          onClick={onNavigate}
+        >
+          {link.label}
+        </Link>
+      )
     ) : (
       <a
         key={`anchor-${link.href}`}
@@ -119,15 +131,27 @@ export function NavigationBar({ overlay = false }: NavigationBarProps) {
     <nav className={navClassName}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          <Link href="/">
-            <img
-              width="150"
-              height="50"
-              src={navigation.logoUrl}
-              alt="ZerofAI"
-              className="w-28 px-2 py-3"
-            />
-          </Link>
+          {hardNavigation ? (
+            <a href="/">
+              <img
+                width="150"
+                height="50"
+                src={navigation.logoUrl}
+                alt="ZerofAI"
+                className="w-28 px-2 py-3"
+              />
+            </a>
+          ) : (
+            <Link href="/">
+              <img
+                width="150"
+                height="50"
+                src={navigation.logoUrl}
+                alt="ZerofAI"
+                className="w-28 px-2 py-3"
+              />
+            </Link>
+          )}
 
           <div className="hidden overflow-x-auto md:flex">
             {links.map((link) => renderNavLink(link, linkClassName(link)))}
