@@ -17,26 +17,31 @@ export function BridgeHero({ content }: Props) {
     const video = videoRef.current;
     if (!video) return;
 
+    video.load();
+
     const play = () => video.play().catch(() => setUsePoster(true));
     play();
 
-    video.addEventListener("error", () => setUsePoster(true));
-    return () => video.removeEventListener("error", () => setUsePoster(true));
-  }, [content.videoUrl]);
+    const handleError = () => setUsePoster(true);
+    video.addEventListener("error", handleError);
+    return () => video.removeEventListener("error", handleError);
+  }, [content.mobileVideoUrl, content.videoUrl]);
 
   return (
     <section className="relative min-h-screen overflow-hidden flex">
       {!usePoster && (
         <video
           ref={videoRef}
-          src={content.videoUrl}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
           className="absolute inset-0 h-full w-full object-cover"
-        />
+        >
+          <source media="(max-width: 767px)" src={content.mobileVideoUrl} />
+          <source media="(min-width: 768px)" src={content.videoUrl} />
+        </video>
       )}
 
       <div className="relative mx-auto flex h-full min-h-[460px] self-center container items-center px-6 py-12 lg:min-h-[540px] lg:px-10 lg:py-16">

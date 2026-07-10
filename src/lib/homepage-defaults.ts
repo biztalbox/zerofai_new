@@ -7,7 +7,8 @@ export const homepageDefaults: HomepageContent = {
       "ZerofAI is an AI-powered autonomous IT operations platform that helps enterprises automate support, improve workplace experience, and operate more efficiently at scale.",
   },
   hero: {
-    videoUrl: "/assets/Zerofai_mashup.mp4",
+    videoUrl: "https://agqugimammzwbqtyqwry.supabase.co/storage/v1/object/public/zerofai_bucket/media/hero%20video.mp4",
+    mobileVideoUrl: "https://agqugimammzwbqtyqwry.supabase.co/storage/v1/object/public/zerofai_bucket/media/ZerofAi%20vertical_1.mp4",
     title: "Autonomous IT Operations Platform",
     ctaLabel: "Request a Demo",
     ctaLink: "/contact",

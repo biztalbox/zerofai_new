@@ -19,11 +19,27 @@ export const Homepage: GlobalConfig = {
               name: "hero",
               type: "group",
               fields: [
-                { name: "video", type: "upload", relationTo: "media", label: "Background video" },
+                {
+                  name: "video",
+                  type: "upload",
+                  relationTo: "media",
+                  label: "Tablet / desktop background video",
+                },
                 {
                   name: "videoUrl",
                   type: "text",
-                  label: "Video URL (fallback if no upload)",
+                  label: "Tablet / desktop video URL (fallback if no upload)",
+                },
+                {
+                  name: "mobileVideo",
+                  type: "upload",
+                  relationTo: "media",
+                  label: "Mobile background video",
+                },
+                {
+                  name: "mobileVideoUrl",
+                  type: "text",
+                  label: "Mobile video URL (fallback if no upload)",
                 },
                 { name: "title", type: "text", required: true },
                 { name: "ctaLabel", type: "text", label: "CTA label" },

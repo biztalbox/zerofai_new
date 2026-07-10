@@ -30,6 +30,12 @@ function mapHomepageFromCms(data: Record<string, unknown>): HomepageContent {
         hero.video as number | Media | null | undefined,
         (hero.videoUrl as string) || homepageDefaults.hero.videoUrl,
       ),
+      mobileVideoUrl: resolveUploadUrl(
+        hero.mobileVideo as number | Media | null | undefined,
+        (hero.mobileVideoUrl as string) ||
+          (hero.videoUrl as string) ||
+          homepageDefaults.hero.mobileVideoUrl,
+      ),
       title: (hero.title as string) || homepageDefaults.hero.title,
       ctaLabel: (hero.ctaLabel as string) || homepageDefaults.hero.ctaLabel,
       ctaLink: (hero.ctaLink as string) || homepageDefaults.hero.ctaLink,

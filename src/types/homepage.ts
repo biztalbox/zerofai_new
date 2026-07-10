@@ -2,6 +2,7 @@ import type { PageSeo } from "@/types/page-seo";
 
 export type HomepageHero = {
   videoUrl: string;
+  mobileVideoUrl: string;
   title: string;
   ctaLabel: string;
   ctaLink: string;
