@@ -53,7 +53,7 @@ export default async function LeadershipPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
                 {content.members.map((member) => (
                   <div key={member.name} className="flex flex-col gap-4">
-                    <div className="aspect-[3/4] w-full overflow-hidden bg-white">
+                    <div className="aspect-square w-full rounded-full overflow-hidden bg-white">
                       <Image
                         src={member.imageUrl}
                         width={400}
@@ -62,7 +62,7 @@ export default async function LeadershipPage() {
                         className="h-full w-full object-cover object-top"
                       />
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 text-center">
                       <h3>{member.name}</h3>
                       <p className="text-xs">{member.designation}</p>
                     </div>
