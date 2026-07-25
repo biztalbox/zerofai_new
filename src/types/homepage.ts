@@ -1,7 +1,9 @@
 import type { PageSeo } from "@/types/page-seo";
 
 export type HomepageHero = {
+  imageUrl: string;
   videoUrl: string;
+  mobileImageUrl: string;
   mobileVideoUrl: string;
   title: string;
   ctaLabel: string;

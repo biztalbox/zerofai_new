@@ -26,9 +26,17 @@ function mapHomepageFromCms(data: Record<string, unknown>): HomepageContent {
   return {
     meta: mapPageSeo(meta, homepageDefaults.meta),
     hero: {
+      imageUrl: resolveUploadUrl(
+        hero.image as number | Media | null | undefined,
+        (hero.imageUrl as string) || "",
+      ),
       videoUrl: resolveUploadUrl(
         hero.video as number | Media | null | undefined,
         (hero.videoUrl as string) || homepageDefaults.hero.videoUrl,
+      ),
+      mobileImageUrl: resolveUploadUrl(
+        hero.mobileImage as number | Media | null | undefined,
+        (hero.mobileImageUrl as string) || "",
       ),
       mobileVideoUrl: resolveUploadUrl(
         hero.mobileVideo as number | Media | null | undefined,
