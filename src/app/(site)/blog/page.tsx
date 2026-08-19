@@ -10,6 +10,8 @@ import { getPayloadClient } from "@/lib/payload";
 import { getBlogPageContent } from "@/lib/site-content";
 import type { Post } from "@/payload-types";
 
+// Dynamic route; the CMS reads underneath are cached at the data layer.
+// See (site)/page.tsx for why this is not ISR.
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {

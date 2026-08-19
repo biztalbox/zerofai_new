@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import HeroCanvas from "../bot/HeroCanvas";
+import DeferredHeroCanvas from "@/components/bot/DeferredHeroCanvas";
 import type { HomepageCta } from "@/types/homepage";
 
 type Props = {
@@ -36,7 +36,7 @@ const CtaBot = ({ content }: Props) => {
             </Link>
           </div>
         </div>
-        <HeroCanvas />
+        <DeferredHeroCanvas />
       </div>
     </section>
   );

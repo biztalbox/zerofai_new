@@ -1,102 +1,94 @@
-"use client";
-
-import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
+import { HeroVideoLayer } from "@/components/home2/HeroVideoLayer";
+import { desktopSrcSet, mobileSrcSet, optimizedSrc } from "@/lib/image-loader";
 import type { HomepageHero } from "@/types/homepage";
 
 type Props = {
   content: HomepageHero;
 };
 
-function HeroVideo({
-  src,
-  className,
-}: {
-  src: string;
-  className: string;
-}) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [failed, setFailed] = useState(false);
+/**
+ * Shown only when a breakpoint has neither an image nor a video configured.
+ * Swap this file to change the fallback backdrop.
+ */
+const HERO_PLACEHOLDER = "/assets/hero-placeholder.webp";
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !src) return;
+type HeroSlot = {
+  /** What actually paints as the still layer for this breakpoint. */
+  image: string;
+  /** Empty string means "no video at this breakpoint". */
+  video: string;
+};
 
-    setFailed(false);
-    video.load();
-
-    const play = () => video.play().catch(() => setFailed(true));
-    play();
-
-    const handleError = () => setFailed(true);
-    video.addEventListener("error", handleError);
-    return () => video.removeEventListener("error", handleError);
-  }, [src]);
-
-  if (!src || failed) return null;
-
-  return (
-    <video
-      ref={videoRef}
-      src={src}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      className={className}
-    />
-  );
+/**
+ * Media priority, resolved independently for each breakpoint:
+ *
+ *   1. image configured  -> show the image, and nothing else (no video at all)
+ *   2. no image, video   -> show the video, with the placeholder behind it
+ *      configured           until the first frame is ready
+ *   3. neither           -> show the placeholder
+ */
+function resolveSlot(imageUrl: string, videoUrl: string): HeroSlot {
+  if (imageUrl) return { image: imageUrl, video: "" };
+  if (videoUrl) return { image: HERO_PLACEHOLDER, video: videoUrl };
+  return { image: HERO_PLACEHOLDER, video: "" };
 }
 
-function HeroMedia({
-  imageUrl,
-  videoUrl,
-  className,
-}: {
-  imageUrl: string;
-  videoUrl: string;
-  className: string;
-}) {
-  if (imageUrl) {
-    return (
-      <img
-        src={imageUrl}
-        alt=""
-        className={`${className} object-cover`}
-        aria-hidden
-      />
-    );
-  }
-
-  return <HeroVideo src={videoUrl} className={`${className} object-cover`} />;
-}
-
+/**
+ * Server component on purpose: the headline, CTA and logo are all in the first
+ * HTML response, so LCP no longer waits on hydration or on a video download.
+ * Only the optional background video is client-side, and it is deferred until
+ * after load (see HeroVideoLayer).
+ */
 export function BridgeHero({ content }: Props) {
-  const mediaClassName = "absolute inset-0 h-full w-full";
+  const { imageUrl, mobileImageUrl, videoUrl, mobileVideoUrl } = content;
+
+  const mobile = resolveSlot(mobileImageUrl, mobileVideoUrl);
+  const desktop = resolveSlot(imageUrl, videoUrl);
 
   return (
-    <section className="relative min-h-screen overflow-hidden flex">
-      <HeroMedia
-        imageUrl={content.mobileImageUrl}
-        videoUrl={content.mobileVideoUrl}
-        className={`${mediaClassName} md:hidden`}
-      />
-      <HeroMedia
-        imageUrl={content.imageUrl}
-        videoUrl={content.videoUrl}
-        className={`${mediaClassName} hidden md:block`}
+    <section className="relative flex min-h-screen overflow-hidden bg-[#0d1b26]">
+      {/*
+        <picture> rather than next/image because the two breakpoints can be
+        entirely different assets; the browser downloads exactly one of them.
+      */}
+      <picture>
+        <source
+          media="(min-width: 768px)"
+          srcSet={desktopSrcSet(desktop.image)}
+          sizes="100vw"
+        />
+        <img
+          src={optimizedSrc(mobile.image, 828)}
+          srcSet={mobileSrcSet(mobile.image)}
+          sizes="100vw"
+          alt=""
+          aria-hidden
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </picture>
+
+      <HeroVideoLayer
+        mobileSrc={mobile.video}
+        desktopSrc={desktop.video}
+        mobilePoster={mobile.image}
+        desktopPoster={desktop.image}
       />
 
-      <div className="relative mx-auto flex h-full min-h-[460px] self-center container items-center px-6 py-12 lg:min-h-[540px] lg:px-10 lg:py-16">
+      <div className="relative mx-auto container flex h-full min-h-[460px] items-center self-center px-6 py-12 lg:min-h-[540px] lg:px-10 lg:py-16">
         <div className="w-full max-w-[400px] rounded-xl bg-[#2828288a] p-8 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-[2px] lg:max-w-[420px] lg:p-10">
-          <img
-            width="150"
-            height="50"
-            src="/assets/logo.png"
+          <Image
+            src="/assets/logo.webp"
+            width={150}
+            height={37}
             alt="ZerofAI"
-            className="w-28 px-2 py-3"
+            loading="eager"
+            sizes="112px"
+            className="h-auto w-28 px-2 py-3"
           />
           <h1 className="text-[1.625rem] font-normal leading-[1.25] tracking-[-0.02em] text-white lg:text-[1.75rem]">
             {content.title}

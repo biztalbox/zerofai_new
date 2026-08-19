@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -133,23 +134,31 @@ export function NavigationBar({ overlay = false, hardNavigation = false }: Navig
         <div className="flex items-center justify-between">
           {hardNavigation ? (
             <a href="/">
-              <img
-                width="150"
-                height="50"
-                src={navigation.logoUrl}
-                alt="ZerofAI"
-                className="w-28 px-2 py-3"
-              />
+              {navigation.logoUrl ? (
+                <Image
+                  src={navigation.logoUrl}
+                  width={150}
+                  height={37}
+                  priority
+                  sizes="112px"
+                  alt="ZerofAI"
+                  className="h-auto w-28 px-2 py-3"
+                />
+              ) : null}
             </a>
           ) : (
             <Link href="/">
-              <img
-                width="150"
-                height="50"
-                src={navigation.logoUrl}
-                alt="ZerofAI"
-                className="w-28 px-2 py-3"
-              />
+              {navigation.logoUrl ? (
+                <Image
+                  src={navigation.logoUrl}
+                  width={150}
+                  height={37}
+                  priority
+                  sizes="112px"
+                  alt="ZerofAI"
+                  className="h-auto w-28 px-2 py-3"
+                />
+              ) : null}
             </Link>
           )}
 

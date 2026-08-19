@@ -1,10 +1,10 @@
 export const CONTINUE = {
-  name: "Please write your correct name to continue.",
-  email: "Please write your correct work email to continue.",
-  company: "Please write your correct company name to continue.",
-  phone: "Please write your correct phone number to continue.",
-  designation: "Please write your correct designation to continue.",
-  message: "Please write your correct message to continue.",
+  name: "Please enter your correct name to continue.",
+  email: "Please enter your correct work email to continue.",
+  company: "Please enter your correct company name to continue.",
+  phone: "Please enter your correct phone number to continue.",
+  designation: "Please enter your correct designation to continue.",
+  message: "Please enter your correct message to continue.",
 } as const;
 
 const PERSONAL_EMAIL_DOMAINS = new Set([

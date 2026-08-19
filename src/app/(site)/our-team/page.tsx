@@ -6,6 +6,8 @@ import { NavigationBar } from "@/components/Navigation";
 import { toNextMetadata } from "@/lib/page-seo";
 import { getLeadershipPageContent } from "@/lib/site-content";
 
+// Dynamic route; the CMS reads underneath are cached at the data layer.
+// See (site)/page.tsx for why this is not ISR.
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,7 +29,9 @@ export default async function LeadershipPage() {
             src={content.hero.imageUrl}
             alt={content.hero.title}
             fill
-            className=""
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
@@ -58,6 +62,8 @@ export default async function LeadershipPage() {
                         src={member.imageUrl}
                         width={400}
                         height={600}
+                        loading="lazy"
+                        sizes="(max-width: 767px) 50vw, 240px"
                         alt={member.name}
                         className="h-full w-full object-cover object-top"
                       />

@@ -22,6 +22,9 @@ import {
   leadershipPageDefaults,
   navigationDefaults,
 } from "@/lib/site-defaults";
+import { unstable_cache } from "next/cache";
+import { cache } from "react";
+
 import { getPayloadClient } from "@/lib/payload";
 
 function resolveUploadUrl(
@@ -234,65 +237,110 @@ function mapBlogPageFromCms(data: Record<string, unknown>): BlogPageContent {
   };
 }
 
-export async function getNavigationContent(): Promise<NavigationContent> {
-  try {
-    const payload = await getPayloadClient();
-    const data = await payload.findGlobal({ slug: "site-navigation", depth: 2 });
-    return mapNavigationFromCms(data as Record<string, unknown>);
-  } catch {
-    return navigationDefaults;
-  }
-}
+/**
+ * Each CMS global is cached across requests for 60s (unstable_cache) and
+ * deduped within a single request (React cache()). This removes the Postgres
+ * round trip from the critical path while leaving the routes dynamic — marking
+ * them ISR instead sends `next dev` into a rebuild-and-reload loop.
+ *
+ * To make a CMS edit appear immediately, call revalidateTag("<tag>") from the
+ * matching Payload afterChange hook.
+ */
+const fetchNavigationContent = unstable_cache(
+  async (): Promise<NavigationContent> => {
+    try {
+      const payload = await getPayloadClient();
+      const data = await payload.findGlobal({ slug: "site-navigation", depth: 2 });
+      return mapNavigationFromCms(data as Record<string, unknown>);
+    } catch {
+      return navigationDefaults;
+    }
+  },
+  ["site-navigation-global"],
+  { revalidate: 60, tags: ["navigation"] },
+);
 
-export async function getFooterContent(): Promise<FooterContent> {
-  try {
-    const payload = await getPayloadClient();
-    const data = await payload.findGlobal({ slug: "site-footer", depth: 2 });
-    return mapFooterFromCms(data as Record<string, unknown>);
-  } catch {
-    return footerDefaults;
-  }
-}
+export const getNavigationContent = cache(async (): Promise<NavigationContent> => fetchNavigationContent());
 
-export async function getContactPageContent(): Promise<ContactPageContent> {
-  try {
-    const payload = await getPayloadClient();
-    const data = await payload.findGlobal({ slug: "contact-page", depth: 2 });
-    return mapContactPageFromCms(data as Record<string, unknown>);
-  } catch {
-    return contactPageDefaults;
-  }
-}
+const fetchFooterContent = unstable_cache(
+  async (): Promise<FooterContent> => {
+    try {
+      const payload = await getPayloadClient();
+      const data = await payload.findGlobal({ slug: "site-footer", depth: 2 });
+      return mapFooterFromCms(data as Record<string, unknown>);
+    } catch {
+      return footerDefaults;
+    }
+  },
+  ["site-footer-global"],
+  { revalidate: 60, tags: ["footer"] },
+);
 
-export async function getLeadershipPageContent(): Promise<LeadershipPageContent> {
-  try {
-    const payload = await getPayloadClient();
-    const data = await payload.findGlobal({ slug: "leadership-page", depth: 2 });
-    return mapLeadershipPageFromCms(data as Record<string, unknown>);
-  } catch {
-    return leadershipPageDefaults;
-  }
-}
+export const getFooterContent = cache(async (): Promise<FooterContent> => fetchFooterContent());
 
-export async function getKnowledgePageContent(): Promise<KnowledgePageContent> {
-  try {
-    const payload = await getPayloadClient();
-    const data = await payload.findGlobal({ slug: "knowledge-page", depth: 2 });
-    return mapKnowledgePageFromCms(data as Record<string, unknown>);
-  } catch {
-    return knowledgePageDefaults;
-  }
-}
+const fetchContactPageContent = unstable_cache(
+  async (): Promise<ContactPageContent> => {
+    try {
+      const payload = await getPayloadClient();
+      const data = await payload.findGlobal({ slug: "contact-page", depth: 2 });
+      return mapContactPageFromCms(data as Record<string, unknown>);
+    } catch {
+      return contactPageDefaults;
+    }
+  },
+  ["contact-page-global"],
+  { revalidate: 60, tags: ["contact-page"] },
+);
 
-export async function getBlogPageContent(): Promise<BlogPageContent> {
-  try {
-    const payload = await getPayloadClient();
-    const data = await payload.findGlobal({ slug: "blog-page", depth: 2 });
-    return mapBlogPageFromCms(data as Record<string, unknown>);
-  } catch {
-    return blogPageDefaults;
-  }
-}
+export const getContactPageContent = cache(async (): Promise<ContactPageContent> => fetchContactPageContent());
+
+const fetchLeadershipPageContent = unstable_cache(
+  async (): Promise<LeadershipPageContent> => {
+    try {
+      const payload = await getPayloadClient();
+      const data = await payload.findGlobal({ slug: "leadership-page", depth: 2 });
+      return mapLeadershipPageFromCms(data as Record<string, unknown>);
+    } catch {
+      return leadershipPageDefaults;
+    }
+  },
+  ["leadership-page-global"],
+  { revalidate: 60, tags: ["leadership-page"] },
+);
+
+export const getLeadershipPageContent = cache(async (): Promise<LeadershipPageContent> => fetchLeadershipPageContent());
+
+const fetchKnowledgePageContent = unstable_cache(
+  async (): Promise<KnowledgePageContent> => {
+    try {
+      const payload = await getPayloadClient();
+      const data = await payload.findGlobal({ slug: "knowledge-page", depth: 2 });
+      return mapKnowledgePageFromCms(data as Record<string, unknown>);
+    } catch {
+      return knowledgePageDefaults;
+    }
+  },
+  ["knowledge-page-global"],
+  { revalidate: 60, tags: ["knowledge-page"] },
+);
+
+export const getKnowledgePageContent = cache(async (): Promise<KnowledgePageContent> => fetchKnowledgePageContent());
+
+const fetchBlogPageContent = unstable_cache(
+  async (): Promise<BlogPageContent> => {
+    try {
+      const payload = await getPayloadClient();
+      const data = await payload.findGlobal({ slug: "blog-page", depth: 2 });
+      return mapBlogPageFromCms(data as Record<string, unknown>);
+    } catch {
+      return blogPageDefaults;
+    }
+  },
+  ["blog-page-global"],
+  { revalidate: 60, tags: ["blog-page"] },
+);
+
+export const getBlogPageContent = cache(async (): Promise<BlogPageContent> => fetchBlogPageContent());
 
 export function buildMapEmbedUrl(address: string): string {
   return `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;

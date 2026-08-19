@@ -12,6 +12,8 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+// Dynamic route; the CMS reads underneath are cached at the data layer.
+// See (site)/page.tsx for why this is not ISR.
 export const dynamic = "force-dynamic";
 
 async function getBlogBySlug(slug: string) {

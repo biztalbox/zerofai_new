@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import type { HomepageCatalog } from "@/types/homepage";
@@ -10,11 +11,14 @@ export function BridgeCatalog({ content }: Props) {
   return (
     <section id="insights" className="border-[#e8e8e8]">
       <div className="grid lg:grid-cols-2">
-        <div className="aspect-[4/3] lg:aspect-auto lg:min-h-[480px]">
-          <img
-            src={content.imageUrl || "/assets/insights.png"}
+        <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[480px]">
+          <Image
+            src={content.imageUrl || "/assets/insights.webp"}
             alt="Insights"
-            className="h-full w-full object-cover"
+            fill
+            loading="lazy"
+            sizes="(max-width: 1023px) 100vw, 50vw"
+            className="object-cover"
           />
         </div>
         <div className="flex flex-col justify-center bg-[#f4f4f1] px-8 py-14 lg:px-14 lg:py-20">

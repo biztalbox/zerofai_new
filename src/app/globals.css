@@ -2,9 +2,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Plain @font-face rather than next/font/local. The font loader made
+ * Turbopack panic in dev (FATAL: An unexpected Turbopack error occurred),
+ * and Next recovered by rebuilding + hard-reloading the page on a loop.
+ *
+ * The size win is unchanged — these are the same subsetted WOFF2 files
+ * (1.49MB of .otf -> 133KB total, ~42KB used above the fold). What is lost is
+ * next/font's automatic preloading, which the site layout does by hand.
+ */
 @font-face {
   font-family: "TWK Everett";
-  src: url("/twk-everett/TWKEverett-Light.otf") format("opentype");
+  src: url("/twk-everett/TWKEverett-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -12,7 +21,7 @@
 
 @font-face {
   font-family: "TWK Everett";
-  src: url("/twk-everett/TWKEverett-Regular.otf") format("opentype");
+  src: url("/twk-everett/TWKEverett-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -20,7 +29,7 @@
 
 @font-face {
   font-family: "TWK Everett";
-  src: url("/twk-everett/TWKEverett-RegularItalic.otf") format("opentype");
+  src: url("/twk-everett/TWKEverett-RegularItalic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -28,39 +37,31 @@
 
 @font-face {
   font-family: "TWK Everett";
-  src: url("/twk-everett/TWKEverett-Medium.otf") format("opentype");
-  font-weight: 500;
+  src: url("/twk-everett/TWKEverett-Medium.woff2") format("woff2");
+  font-weight: 500 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "TWK Everett";
-  src: url("/twk-everett/TWKEverett-Medium.otf") format("opentype");
-  font-weight: 600;
+  src: url("/twk-everett/TWKEverett-Bold.woff2") format("woff2");
+  font-weight: 700 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: "TWK Everett";
-  src: url("/twk-everett/TWKEverett-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "TWK Everett";
-  src: url("/twk-everett/TWKEverett-BoldItalic.otf") format("opentype");
-  font-weight: 700;
+  src: url("/twk-everett/TWKEverett-BoldItalic.woff2") format("woff2");
+  font-weight: 700 900;
   font-style: italic;
   font-display: swap;
 }
 
 @theme inline {
-  --font-sans: "TWK Everett", system-ui, sans-serif;
-  --font-display: "TWK Everett", system-ui, sans-serif;
+  --font-sans: "TWK Everett", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-display: "TWK Everett", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 6px;
@@ -182,4 +183,21 @@
   .bridge-page {
     --bridge-header-h: 65px;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up, .fade-up-2, .fade-up-3, .fade-up-4 { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Keep offscreen homepage sections out of the initial layout/paint work. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
