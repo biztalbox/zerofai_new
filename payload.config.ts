@@ -6,12 +6,12 @@ import {
 import { s3Storage } from "@payloadcms/storage-s3";
 import { config as loadEnv } from "dotenv";
 import path from "path";
-import type { CollectionConfig, GlobalConfig } from "payload";
+import type { CollectionConfig } from "payload";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
-import { pageMetaGroupFields } from "./src/globals/seo-fields";
+import { Homepage } from "./src/globals/homepage";
 import { SiteGlobals } from "./src/globals/site-content";
 import { migrations } from "./src/migrations";
 
@@ -90,176 +90,6 @@ const isNextBuild = process.env.npm_lifecycle_event === "build";
 const articleEditor = lexicalEditor({
   features: ({ defaultFeatures }) => [...defaultFeatures, EXPERIMENTAL_TableFeature()],
 });
-
-const Homepage: GlobalConfig = {
-  slug: "homepage",
-  label: "Homepage",
-  access: {
-    read: () => true,
-  },
-  fields: [
-    {
-      type: "tabs",
-      tabs: [
-        {
-          label: "Hero",
-          fields: [
-            {
-              name: "hero",
-              type: "group",
-              fields: [
-                { name: "video", type: "upload", relationTo: "media", label: "Background video" },
-                {
-                  name: "videoUrl",
-                  type: "text",
-                  label: "Video URL (fallback if no upload)",
-                },
-                { name: "title", type: "text", required: true },
-                { name: "ctaLabel", type: "text", label: "CTA label" },
-                { name: "ctaLink", type: "text", label: "CTA link" },
-              ],
-            },
-          ],
-        },
-        {
-          label: "What is ZerofAI",
-          fields: [
-            {
-              name: "whatIs",
-              type: "group",
-              fields: [
-                { name: "title", type: "text", required: true },
-                {
-                  name: "paragraphs",
-                  type: "array",
-                  fields: [{ name: "text", type: "textarea", required: true }],
-                },
-                { name: "video", type: "upload", relationTo: "media", label: "Section video" },
-                {
-                  name: "videoUrl",
-                  type: "text",
-                  label: "Video URL (fallback if no upload)",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: "Customer Trust",
-          fields: [
-            {
-              name: "customerTrust",
-              type: "group",
-              fields: [
-                { name: "heading", type: "text" },
-                { name: "headingHighlight", type: "text", label: "Highlighted text" },
-                {
-                  name: "cards",
-                  type: "array",
-                  fields: [
-                    { name: "number", type: "text", required: true },
-                    { name: "image", type: "upload", relationTo: "media" },
-                    {
-                      name: "imageUrl",
-                      type: "text",
-                      label: "Image URL (fallback if no upload)",
-                    },
-                    {
-                      name: "videoId",
-                      type: "text",
-                      label: "YouTube video ID",
-                      admin: { description: "e.g. kLja5C1i_kk — opens in popup on click" },
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: "Stats",
-          fields: [
-            {
-              name: "stats",
-              type: "group",
-              fields: [
-                { name: "sectionLabel", type: "text", label: "Section label" },
-                {
-                  name: "items",
-                  type: "array",
-                  fields: [
-                    { name: "value", type: "text", required: true },
-                    { name: "label", type: "text", required: true },
-                    { name: "description", type: "textarea" },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: "Platform Pillars",
-          fields: [
-            {
-              name: "pillars",
-              type: "group",
-              fields: [
-                { name: "title", type: "text", required: true },
-                {
-                  name: "items",
-                  type: "array",
-                  fields: [
-                    { name: "title", type: "text", required: true },
-                    { name: "description", type: "textarea", required: true },
-                    { name: "image", type: "upload", relationTo: "media" },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          label: "CTA",
-          fields: [
-            {
-              name: "cta",
-              type: "group",
-              fields: [
-                { name: "title", type: "text", required: true },
-                { name: "description", type: "textarea" },
-                { name: "buttonLabel", type: "text" },
-                { name: "buttonLink", type: "text" },
-              ],
-            },
-          ],
-        },
-        {
-          label: "Insights / Catalog",
-          fields: [
-            {
-              name: "catalog",
-              type: "group",
-              fields: [
-                { name: "image", type: "upload", relationTo: "media" },
-                {
-                  name: "paragraphs",
-                  type: "array",
-                  fields: [{ name: "text", type: "textarea", required: true }],
-                },
-                { name: "ctaLabel", type: "text", label: "CTA label" },
-                { name: "ctaLink", type: "text", label: "CTA link" },
-              ],
-            },
-          ],
-        },
-        {
-          label: "SEO / Metadata",
-          fields: pageMetaGroupFields,
-        },
-      ],
-    },
-  ],
-};
 
 function slugify(value: string): string {
   return value

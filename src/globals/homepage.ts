@@ -19,11 +19,91 @@ export const Homepage: GlobalConfig = {
               name: "hero",
               type: "group",
               fields: [
-                { name: "video", type: "upload", relationTo: "media", label: "Background video" },
                 {
-                  name: "videoUrl",
-                  type: "text",
-                  label: "Video URL (fallback if no upload)",
+                  type: "row",
+                  fields: [
+                    {
+                      name: "image",
+                      type: "upload",
+                      relationTo: "media",
+                      label: "Desktop / tablet background image",
+                      admin: {
+                        description:
+                          "Priority: if set, image is shown instead of video on tablet/desktop.",
+                        width: "50%",
+                      },
+                    },
+                    {
+                      name: "imageUrl",
+                      type: "text",
+                      label: "Desktop / tablet image URL (fallback)",
+                      admin: { width: "50%" },
+                    },
+                  ],
+                },
+                {
+                  type: "row",
+                  fields: [
+                    {
+                      name: "video",
+                      type: "upload",
+                      relationTo: "media",
+                      label: "Desktop / tablet background video",
+                      admin: {
+                        description: "Used only when no desktop/tablet image is set.",
+                        width: "50%",
+                      },
+                    },
+                    {
+                      name: "videoUrl",
+                      type: "text",
+                      label: "Desktop / tablet video URL (fallback)",
+                      admin: { width: "50%" },
+                    },
+                  ],
+                },
+                {
+                  type: "row",
+                  fields: [
+                    {
+                      name: "mobileImage",
+                      type: "upload",
+                      relationTo: "media",
+                      label: "Mobile background image",
+                      admin: {
+                        description:
+                          "Priority: if set, image is shown instead of video on phone.",
+                        width: "50%",
+                      },
+                    },
+                    {
+                      name: "mobileImageUrl",
+                      type: "text",
+                      label: "Mobile image URL (fallback)",
+                      admin: { width: "50%" },
+                    },
+                  ],
+                },
+                {
+                  type: "row",
+                  fields: [
+                    {
+                      name: "mobileVideo",
+                      type: "upload",
+                      relationTo: "media",
+                      label: "Mobile background video",
+                      admin: {
+                        description: "Used only when no mobile image is set.",
+                        width: "50%",
+                      },
+                    },
+                    {
+                      name: "mobileVideoUrl",
+                      type: "text",
+                      label: "Mobile video URL (fallback)",
+                      admin: { width: "50%" },
+                    },
+                  ],
                 },
                 { name: "title", type: "text", required: true },
                 { name: "ctaLabel", type: "text", label: "CTA label" },

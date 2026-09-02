@@ -9,18 +9,31 @@ type FooterProps = {
 export function Footer({ content }: FooterProps) {
   return (
     <footer className="bg-[#060f1c] text-white z-10 relative flex flex-col p-5">
-      <img src="/assets/text.png" alt="Footer Background" className="object-contain self-center" />
+      <Image
+        src="/assets/text.webp"
+        alt=""
+        aria-hidden
+        width={1830}
+        height={424}
+        loading="lazy"
+        sizes="100vw"
+        className="h-auto w-full max-w-[1830px] self-center object-contain"
+      />
 
       <div className="container mx-auto -mt-5 lg:-mt-16">
         <div className="grid grid-cols-1 z-10 relative gap-12 py-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
-            <img
-              width="300"
-              height="100"
-              src={content.logoUrl}
-              className="w-32"
-              alt="ZerofAI"
-            />
+            {content.logoUrl ? (
+              <Image
+                src={content.logoUrl}
+                width={300}
+                height={73}
+                loading="lazy"
+                sizes="128px"
+                className="h-auto w-32"
+                alt="ZerofAI"
+              />
+            ) : null}
             <p className="mt-4 max-w-xs text-sm text-white/60">{content.description}</p>
           </div>
 
@@ -50,7 +63,16 @@ export function Footer({ content }: FooterProps) {
             <FooterDemoForm />
           </div>
         </div>
-        <img src="/assets/pattern.png" alt="Footer Background" className="-mt-24" />
+        <Image
+          src="/assets/pattern.webp"
+          alt=""
+          aria-hidden
+          width={1536}
+          height={285}
+          loading="lazy"
+          sizes="100vw"
+          className="-mt-24 h-auto w-full"
+        />
         <div className="flex text-center justify-center items-center py-5 text-xs text-white/50">
           <div>
             © {new Date().getFullYear()} {content.copyright}

@@ -1,10 +1,10 @@
 "use client";
 
-import HeroScene from "@/components/bot/HeroScene";
-import { LoaderContent } from "@/components/page-loader";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, OrbitControls, useGLTF } from "@react-three/drei";
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
+
+import HeroScene from "@/components/bot/HeroScene";
 
 useGLTF.preload("/assets/bot_final.glb");
 
@@ -32,24 +32,24 @@ function MouseOrbit() {
   );
 }
 
-function HeroCanvasScene() {
+/**
+ * Only ever rendered through DeferredHeroCanvas, which keeps this module (and
+ * three.js with it) out of the initial bundle and off phones entirely.
+ *
+ * dpr is capped at 1.5 so high-DPI laptops do not render a 3x framebuffer for
+ * a decorative element, and the canvas pauses whenever it scrolls out of view.
+ */
+export default function HeroCanvas() {
   return (
-    <Canvas camera={{ fov: 50 }} gl={{ antialias: true }} className="min-h-96 w-full cursor-pointer">
+    <Canvas
+      camera={{ fov: 50 }}
+      dpr={[1, 1.5]}
+      gl={{ antialias: true, powerPreference: "high-performance" }}
+      className="min-h-96 w-full cursor-pointer"
+    >
       <HeroScene />
       <Environment preset="city" />
       <MouseOrbit />
     </Canvas>
   );
 }
-
-const HeroCanvas = () => {
-  return (
-    <div className="relative order-1 h-full w-full min-w-0 overflow-hidden md:order-2">
-      {/* <Suspense fallback={<LoaderContent />}> */}
-        <HeroCanvasScene />
-      {/* </Suspense> */}
-    </div>
-  );
-};
-
-export default HeroCanvas;

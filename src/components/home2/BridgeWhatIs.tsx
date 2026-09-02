@@ -30,8 +30,8 @@ export function BridgeWhatIs({ content }: Props) {
 
   return (
     <section id="what-is" className="bg-background">
-      <div className="grid lg:grid-cols-2">
-        <div className="flex items-center px-6 py-20 lg:px-20 lg:py-28">
+      <div className="container mx-auto px-6 lg:px-10 gap-8 grid lg:grid-cols-2 py-12 lg:py-16">
+        <div className="flex items-center">
           <div>
             <h2 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-[#3d3d3d] lg:text-[2.75rem]">
               {content.title}
@@ -47,14 +47,14 @@ export function BridgeWhatIs({ content }: Props) {
         <div
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          className="group relative min-h-[460px] overflow-hidden bg-coral lg:min-h-[640px]"
+          className="group relative min-h-72 md:min-h-96 h-full overflow-hidden bg-coral"
         >
           <div
             className="absolute inset-0 bg-black/35 transition-opacity duration-700"
             style={{ opacity: hover ? 1 : 0 }}
           />
 
-          <div className="relative flex h-full min-h-[460px] items-center justify-center px-6 lg:min-h-[640px]">
+          <div className="relative flex h-full items-center justify-center px-6">
             <h3
               className="text-center text-5xl font-light text-white transition-transform duration-700 md:text-6xl lg:text-7xl"
               style={{ transform: hover ? "translateY(-12px)" : "translateY(0)" }}
@@ -67,7 +67,7 @@ export function BridgeWhatIs({ content }: Props) {
           <button
             type="button"
             onClick={() => setVideoOpen(true)}
-            className="absolute bottom-8 left-8 z-10 inline-flex items-center gap-3 border border-white px-7 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-coral"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-8 z-10 inline-flex items-center gap-3 border border-white px-7 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-coral"
           >
             <Play className="h-3.5 w-3.5 fill-current" />
             Watch Now
@@ -76,7 +76,7 @@ export function BridgeWhatIs({ content }: Props) {
         </div>
 
       </div>
-      <div className="text-center capitalize -mb-[14px] md:-mb-[30px] lg:-mb-[35px] 2xl:-mb-[55px] xl:text-[7.2rem] xl:-mb-[44px] 2xl:text-[8.2rem] md:text-[65px] pt-10 lg:text-[5.5rem] whitespace-nowrap text-[#EFF2F5] text-[35px] font-bold">Transformation Stories</div>
+      <div className="text-center capitalize -mb-[14px] md:-mb-[30px] lg:-mb-[35px] 2xl:-mb-[55px] xl:text-[7.2rem] xl:-mb-[44px] 2xl:text-[8.2rem] md:text-[65px] lg:text-[5.5rem] whitespace-nowrap text-[#EFF2F5] text-[32px] font-bold">Transformation Stories</div>
 
        
       <Dialog

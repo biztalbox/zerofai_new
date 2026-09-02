@@ -9,6 +9,8 @@ import * as migration_20260615_site_footer_schema_fix from "./20260615_site_foot
 import * as migration_20260616_knowledge_page_intro_content from "./20260616_knowledge_page_intro_content";
 import * as migration_20260617_blog_page_global from "./20260617_blog_page_global";
 import * as migration_20260618_nav_route_show_on_homepage from "./20260618_nav_route_show_on_homepage";
+import * as migration_20260710_homepage_hero_mobile_video from "./20260710_homepage_hero_mobile_video";
+import * as migration_20260725_homepage_hero_images from "./20260725_homepage_hero_images";
 
 export const migrations = [
   {
@@ -65,5 +67,15 @@ export const migrations = [
     up: migration_20260618_nav_route_show_on_homepage.up,
     down: migration_20260618_nav_route_show_on_homepage.down,
     name: "20260618_nav_route_show_on_homepage",
+  },
+  {
+    up: migration_20260710_homepage_hero_mobile_video.up,
+    down: migration_20260710_homepage_hero_mobile_video.down,
+    name: "20260710_homepage_hero_mobile_video",
+  },
+  {
+    up: migration_20260725_homepage_hero_images.up,
+    down: migration_20260725_homepage_hero_images.down,
+    name: "20260725_homepage_hero_images",
   },
 ];

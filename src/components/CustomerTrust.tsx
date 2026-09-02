@@ -74,7 +74,9 @@ export function CustomerTrust({ content }: CustomerTrustProps) {
                   <Image
                     src={card.imageUrl}
                     width={1000}
-                    height={1000}
+                    height={563}
+                    loading="lazy"
+                    sizes="(max-width: 1023px) 100vw, 66vw"
                     alt="Customer Trust"
                     className={`h-full w-full object-cover ${card.videoId ? "cursor-pointer" : ""}`}
                   />

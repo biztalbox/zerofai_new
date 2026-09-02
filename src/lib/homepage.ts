@@ -4,6 +4,9 @@ import type { HomepageContent } from "@/types/homepage";
 import { getMediaUrl } from "@/lib/blog";
 import { homepageDefaults } from "@/lib/homepage-defaults";
 import { mapPageSeo } from "@/lib/page-seo";
+import { unstable_cache } from "next/cache";
+import { cache } from "react";
+
 import { getPayloadClient } from "@/lib/payload";
 
 function resolveUploadUrl(
@@ -26,9 +29,23 @@ function mapHomepageFromCms(data: Record<string, unknown>): HomepageContent {
   return {
     meta: mapPageSeo(meta, homepageDefaults.meta),
     hero: {
+      imageUrl: resolveUploadUrl(
+        hero.image as number | Media | null | undefined,
+        (hero.imageUrl as string) || "",
+      ),
       videoUrl: resolveUploadUrl(
         hero.video as number | Media | null | undefined,
         (hero.videoUrl as string) || homepageDefaults.hero.videoUrl,
+      ),
+      mobileImageUrl: resolveUploadUrl(
+        hero.mobileImage as number | Media | null | undefined,
+        (hero.mobileImageUrl as string) || "",
+      ),
+      mobileVideoUrl: resolveUploadUrl(
+        hero.mobileVideo as number | Media | null | undefined,
+        (hero.mobileVideoUrl as string) ||
+          (hero.videoUrl as string) ||
+          homepageDefaults.hero.mobileVideoUrl,
       ),
       title: (hero.title as string) || homepageDefaults.hero.title,
       ctaLabel: (hero.ctaLabel as string) || homepageDefaults.hero.ctaLabel,
@@ -126,16 +143,33 @@ function mapHomepageFromCms(data: Record<string, unknown>): HomepageContent {
   };
 }
 
-export async function getHomepageContent(): Promise<HomepageContent> {
-  try {
-    const payload = await getPayloadClient();
-    const homepage = await payload.findGlobal({
-      slug: "homepage",
-      depth: 2,
-    });
+/**
+ * Cached across requests for 60s, and deduped within a single request by
+ * React's cache(). This is what actually removes the Postgres round trip from
+ * the critical path — the route itself stays dynamic, which keeps `next dev`
+ * out of its ISR rebuild-and-reload loop.
+ *
+ * Revalidate on demand from a Payload afterChange hook with
+ * `revalidateTag("homepage")` if you want CMS edits to appear instantly.
+ */
+const fetchHomepageContent = unstable_cache(
+  async (): Promise<HomepageContent> => {
+    try {
+      const payload = await getPayloadClient();
+      const homepage = await payload.findGlobal({
+        slug: "homepage",
+        depth: 2,
+      });
 
-    return mapHomepageFromCms(homepage as Record<string, unknown>);
-  } catch {
-    return homepageDefaults;
-  }
-}
+      return mapHomepageFromCms(homepage as Record<string, unknown>);
+    } catch {
+      return homepageDefaults;
+    }
+  },
+  ["homepage-global"],
+  { revalidate: 60, tags: ["homepage"] },
+);
+
+export const getHomepageContent = cache(
+  async (): Promise<HomepageContent> => fetchHomepageContent(),
+);

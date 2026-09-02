@@ -15,7 +15,7 @@ export default function PrivacyPage() {
       <section className="bg-[#1a2e24] px-6 py-16 lg:px-10 lg:py-20">
         <div className="mx-auto container">
           <h1 className="text-[2rem] font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-[2.5rem] lg:text-[2.75rem]">
-            ZeroFAI Privacy Statement
+            Privacy Statement
           </h1>
           
         </div>

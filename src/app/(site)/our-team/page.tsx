@@ -6,6 +6,8 @@ import { NavigationBar } from "@/components/Navigation";
 import { toNextMetadata } from "@/lib/page-seo";
 import { getLeadershipPageContent } from "@/lib/site-content";
 
+// Dynamic route; the CMS reads underneath are cached at the data layer.
+// See (site)/page.tsx for why this is not ISR.
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,7 +29,9 @@ export default async function LeadershipPage() {
             src={content.hero.imageUrl}
             alt={content.hero.title}
             fill
-            className=""
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
@@ -50,19 +54,21 @@ export default async function LeadershipPage() {
         <section id="connect" className="border-t border-[#e8e8e8] bg-white py-16 lg:py-24 relative">
           <div className="mx-auto container relative z-10 w-full px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10">
             <div className="flex flex-col gap-10 w-full">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+              <div className="flex gap-6 md:gap-10 items-start justify-center">
                 {content.members.map((member) => (
-                  <div key={member.name} className="flex flex-col gap-4">
-                    <div className="aspect-[3/4] w-full overflow-hidden bg-white">
+                  <div key={member.name} className="flex flex-col gap-4 w-1/2 md:w-60">
+                    <div className="aspect-square w-full rounded-full overflow-hidden bg-white">
                       <Image
                         src={member.imageUrl}
                         width={400}
                         height={600}
+                        loading="lazy"
+                        sizes="(max-width: 767px) 50vw, 240px"
                         alt={member.name}
                         className="h-full w-full object-cover object-top"
                       />
                     </div>
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 text-center">
                       <h3>{member.name}</h3>
                       <p className="text-xs">{member.designation}</p>
                     </div>

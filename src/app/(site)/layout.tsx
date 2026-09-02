@@ -1,19 +1,23 @@
-import { Geist, Geist_Mono } from "next/font/google";
-
-import { ContactChatBot } from "@/app/(site)/contact/ContactChatBot";
 import { ConditionalFooter } from "@/components/ConditionalFooter";
+import { DeferredChatBot } from "@/components/lazy/DeferredChatBot";
 import { SiteContentProvider } from "@/components/SiteContentProvider";
 import { getFooterContent, getNavigationContent } from "@/lib/site-content";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+/** CMS media origin — warming it removes a DNS + TLS hop from the LCP path. */
+const MEDIA_ORIGIN = "https://agqugimammzwbqtyqwry.supabase.co";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+/**
+ * Only the two weights used above the fold. The @font-face rules themselves
+ * live in globals.css; next/font is deliberately not used here because its
+ * loader crashed Turbopack in dev and put the server in a reload loop.
+ *
+ * These are plain children, not wrapped in a manual <head> — React 19 hoists
+ * <link> elements into the document head on its own.
+ */
+const PRELOADED_FONTS = [
+  "/twk-everett/TWKEverett-Regular.woff2",
+  "/twk-everett/TWKEverett-Medium.woff2",
+];
 
 export default async function SiteLayout({
   children,
@@ -26,14 +30,23 @@ export default async function SiteLayout({
   ]);
 
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
+        <link rel="preconnect" href={MEDIA_ORIGIN} crossOrigin="" />
+        <link rel="dns-prefetch" href={MEDIA_ORIGIN} />
+        {PRELOADED_FONTS.map((href) => (
+          <link
+            key={href}
+            rel="preload"
+            href={href}
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+        ))}
         <SiteContentProvider navigation={navigation} footer={footer}>
           {children}
-          <ContactChatBot />
+          <DeferredChatBot />
           <ConditionalFooter />
         </SiteContentProvider>
       </body>

@@ -10,6 +10,8 @@ import { buildMapEmbedUrl, getContactPageContent } from "@/lib/site-content";
 
 import { ContactForm } from "./ContactForm";
 
+// Dynamic route; the CMS reads underneath are cached at the data layer.
+// See (site)/page.tsx for why this is not ISR.
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,7 +37,6 @@ export default async function ContactPage() {
             alt={content.hero.title}
             fill
             priority
-            className="object-contain"
           />
           <div
             className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"

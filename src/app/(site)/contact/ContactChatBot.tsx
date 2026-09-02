@@ -215,7 +215,7 @@ export function ContactChatBot() {
         setStep("email");
         setInput("");
         await addBotMessages(
-          [result.error ?? "Please write the correct email address.", CONTINUE.email],
+          [result.error ?? CONTINUE.email],
           500
         );
       } else {

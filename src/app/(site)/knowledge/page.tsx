@@ -6,6 +6,8 @@ import { getKnowledgePageContent } from "@/lib/site-content";
 
 import { KnowledgePageClient } from "./KnowledgePageClient";
 
+// Dynamic route; the CMS reads underneath are cached at the data layer.
+// See (site)/page.tsx for why this is not ISR.
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
